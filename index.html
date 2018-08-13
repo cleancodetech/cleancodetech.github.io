@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>makeameme</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet' media='screen and (min-width: 701px) and (max-width: 900px)' href='css/portrait.css' />
+        <link rel='stylesheet' media='screen and (min-width: 1141px)' href='css/wideAll.css' />
+        <link rel='stylesheet' media='screen and (min-width: 1141px)' href='css/wide.css' />
+        <link href="https://fonts.googleapis.com/css?family=Lobster|Montserrat:200,400,700|Space+Mono:400,700" rel="stylesheet">
+        <script type="text/javascript" src="/js/fabric.min.js"></script>
+    </head>
+    <body>
+        <div id="header">makeameme</div>
+        <div id="power" title="Powered by Clean Code">
+            <p>by <a href="#" target="_blank">Clean Code</a></p>
+        </div>
+        <div id="copyright"></div>
+        <div id="sidebar">
+            <a href="/index.html" class="sidebarButton" title="Create a meme"><img src="imgs/paint.svg"></a>
+            <a href="/credits.html" class="sidebarButton" title="Credits"><img src="imgs/heart.svg"></a>
+            <a href="#" class="sidebarButton" title="Privacy Policy"><img src="imgs/read.svg"></a>
+            <a href="#" class="sidebarButton" title="Visit our Facebook Page"><img src="imgs/facebook.svg"></a>
+            <a href="#" class="sidebarButton" title="Visit our Twitter"><img src="imgs/twitter.svg"></a>
+        </div>
+        <div id="box">
+            <div id="drag">
+                <p>Drag and drop a file from your device or from another website, in this circle</p>
+            </div>
+            <div id="upload">
+                <input id="photoUpload" name="photo" accept="image/jpg,image/jpeg,image/png" data-max-size="548" type="file">
+                <p>Click this circle to upload a file from your device</p>
+            </div>
+            <div id="url">
+                <div id="urlBlock">
+                    <p>Paste below the full url address of the image you want to use</p>
+                    <input type="text" id="photoUrl" placeholder="https://example.com/image.png">
+                </div>
+            </div>
+        </div>
+        <div id="delCCLayer">
+            <div id="delCCWindow">
+                <div id="delCCText">
+                    <h2>Heyyyy, wait a minute!</h2>
+                    <p>Are you sure you want to delete the name of our site from your image? We mean... sure you can, if you just press the button below. But take a second there if you are not in a hurry and think how important this little text is for our site, so that others can learn about it as well. There are very few ways for a site to gain some audience and this is one of them. So please, if you don't mind a lot, would you keep this text on your image? It is kind of important to us. Just look how much text we have written here.</p>
+                </div>
+                <button id="delCCdelete">Delete it!</button>
+                <button id="delCCkeep">Keep it!</button>
+                <div id="delCCIcon"></div>
+            </div>
+        </div>
+        <script type="text/javascript" src="/js/mainAll.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
+    </body>
+</html>

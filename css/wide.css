@@ -1,0 +1,641 @@
+#box{
+    position: absolute;
+    height: 92vh;
+    top: 7vh;
+    left: 4vw;
+    overflow: hidden;
+}
+
+#drag, #upload, #url{
+    position: absolute;
+    box-sizing: border-box;
+    border-radius: 500vw;
+    background-color: rgb(10, 10, 10);
+    border: dashed 3px white;
+    cursor: pointer;
+    transition: background-position 0.4s ease 0s, background-size 0.4s ease 0s, background-color 0.4s ease 0s, left 0.3s ease 0s, top 0.3s ease 0.3s, bottom 0.3s ease 0.6s;
+}
+
+#drag{
+    width: 92vh;
+    height: 92vh;
+    top: 0;
+    left: -100vh;
+    display: flex;
+    display: -webkit-flex; 
+    background-image: url(/imgs/cursor.svg);
+    background-repeat: no-repeat;
+    background-size: 25%;
+    background-position: center center;
+}
+
+#upload{
+    width: 45vh;
+    height: 45vh;
+    bottom: -46vh;
+    right: 12vh;
+    display: flex;
+    display: -webkit-flex; 
+    background-image: url(/imgs/upload.svg);
+    background-repeat: no-repeat;
+    background-size: 25%;
+    background-position: center center;
+}
+
+#url{
+    width: 55vh;
+    height: 55vh;
+    top: -56vh;
+    right: 0;
+    display: flex;
+    display: -webkit-flex; 
+    background-image: url(/imgs/link.svg);
+    background-repeat: no-repeat;
+    background-size: 25%;
+    background-position: center center;
+    overflow: hidden;
+}
+
+#drag:hover, #upload:hover{
+    background-position: center 25%;
+    background-size: 10%;
+    background-color: rgb(10, 10, 10);
+}
+
+#url:hover{
+    background-position: center 25%;
+    background-size: 0%;
+    background-color: rgb(10, 10, 10);
+}
+
+#drag p{
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(235, 235, 235);
+    font-size: 1em;
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease 0s;
+}
+
+#upload p{
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(235, 235, 235);
+    font-size: 1em;
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease 0s;
+}
+
+#url #urlBlock{
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(235, 235, 235);
+    font-size: 1em;
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease 0s;
+}
+
+#url #urlBlock input{
+    border-radius: 0.5vh;
+    border: medium none;
+    padding: 0.5vh;
+    margin: 1vh 0 0 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#drag:hover p, #upload:hover p, #url:hover #urlBlock{
+    opacity: 1;
+}
+
+#photoUpload{
+    position: absolute;
+    width: 45vh;
+    height: 45vh;
+    box-sizing: border-box;
+    background-color: red;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#controlsBox{
+    
+}
+
+
+
+
+
+
+#playground{
+    position: absolute;
+    height: 92vh;
+    top: 7vh;
+    left: 4vw;
+    overflow: hidden;
+}
+
+#playground #canvasContainer{
+    position: absolute;
+    box-sizing: border-box;
+    width: 74%;
+    top: 0;
+    left: 0;
+    height: 92vh;
+}
+
+#playground #canvasContainer .canvas-container{
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 1vh black;
+}
+
+#playground #controlsContainer{
+    position: absolute;
+    box-sizing: border-box;
+    width: 25%;
+    top: 0;
+    right: 0;
+    height: 92vh;
+}
+
+#playground #controlsContainer #mainControls{
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 500px;
+    background-color: rgb(20, 20, 20);
+    display: flex;
+    justify-content: space-between;
+}
+
+#playground #controlsContainer #mainControls #deleteAll{
+    width: 4vh;
+    height: 4vh;
+    margin: 1vh;
+    background-image: url('/imgs/delete.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    cursor: pointer;
+    transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
+}
+
+#playground #controlsContainer #mainControls #exportToSvg{
+    width: 4vh;
+    height: 4vh;
+    margin: 1vh;
+    background-image: url('/imgs/export.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    cursor: pointer;
+    transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
+}
+
+#playground #controlsContainer #mainControls #download{
+    width: 4vh;
+    height: 4vh;
+    margin: 1vh;
+    background-image: url('/imgs/download.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    cursor: pointer;
+    transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
+}
+
+#playground #controlsContainer #mainControls #shareSocial{
+    width: 4vh;
+    height: 4vh;
+    margin: 1vh;
+    background-image: url('/imgs/social.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    cursor: pointer;
+    transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
+}
+
+#playground #controlsContainer #addNewPartContainer{
+    width: 100%;
+    height: 6vh;
+    margin: 2vh auto;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+}
+
+#playground #controlsContainer #addNewPartContainer #addNewPart{
+    width: 6vh;
+    height: 6vh;
+    box-sizing: border-box;
+    border-radius: 500px;
+    background-color: rgb(20, 20, 20);
+    background-image: url('/imgs/add.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+}
+
+#playground #controlsContainer #addNewPartContainer #addNewTextPart{
+    width: 4vh;
+    height: 4vh;
+    box-sizing: border-box;
+    background-image: url('/imgs/text.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0;
+    transition: opacity 0.3s ease 0s;
+    margin: 1vh 0 0 0;
+}
+
+#playground #controlsContainer #addNewPartContainer #addNewDrawPart{
+    width: 4vh;
+    height: 4vh;
+    box-sizing: border-box;
+    background-image: url('/imgs/pencil.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0;
+    transition: opacity 0.3s ease 0s;
+    margin: 1vh 0 0 0;
+}
+
+.panel{
+    width: 100%;
+    margin: 2vh auto;
+    box-sizing: border-box;
+    border-radius: 1vh;
+    background-color: rgb(30, 30, 30);
+    overflow: hidden;
+}
+
+.panelHeader{
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(20, 20, 20);
+    display: flex;
+    justify-content: space-between;
+}
+
+.panelHeaderWallpIcon{
+    background-image: url('/imgs/wallpIcon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 4vh;
+    height: 4vh;
+    margin: 1vh;
+}
+
+.panelHeaderCCIcon{
+    background-image: url('/imgs/cc.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 4vh;
+    height: 4vh;
+    margin: 1vh;
+}
+
+.panelHeaderTextIcon{
+    background-image: url('/imgs/text.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 4vh;
+    height: 4vh;
+    margin: 1vh;
+}
+
+.panelHeaderDel{
+    background-image: url('/imgs/delete2.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 4vh;
+    height: 4vh;
+    margin: 1vh;
+    cursor: pointer;
+}
+
+.panelInputText{
+    display: block;
+    width: 95%;
+    margin: 1vh auto;
+    border: medium none;
+    font-size: 1em;
+    line-height: 1.5em;
+    padding: 0 1vh;
+    box-sizing: border-box;
+    border-radius: 0.5vh;
+    background-color: rgb(235, 235, 235);
+    color: rgb(10, 10, 10);
+    font-family: Montserrat, "sans serif";
+}
+
+.panelInputColor{
+    border: medium none;
+    width: 3vh;
+    height: 3vh;
+    cursor: pointer;
+}
+
+.panelBodyWallpFilters{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+}
+
+.panelGrayscaleButton{
+    box-sizing: border-box;
+    width: 3vh;
+    height: 3vh;
+    background-color: gray;
+    margin: 1vh;
+    border-radius: 500px;
+    box-shadow: 0 0 0.5vh black;
+    cursor: pointer;
+}
+
+.panelSepiaButton{
+    box-sizing: border-box;
+    width: 3vh;
+    height: 3vh;
+    background-color: #704214;
+    margin: 1vh;
+    border-radius: 500px;
+    box-shadow: 0 0 0.5vh black;
+    cursor: pointer;
+}
+
+
+
+
+.brightnessContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.brightnessIcon{
+    width: 10%;
+    height: 3vh;
+    background-image: url('/imgs/brightness.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.brightnessRange{
+    width: 70%;
+    height: 3vh;
+}
+
+
+
+
+.blurContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.blurIcon{
+    width: 10%;
+    height: 3vh;
+    background-image: url('/imgs/blur.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.blurRange{
+    width: 70%;
+    height: 3vh;
+}
+
+
+
+
+.fontSizeRangeContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fontSizeRangeIcon{
+    width: 10%;
+    height: 3vh;
+    background-image: url('/imgs/text.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.fontSizeRange{
+    width: 70%;
+    height: 3vh;
+}
+
+
+
+
+.fontStrokeRangeContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fontSizeRangeIcon{
+    width: 10%;
+    height: 3vh;
+    background-image: url('/imgs/text.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.fontStrokeRange{
+    width: 70%;
+    height: 3vh;
+}
+
+
+
+
+.fontWeightRangeContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fontWeightRangeIcon{
+    width: 10%;
+    height: 3vh;
+    background-image: url('/imgs/bold.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.fontWeightRange{
+    width: 70%;
+    height: 3vh;
+}
+
+
+
+
+.rangerUndo{
+    width: 10%;
+    height: 3vh;
+    background-image: url('/imgs/undo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+}
+
+
+
+
+#delCCLayer{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#delCCLayer #delCCWindow {
+    width: 80vw;
+    height: 80vh;
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+    background-color: black;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 0 2vh rgba(255, 255, 255, 0.1);
+}
+
+#delCCLayer #delCCWindow #delCCIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30vw;
+    height: 80vh;
+    background-image: url('/imgs/sad1.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-right: solid 1px lime;
+    box-sizing: border-box;
+}
+
+#delCCLayer #delCCWindow #delCCText {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 50vh;
+    border-bottom: solid 1px lime;
+    box-sizing: border-box;
+}
+
+#delCCLayer #delCCWindow #delCCText h2{
+    color: lime;
+    font-family: "Space Mono";
+    padding: 1vh 0 1vh 3vh;
+    font-weight: normal;
+    font-size: 2em;
+    letter-spacing: -1px;
+}
+
+#delCCLayer #delCCWindow #delCCText p{
+    color: #ebebeb;
+    font-family: "Space Mono";
+    padding: 1vh 0 1vh 3vh;
+    font-weight: normal;
+    font-size: 1em;
+    letter-spacing: -1px;
+}
+
+#delCCLayer #delCCWindow #delCCControls{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50vw;
+    height: 30vh;
+    box-sizing: border-box;
+}
+
+#delCCLayer #delCCWindow #delCCdelete {
+    position: absolute;
+    width: 20vw;
+    height: 25vh;
+    bottom: 2.5vh;
+    right: 27.5vw;
+    background-color: rgb(255, 40, 40);
+    border: medium none;
+    border-radius: 1vh;
+    font-size: 2em;
+    font-family: "Space Mono";
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease 0s;
+}
+
+#delCCLayer #delCCWindow #delCCkeep {
+    position: absolute;
+    width: 20vw;
+    height: 25vh;
+    bottom: 2.5vh;
+    right: 2.5vw;
+    background-color: rgb(40, 255, 40);
+    border: medium none;
+    border-radius: 1vh;
+    font-size: 2em;
+    font-family: "Space Mono";
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease 0s;
+}
+
+#delCCLayer #delCCWindow #delCCdelete:hover{
+    background-color: rgb(255, 0, 0);
+}
+
+#delCCLayer #delCCWindow #delCCkeep:hover{
+    background-color: rgb(0, 255, 0);
+}
+
+#delCCLayer #delCCWindow #delCCdelete:hover ~ #delCCIcon{
+    background-image: url('/imgs/sad2.svg');
+}
+
+#delCCLayer #delCCWindow #delCCkeep:hover ~ #delCCIcon{
+    background-image: url('/imgs/heart.svg');
+}

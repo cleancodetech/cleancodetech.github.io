@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(10, 10, 10);
+}
+
+#header{
+    color: rgb(127, 235, 127);
+    font-family: 'Lobster', cursive;
+    font-size: 4vh;
+    line-height: 5vh;
+    padding: 0.5vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+#power{
+    position: absolute;
+    font-size: 3vh;
+    color: rgb(235, 235, 235);
+    top: 0;
+    left: 0;
+    z-index: 2;
+    box-sizing: border-box;
+    background-image: url('/imgs/power.svg');
+    background-repeat: no-repeat;
+    background-size: auto 80%;
+    background-position: 5% center;
+    padding: 0 0 0 6vh;
+    font-family: 'Space Mono', monospace;
+}
+
+#power p{
+    font-size: 0.8em;
+    /*letter-spacing: -1px;*/
+    line-height: 5vh;
+    padding: 0.5vh;
+}
+
+#power p a{
+    color: rgb(235, 235, 235);
+    text-decoration: none;
+    outline: medium none;
+}
+
+#copyright{
+    position: absolute;
+    font-size: 3vh;
+    color: rgb(235, 235, 235);
+    top: 0;
+    right: 0.5vh;
+    z-index: 2;
+    box-sizing: border-box;
+    background-image: url('/imgs/copyright.svg');
+    background-repeat: no-repeat;
+    background-size: auto 50%;
+    background-position: 5% center;
+    padding: 0 0 0 5vh;
+    font-family: 'Space Mono', monospace;
+}
+
+#copyright p{
+    font-size: 0.8em;
+    /*letter-spacing: -1px;*/
+    line-height: 5vh;
+    padding: 0.5vh;
+}
+
+#sidebar{
+    position: absolute;
+    width: 3vw;
+    left: 0;
+    box-sizing: border-box;
+    top: 30vh;
+}
+
+#sidebar .sidebarButton{
+    width: 4vh;
+    height: 4vh;
+    margin: 3vh 1vh;
+    display: block;
+    border-radius: 500px;
+    transition: background-color 0.3s ease 0s;
+}
+
+#sidebar .sidebarButton:hover{
+    background-color: rgb(30, 30, 30);
+}
+
+#sidebar .sidebarButton img{
+    width: 4vh;
+    height: 4vh;
+}
