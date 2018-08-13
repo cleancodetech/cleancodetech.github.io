@@ -470,6 +470,21 @@
 
 
 
+.bgRangeContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bgRange{
+    width: 70%;
+    height: 3vh;
+}
+
+
+
+
 .fontStrokeRangeContainer{
     width: 95%;
     margin: 1vh auto;

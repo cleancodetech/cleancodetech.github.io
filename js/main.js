@@ -133,6 +133,15 @@ function convertHex(hex){
     return 'rgb('+r+', '+g+', '+b+')';
 }
 
+function convertHexOpacity(hex,opacity){
+    hex = hex.replace('#','');
+    r = parseInt(hex.substring(0,2), 16);
+    g = parseInt(hex.substring(2,4), 16);
+    b = parseInt(hex.substring(4,6), 16);
+
+    return'rgba('+r+','+g+','+b+','+opacity+')';
+}
+
 function initialArrange() {
     
     var width = window.innerWidth
@@ -649,21 +658,7 @@ var Engine = function(){
         
         this.handleEvent = function( event ) {
             
-            if ( event.type === 'mouseover' ){
-                
-                this.textInstance.set( 'selectionBackgroundColor', 'rgba(255, 0, 0, 0.5)' );
-                
-                _Engine.canvas.setActiveObject( this.textInstance );
-                
-                _Engine.canvas.renderAll();
-                
-            } else if ( event.type === 'mouseout' ){
-                
-                this.textInstance.set( 'selectionBackgroundColor', 'rgba(255, 0, 0, 0)' );
-                
-                _Engine.canvas.renderAll();
-                
-            } else if ( event.type === 'input' && event.target === this.panelInputTextElem ){
+            if ( event.type === 'input' && event.target === this.panelInputTextElem ){
                 
                 this.textInstance.text = this.panelInputTextElem.value;
                 
@@ -713,6 +708,18 @@ var Engine = function(){
                 
                 this.textInstance.set("strokeWidth", parseInt( this.fontStrokeRangeElem.value ) );
                 
+            } else if ( event.type === 'click' && event.target === this.panelHeaderDelElem ){
+                
+                this.remove();
+                
+            } else if ( event.type === 'input' && event.target === this.bgColorElem ){
+                
+                this.textInstance.set('backgroundColor', convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
+                
+            } else if ( event.type === 'input' && event.target === this.bgRangeElem ){
+                
+                this.textInstance.set('backgroundColor', convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
+                
             }
             
             _Engine.canvas.renderAll();
@@ -743,7 +750,8 @@ var Engine = function(){
                 stroke: 'rgb(0, 0, 0)',
                 strokeWidth: 1,
                 breakWords: true,
-                textAlign: 'center'
+                textAlign: 'center',
+                backgroundColor: 'rgba(255, 0, 0, 0.5)'
             });
             
             if ( this.args.alignBottom === true ) {
@@ -755,6 +763,40 @@ var Engine = function(){
             }
             
             _Engine.canvas.add( this.textInstance );
+            
+        };
+        
+        this.buildBgControl = function() {
+            
+            this.bgRangeContainerElem = document.createElement("DIV");
+            this.bgRangeContainerElem.setAttribute("class", "bgRangeContainer");
+            this.panelElem.appendChild( this.bgRangeContainerElem );
+            
+            this.bgColorElem = document.createElement("INPUT");
+            this.bgColorElem.setAttribute("class", "panelInputColor");
+            this.bgColorElem.setAttribute("type", "color");
+            this.bgColorElem.setAttribute("title", "Change the text's background color");
+            this.bgColorElem.value = '#ff0000';
+            this.bgRangeContainerElem.appendChild( this.bgColorElem );
+            
+            this.bgRangeElem = document.createElement("INPUT");
+            this.bgRangeElem.setAttribute("class", "bgRange");
+            this.bgRangeElem.setAttribute("title", "Adjust the text's background color opacity");
+            this.bgRangeElem.setAttribute("type", "range");
+            this.bgRangeElem.setAttribute("min", "0");
+            this.bgRangeElem.setAttribute("max", "1");
+            this.bgRangeElem.setAttribute("step", "0.01");
+            this.bgRangeElem.value = 0.50;
+            this.bgRangeContainerElem.appendChild( this.bgRangeElem );
+            
+            this.bgRangeUndoElem = document.createElement("DIV");
+            this.bgRangeUndoElem.setAttribute("class", "rangerUndo");
+            this.bgRangeUndoElem.setAttribute("title", "Reset the the text's background color to original");
+            this.bgRangeContainerElem.appendChild( this.bgRangeUndoElem );
+            
+            this.bgColorElem.addEventListener( 'input', this, false );
+            this.bgRangeElem.addEventListener( 'input', this, false );
+            this.bgRangeUndoElem.addEventListener( 'click', this, false );
             
         };
         
@@ -894,10 +936,56 @@ var Engine = function(){
             
             this.buildStrokeControl();
             
+            this.buildBgControl();
+            
             this.buildWeightControl();
             
             this.panelElem.addEventListener( 'mouseover', this, false );
             this.panelElem.addEventListener( 'mouseout', this, false );
+            this.panelHeaderDelElem.addEventListener( 'click', this, false );
+            
+        };
+        
+        this.remove = function() {
+            
+            _Engine.canvas.remove( this.textInstance );
+            
+            this.bgRangeUndoElem.removeEventListener( 'click', this, false );
+            this.bgRangeElem.removeEventListener( 'input', this, false );
+            this.bgColorElem.removeEventListener( 'input', this, false );
+            this.fontWeightRangeUndoElem.removeEventListener( 'click', this, false );
+            this.fontWeightRangeElem.removeEventListener( 'input', this, false );
+            this.fontStrokeRangeUndoElem.removeEventListener( 'click', this, false );
+            this.fontStrokeRangeElem.removeEventListener( 'input', this, false );
+            this.fontStrokeColorElem.removeEventListener( 'input', this, false );
+            this.fontSizeRangeUndoElem.removeEventListener( 'click', this, false );
+            this.fontSizeRangeElem.removeEventListener( 'input', this, false );
+            this.panelInputColorElem.removeEventListener( 'input', this, false );
+            this.panelInputTextElem.removeEventListener( 'input', this, false );
+            this.panelElem.removeEventListener( 'mouseout', this, false );
+            this.panelElem.removeEventListener( 'mouseover', this, false );
+            
+            this.bgRangeUndoElem.remove();
+            this.bgRangeElem.remove();
+            this.bgColorElem.remove();
+            this.bgRangeContainerElem.remove();
+            this.fontWeightRangeUndoElem.remove();
+            this.fontWeightRangeElem.remove();
+            this.fontWeightRangeIcon.remove();
+            this.fontWeightRangeContainerElem.remove();
+            this.fontStrokeRangeUndoElem.remove();
+            this.fontStrokeRangeElem.remove();
+            this.fontStrokeColorElem.remove();
+            this.fontStrokeRangeContainerElem.remove();
+            this.fontSizeRangeUndoElem.remove();
+            this.fontSizeRangeElem.remove();
+            this.panelInputColorElem.remove();
+            this.fontSizeRangeContainerElem.remove();
+            this.panelInputTextElem.remove();            
+            this.panelHeaderDelElem.remove();
+            this.panelHeaderIconElem.remove();
+            this.panelHeaderElem.remove();
+            this.panelElem.remove();
             
         };
         
@@ -921,6 +1009,10 @@ var Engine = function(){
         this.fontWeightRangeIcon;
         this.fontWeightRangeElem;
         this.fontWeightRangeUndoElem;
+        this.bgRangeContainerElem;
+        this.bgColorElem;
+        this.bgRangeElem;
+        this.bgRangeUndoElem;
         
         this.fontStrokeRangeContainerElem;
         this.fontStrokeColorElem;
@@ -1068,15 +1160,15 @@ var Engine = function(){
         this.addNewPartContainerElem.setAttribute("id", "addNewPartContainer");
         this.controlsContainerElem.appendChild( this.addNewPartContainerElem );
         
-        this.addNewTextPartElem = document.createElement("DIV");
-        this.addNewTextPartElem.setAttribute("id", "addNewTextPart");
-        this.addNewTextPartElem.setAttribute("title", "Add text to the image");
-        this.addNewPartContainerElem.appendChild( this.addNewTextPartElem );
-        
         this.addNewPartElem = document.createElement("DIV");
         this.addNewPartElem.setAttribute("id", "addNewPart");
         this.addNewPartElem.setAttribute("title", "Add new elements to the image. Text, drawings, etc.");
         this.addNewPartContainerElem.appendChild( this.addNewPartElem );
+        
+        this.addNewTextPartElem = document.createElement("DIV");
+        this.addNewTextPartElem.setAttribute("id", "addNewTextPart");
+        this.addNewTextPartElem.setAttribute("title", "Add text to the image");
+        this.addNewPartContainerElem.appendChild( this.addNewTextPartElem );
         
         this.addNewDrawPartElem = document.createElement("DIV");
         this.addNewDrawPartElem.setAttribute("id", "addNewDrawPart");
