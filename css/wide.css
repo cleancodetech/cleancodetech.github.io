@@ -174,6 +174,18 @@
     background-color: rgb(20, 20, 20);
     display: flex;
     justify-content: space-between;
+    height: 6vh;
+    margin: 0 0 2vh 0;
+}
+
+#panelContainer {
+    position: absolute;
+    top: 8vh;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    padding: 0 1vw 0 0;
+    height: 75vh;
 }
 
 #playground #controlsContainer #mainControls #deleteAll{
@@ -227,10 +239,12 @@
 #playground #controlsContainer #addNewPartContainer{
     width: 100%;
     height: 6vh;
-    margin: 2vh auto;
+    margin: 1vh auto;
     box-sizing: border-box;
     display: flex;
     justify-content: space-around;
+    position: absolute;
+    bottom: 0;
 }
 
 #playground #controlsContainer #addNewPartContainer #addNewPart{
@@ -274,7 +288,7 @@
 
 .panel{
     width: 100%;
-    margin: 2vh auto;
+    margin: 0 auto 2vh 0;
     box-sizing: border-box;
     border-radius: 1vh;
     background-color: rgb(30, 30, 30);

@@ -297,7 +297,7 @@ var Engine = function(){
             
             this.panelElem = document.createElement("DIV");
             this.panelElem.setAttribute("class", "panel");
-            _Engine.controlsContainerElem.insertBefore( this.panelElem, _Engine.addNewPartContainerElem );
+            _Engine.panelContainerElem.appendChild( this.panelElem );
             
             this.panelHeaderElem = document.createElement("DIV");
             this.panelHeaderElem.setAttribute("class", "panelHeader");
@@ -511,7 +511,7 @@ var Engine = function(){
             
             this.panelElem = document.createElement("DIV");
             this.panelElem.setAttribute("class", "panel");
-            _Engine.controlsContainerElem.insertBefore( this.panelElem, _Engine.addNewPartContainerElem );
+            _Engine.panelContainerElem.appendChild( this.panelElem );
             
             this.panelHeaderElem = document.createElement("DIV");
             this.panelHeaderElem.setAttribute("class", "panelHeader");
@@ -874,7 +874,7 @@ var Engine = function(){
             
             this.panelElem = document.createElement("DIV");
             this.panelElem.setAttribute("class", "panel");
-            _Engine.controlsContainerElem.insertBefore( this.panelElem, _Engine.addNewPartContainerElem );
+            _Engine.panelContainerElem.appendChild( this.panelElem );
             
             this.panelHeaderElem = document.createElement("DIV");
             this.panelHeaderElem.setAttribute("class", "panelHeader");
@@ -1060,6 +1060,10 @@ var Engine = function(){
         this.shareToSocialElem.setAttribute("title", "Share the image to social media");
         this.mainControlsElem.appendChild( this.shareToSocialElem );
         
+        this.panelContainerElem = document.createElement("DIV");
+        this.panelContainerElem.setAttribute("id", "panelContainer");
+        this.controlsContainerElem.appendChild( this.panelContainerElem );
+        
         this.addNewPartContainerElem = document.createElement("DIV");
         this.addNewPartContainerElem.setAttribute("id", "addNewPartContainer");
         this.controlsContainerElem.appendChild( this.addNewPartContainerElem );
@@ -1124,6 +1128,7 @@ var Engine = function(){
     this.addNewPartElem;
     this.addNewTextPartElem;
     this.addNewDrawPartElem;
+    this.panelContainerElem;
     
     this.canvasRatio = 1;
     this.canvasContainerWidth = 0;
