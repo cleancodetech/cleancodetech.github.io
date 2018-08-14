@@ -182,19 +182,6 @@
     position: absolute;
 }
 
-#playground #controlsContainer #newPartsContainer{
-    width: 100%;
-    box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.98);
-    height: 92vh;
-    padding: 8vh 0 0 0;
-    position: absolute;
-    z-index: 2;
-    top: -92vh;
-    box-shadow: 0 -10px 10px -7px rgb(127, 235, 127) inset;
-    transition: top 0.3s ease 0s;
-}
-
 #panelContainer {
     position: absolute;
     top: 8vh;
@@ -217,42 +204,6 @@
     transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
 }
 
-#playground #controlsContainer #mainControls #exportToSvg{
-    width: 4vh;
-    height: 4vh;
-    margin: 1vh;
-    background-image: url('/imgs/export.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-    cursor: pointer;
-    transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
-}
-
-#playground #controlsContainer #mainControls #download{
-    width: 4vh;
-    height: 4vh;
-    margin: 1vh;
-    background-image: url('/imgs/download.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-    cursor: pointer;
-    transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
-}
-
-#playground #controlsContainer #mainControls #shareSocial{
-    width: 4vh;
-    height: 4vh;
-    margin: 1vh;
-    background-image: url('/imgs/social.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-    cursor: pointer;
-    transition: background-color 0.3s ease 0s, box-shadow 0.3s ease 0s;
-}
-
 #playground #controlsContainer #addNewPartContainer{
     width: 100%;
     height: 6vh;
@@ -262,23 +213,6 @@
     justify-content: space-around;
     position: absolute;
     bottom: 0;
-}
-
-#playground #controlsContainer #mainControls #addNewPart{
-    width: 4vh;
-    height: 4vh;
-    padding: 1vh;
-    background-image: url('/imgs/add.svg');
-    background-repeat: no-repeat;
-    background-size: 4vh;
-    background-position: center center;
-    cursor: pointer;
-    background-color: rgb(30, 30, 30);
-    transition: background-color 0.3s ease-out 0s;
-}
-
-#playground #controlsContainer #mainControls #addNewPart:hover{
-    background-color: black;
 }
 
 #playground #controlsContainer #addNewPartContainer #addNewTextPart{
@@ -305,52 +239,6 @@
     opacity: 0;
     transition: opacity 0.3s ease 0s;
     margin: 1vh 0 0 0;
-}
-
-#newPartText {
-    width: 90%;
-    margin: 2vh auto;
-    box-sizing: border-box;
-    font-size: 3vh;
-    line-height: 4vh;
-    font-family: Montserrat;
-    color: #ebebeb;
-    border-radius: 1vh;
-    background-image: url('/imgs/text.svg');
-    background-position: 1vh center;
-    background-repeat: no-repeat;
-    padding: 1vh 1vh 1vh 1vh;
-    text-align: center;
-    box-shadow: 0 0 0.5vh rgb(127, 235, 127);
-    cursor: pointer;
-    transition: box-shadow 0.3s ease 0s;
-}
-
-#newPartText:hover {
-    box-shadow: 0 0 1vh rgb(127, 235, 127);
-}
-
-#newPartDraw {
-    width: 90%;
-    margin: 2vh auto;
-    box-sizing: border-box;
-    font-size: 3vh;
-    line-height: 4vh;
-    font-family: Montserrat;
-    color: #ebebeb;
-    border-radius: 1vh;
-    background-image: url('/imgs/pencil.svg');
-    background-position: 1vh center;
-    background-repeat: no-repeat;
-    padding: 1vh 1vh 1vh 1vh;
-    text-align: center;
-    box-shadow: 0 0 0.5vh rgb(127, 235, 127);
-    cursor: pointer;
-    transition: box-shadow 0.3s ease 0s;
-}
-
-#newPartDraw:hover {
-    box-shadow: 0 0 1vh rgb(127, 235, 127);
 }
 
 
@@ -739,4 +627,114 @@
 
 #delCCLayer #delCCWindow #delCCkeep:hover ~ #delCCIcon{
     background-image: url('/imgs/heart.svg');
+}
+
+
+
+
+.mainControlsDropDownContainer{
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.98);
+    height: 92vh;
+    padding: 8vh 0 0 0;
+    position: absolute;
+    z-index: 2;
+    top: -92vh;
+    box-shadow: 0 -10px 10px -7px rgb(127, 235, 127) inset;
+    transition: top 0.3s ease 0s;
+}
+
+#newPartsContainer{
+    
+}
+
+
+
+
+
+
+.mainControlsButton{
+    width: 4vh;
+    height: 4vh;
+    padding: 1vh;
+    background-repeat: no-repeat;
+    background-size: 4vh;
+    background-position: center center;
+    cursor: pointer;
+    background-color: rgb(30, 30, 30);
+    transition: background-color 0.3s ease-out 0s;
+}
+
+.mainControlsButton:hover{
+    background-color: black;
+}
+
+#addNewPart{
+    background-image: url('/imgs/add.svg');
+}
+
+#shareSocial{
+    background-image: url('/imgs/social.svg');
+}
+
+#download{
+    background-image: url('/imgs/download.svg');
+}
+
+#exportToSvg{
+    background-image: url('/imgs/export.svg');
+}
+
+
+
+
+
+
+.mainControlsOptionsHeader{
+    width: 90%;
+    margin: 2vh auto;
+    box-sizing: border-box;
+    font-size: 3vh;
+    line-height: 4vh;
+    font-family: Montserrat;
+    color: #ebebeb;
+    border-radius: 1vh;
+    background-position: 1vh center;
+    background-repeat: no-repeat;
+    padding: 1vh 1vh 1vh 1vh;
+    text-align: center;
+    box-shadow: 0 0 0.5vh rgb(127, 235, 127);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease 0s;
+}
+
+.mainControlsOptionsHeader:hover {
+    box-shadow: 0 0 1vh rgb(127, 235, 127);
+}
+
+#newPartText {
+    background-image: url('/imgs/text.svg');
+}
+
+#newPartDraw {
+    background-image: url('/imgs/pencil.svg');
+}
+
+#shareSocialFacebook {
+    background-image: url('/imgs/facebookBlue.svg');
+    box-shadow: 0 0 0.5vh rgb(66, 103, 178);
+}
+
+#shareSocialFacebook:hover {
+    box-shadow: 0 0 1vh rgb(66, 103, 178);
+}
+
+#shareSocialTwitter {
+    background-image: url('/imgs/twitterColor.svg');
+    box-shadow: 0 0 0.5vh rgb(29, 161, 242);
+}
+
+#shareSocialTwitter:hover {
+    box-shadow: 0 0 1vh rgb(29, 161, 242);
 }

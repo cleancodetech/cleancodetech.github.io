@@ -1085,27 +1085,22 @@ var Engine = function(){
             
         if ( event.type === 'click' && event.target === this.downloadElem ){
 
-//            window.open(canvas.toDataURL('png'));
-
-            _Engine.canvas.toBlob(function(blob) {
-                    saveAs(blob, "canvas_images.png");
-            });
+            this.downloadElem.href = _Engine.canvas.toDataURL();
+            this.downloadElem.download = "mypainting.png";
             
         } else if ( event.type === 'click' && event.target === this.addNewPartElem ){
             
-            if ( this.toggleNewPart < 0 ) {
-                
-                this.addNewPartElem.style.backgroundColor = 'black';
-                this.addNewPartContainerElem.style.top = 0;
-                
-            } else {
-                
-                this.addNewPartElem.style.backgroundColor = '';
-                this.addNewPartContainerElem.style.top = '-92vh';
-                
-            }
-
+            this.toggleShareSocial = -1;
             this.toggleNewPart = this.toggleNewPart * (-1);
+            
+            this.toggleMainControlsContainer();
+            
+        } else if ( event.type === 'click' && event.target === this.shareToSocialElem ){
+            
+            this.toggleNewPart = -1;
+            this.toggleShareSocial = this.toggleShareSocial * (-1);
+            
+            this.toggleMainControlsContainer();
             
         } else if ( event.type === 'click' && event.target === this.addNewTextPartElem ){
 
@@ -1202,14 +1197,18 @@ var Engine = function(){
         this.mainControlsElem.setAttribute("id", "mainControls");
         this.controlsContainerElem.appendChild( this.mainControlsElem );
         
-        this.exportToSvgElem = document.createElement("DIV");
-        this.exportToSvgElem.setAttribute("id", "exportToSvg");
-        this.exportToSvgElem.setAttribute("title", "Export to svg file");
-        this.mainControlsElem.appendChild( this.exportToSvgElem );
+//        this.exportToSvgElem = appendElement({
+//            tag: 'DIV',
+//            id: 'exportToSvg',
+//            class: 'mainControlsButton',
+//            title: 'Export to svg file',
+//            parent: this.mainControlsElem
+//        });
         
         this.downloadElem = appendElement({
-            tag: 'DIV',
+            tag: 'A',
             id: 'download',
+            class: 'mainControlsButton',
             title: 'Download the image',
             parent: this.mainControlsElem
         });
@@ -1217,6 +1216,7 @@ var Engine = function(){
         this.shareToSocialElem = appendElement({
             tag: 'DIV',
             id: 'shareSocial',
+            class: 'mainControlsButton',
             title: 'Share the image to social media',
             parent: this.mainControlsElem
         });
@@ -1224,6 +1224,7 @@ var Engine = function(){
         this.addNewPartElem = appendElement({
             tag: 'DIV',
             id: 'addNewPart',
+            class: 'mainControlsButton',
             title: 'Add new elements to the image. Text, drawings, etc.',
             parent: this.mainControlsElem
         });
@@ -1244,9 +1245,41 @@ var Engine = function(){
         
         this.downloadElem.addEventListener( 'click', this, false );
         this.addNewPartElem.addEventListener( 'click', this, false );
+        this.shareToSocialElem.addEventListener( 'click', this, false );
 //        this.addNewTextPartElem.addEventListener( 'click', this, false );
 
         this.buildModuleNewParts();
+        
+        this.buildModuleShareSocial();
+        
+    };
+    
+    this.buildModuleShareSocial = function() {
+        
+        this.shareSocialContainerElem = appendElement({
+            tag: 'DIV',
+            id: 'shareSocialContainer',
+            class: 'mainControlsDropDownContainer',
+            parent: this.controlsContainerElem
+        });
+        
+        this.shareSocialFacebookElem = appendElement({
+            tag: 'DIV',
+            id: 'shareSocialFacebook',
+            class: 'mainControlsOptionsHeader',
+            text: 'Facebook',
+            title: 'Share this image to Facebook',
+            parent: this.shareSocialContainerElem
+        });
+        
+        this.shareSocialTwitterElem = appendElement({
+            tag: 'DIV',
+            id: 'shareSocialTwitter',
+            class: 'mainControlsOptionsHeader',
+            text: 'Twitter',
+            title: 'Share this image to Twitter',
+            parent: this.shareSocialContainerElem
+        });
         
     };
     
@@ -1255,12 +1288,14 @@ var Engine = function(){
         this.addNewPartContainerElem = appendElement({
             tag: 'DIV',
             id: 'newPartsContainer',
+            class: 'mainControlsDropDownContainer',
             parent: this.controlsContainerElem
         });
         
         this.addNewTextPartElem = appendElement({
             tag: 'DIV',
             id: 'newPartText',
+            class: 'mainControlsOptionsHeader',
             text: 'Text',
             title: 'Add a new text element to your image',
             parent: this.addNewPartContainerElem
@@ -1269,10 +1304,39 @@ var Engine = function(){
         this.addNewDrawPartElem = appendElement({
             tag: 'DIV',
             id: 'newPartDraw',
+            class: 'mainControlsOptionsHeader',
             text: 'Draw',
             title: 'Draw freely on the image',
             parent: this.addNewPartContainerElem
         });
+        
+    };
+    
+    this.toggleMainControlsContainer = function() {
+        
+        if ( this.toggleNewPart > 0 ) {
+                
+            this.addNewPartElem.style.backgroundColor = 'black';
+            this.addNewPartContainerElem.style.top = 0;
+
+        } else {
+
+            this.addNewPartElem.style.backgroundColor = '';
+            this.addNewPartContainerElem.style.top = '-92vh';
+
+        }
+        
+        if ( this.toggleShareSocial > 0 ) {
+                
+            this.shareToSocialElem.style.backgroundColor = 'black';
+            this.shareSocialContainerElem.style.top = 0;
+
+        } else {
+
+            this.shareToSocialElem.style.backgroundColor = '';
+            this.shareSocialContainerElem.style.top = '-92vh';
+
+        }
         
     };
     
@@ -1316,6 +1380,8 @@ var Engine = function(){
     this.addNewTextPartElem;
     this.addNewDrawPartElem;
     this.panelContainerElem;
+    this.shareSocialContainerElem;
+    this.shareSocialFacebookElem;
     
     this.canvasRatio = 1;
     this.canvasContainerWidth = 0;
@@ -1324,6 +1390,7 @@ var Engine = function(){
     this.canvasHeight = 0;
     
     this.toggleNewPart = -1;
+    this.toggleShareSocial = -1;
     
     this.ctx;
     this.canvas;
