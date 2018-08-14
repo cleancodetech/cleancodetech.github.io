@@ -165,17 +165,34 @@
     top: 0;
     right: 0;
     height: 92vh;
+    border-radius: 1vh 1vh 0 0;
+    overflow: hidden;
 }
 
 #playground #controlsContainer #mainControls{
     width: 100%;
     box-sizing: border-box;
-    border-radius: 500px;
-    background-color: rgb(20, 20, 20);
+    border-radius: 1vh;
+    background-color: rgb(30, 30, 30);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 6vh;
     margin: 0 0 2vh 0;
+    z-index: 3;
+    position: absolute;
+}
+
+#playground #controlsContainer #newPartsContainer{
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.98);
+    height: 92vh;
+    padding: 8vh 0 0 0;
+    position: absolute;
+    z-index: 2;
+    top: -92vh;
+    box-shadow: 0 -10px 10px -7px rgb(127, 235, 127) inset;
+    transition: top 0.3s ease 0s;
 }
 
 #panelContainer {
@@ -185,7 +202,7 @@
     box-sizing: border-box;
     overflow-y: scroll;
     padding: 0 1vw 0 0;
-    height: 75vh;
+    height: 84vh;
 }
 
 #playground #controlsContainer #mainControls #deleteAll{
@@ -247,17 +264,21 @@
     bottom: 0;
 }
 
-#playground #controlsContainer #addNewPartContainer #addNewPart{
-    width: 6vh;
-    height: 6vh;
-    box-sizing: border-box;
-    border-radius: 500px;
-    background-color: rgb(20, 20, 20);
+#playground #controlsContainer #mainControls #addNewPart{
+    width: 4vh;
+    height: 4vh;
+    padding: 1vh;
     background-image: url('/imgs/add.svg');
-    background-size: contain;
     background-repeat: no-repeat;
+    background-size: 4vh;
     background-position: center center;
     cursor: pointer;
+    background-color: rgb(30, 30, 30);
+    transition: background-color 0.3s ease-out 0s;
+}
+
+#playground #controlsContainer #mainControls #addNewPart:hover{
+    background-color: black;
 }
 
 #playground #controlsContainer #addNewPartContainer #addNewTextPart{
@@ -285,6 +306,57 @@
     transition: opacity 0.3s ease 0s;
     margin: 1vh 0 0 0;
 }
+
+#newPartText {
+    width: 90%;
+    margin: 2vh auto;
+    box-sizing: border-box;
+    font-size: 3vh;
+    line-height: 4vh;
+    font-family: Montserrat;
+    color: #ebebeb;
+    border-radius: 1vh;
+    background-image: url('/imgs/text.svg');
+    background-position: 1vh center;
+    background-repeat: no-repeat;
+    padding: 1vh 1vh 1vh 1vh;
+    text-align: center;
+    box-shadow: 0 0 0.5vh rgb(127, 235, 127);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease 0s;
+}
+
+#newPartText:hover {
+    box-shadow: 0 0 1vh rgb(127, 235, 127);
+}
+
+#newPartDraw {
+    width: 90%;
+    margin: 2vh auto;
+    box-sizing: border-box;
+    font-size: 3vh;
+    line-height: 4vh;
+    font-family: Montserrat;
+    color: #ebebeb;
+    border-radius: 1vh;
+    background-image: url('/imgs/pencil.svg');
+    background-position: 1vh center;
+    background-repeat: no-repeat;
+    padding: 1vh 1vh 1vh 1vh;
+    text-align: center;
+    box-shadow: 0 0 0.5vh rgb(127, 235, 127);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease 0s;
+}
+
+#newPartDraw:hover {
+    box-shadow: 0 0 1vh rgb(127, 235, 127);
+}
+
+
+
+
+
 
 .panel{
     width: 100%;

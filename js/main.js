@@ -142,6 +142,26 @@ function convertHexOpacity(hex,opacity){
     return'rgba('+r+','+g+','+b+','+opacity+')';
 }
 
+function appendElement( args ) {
+    
+    var elem = document.createElement( args.tag );
+    
+    if ( args.hasOwnProperty('id') )        { elem.id = args.id; }
+    if ( args.hasOwnProperty('title') )     { elem.setAttribute("title", args.title ); }
+    if ( args.hasOwnProperty('class') )     { elem.setAttribute("class", args.class ); }
+    if ( args.hasOwnProperty('type') )      { elem.setAttribute("type", args.type ); }
+    if ( args.hasOwnProperty('min') )       { elem.setAttribute("min", args.min ); }
+    if ( args.hasOwnProperty('max') )       { elem.setAttribute("max", args.max ); }
+    if ( args.hasOwnProperty('step') )      { elem.setAttribute("step", args.step ); }
+    if ( args.hasOwnProperty('value') )     { elem.setAttribute("value", args.value ); }
+    if ( args.hasOwnProperty('text') )      { elem.innerHTML = args.text; }
+    
+    args.parent.appendChild( elem );
+    
+    return elem;
+    
+};
+
 function initialArrange() {
     
     var width = window.innerWidth
@@ -303,28 +323,35 @@ var Engine = function(){
         };
         
         this.buildControlPanel = function() {
-            
-            this.panelElem = document.createElement("DIV");
-            this.panelElem.setAttribute("class", "panel");
-            _Engine.panelContainerElem.appendChild( this.panelElem );
-            
-            this.panelHeaderElem = document.createElement("DIV");
-            this.panelHeaderElem.setAttribute("class", "panelHeader");
-            this.panelElem.appendChild( this.panelHeaderElem );
-            
-            this.panelHeaderIconElem = document.createElement("DIV");
-            this.panelHeaderIconElem.setAttribute("class", "panelHeaderCCIcon");
-            this.panelHeaderIconElem.setAttribute("title", "Controls the tiny text on the left side of the image");
-            this.panelHeaderElem.appendChild( this.panelHeaderIconElem );
-            
-            this.panelHeaderDelElem = document.createElement("DIV");
-            this.panelHeaderDelElem.setAttribute("class", "panelHeaderDel");
-            this.panelHeaderDelElem.setAttribute("title", "Delete this element from image");
-            this.panelHeaderElem.appendChild( this.panelHeaderDelElem );
+        
+            this.panelElem = appendElement({
+                tag: 'DIV',
+                class: 'panel',
+                parent: _Engine.panelContainerElem
+            });
+        
+            this.panelHeaderElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeader',
+                parent: this.panelElem
+            });
+        
+            this.panelHeaderIconElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeaderCCIcon',
+                title: 'Controls the tiny text on the left side of the image',
+                parent: this.panelHeaderElem
+            });
+        
+            this.panelHeaderDelElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeaderDel',
+                title: 'Delete this element from image',
+                parent: this.panelHeaderElem
+            });
             
             this.panelElem.addEventListener( 'mouseover', this, false );
-            this.panelElem.addEventListener( 'mouseout', this, false );
-            
+            this.panelElem.addEventListener( 'mouseout', this, false );            
             this.panelHeaderDelElem.addEventListener( 'click', this, false );
             
         };
@@ -517,24 +544,32 @@ var Engine = function(){
         };
         
         this.buildControlPanel = function() {
-            
-            this.panelElem = document.createElement("DIV");
-            this.panelElem.setAttribute("class", "panel");
-            _Engine.panelContainerElem.appendChild( this.panelElem );
-            
-            this.panelHeaderElem = document.createElement("DIV");
-            this.panelHeaderElem.setAttribute("class", "panelHeader");
-            this.panelElem.appendChild( this.panelHeaderElem );
-            
-            this.panelHeaderIconElem = document.createElement("DIV");
-            this.panelHeaderIconElem.setAttribute("class", "panelHeaderWallpIcon");
-            this.panelHeaderElem.appendChild( this.panelHeaderIconElem );
+        
+            this.panelElem = appendElement({
+                tag: 'DIV',
+                class: 'panel',
+                parent: _Engine.panelContainerElem
+            });
+        
+            this.panelHeaderElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeader',
+                parent: this.panelElem
+            });
+        
+            this.panelHeaderIconElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeaderWallpIcon',
+                parent: this.panelHeaderElem
+            });
             
             if ( this.args.delButton !== false ) {
-            
-                this.panelHeaderDelElem = document.createElement("DIV");
-                this.panelHeaderDelElem.setAttribute("class", "panelHeaderDel");
-                this.panelHeaderElem.appendChild( this.panelHeaderDelElem );
+        
+                this.panelHeaderDelElem = appendElement({
+                    tag: 'DIV',
+                    class: 'panelHeaderDel',
+                    parent: this.panelHeaderElem
+                });
                 
             }
             
@@ -543,68 +578,90 @@ var Engine = function(){
         this.buildControlModule = function(){
             
             this.buildControlPanel();
-            
-            this.panelBodyFiltersElem = document.createElement("DIV");
-            this.panelBodyFiltersElem.setAttribute("class", "panelBodyWallpFilters");
-            this.panelElem.appendChild( this.panelBodyFiltersElem );
-            
-            this.panelGrayscaleButtonElem = document.createElement("DIV");
-            this.panelGrayscaleButtonElem.setAttribute("class", "panelGrayscaleButton");
-            this.panelGrayscaleButtonElem.setAttribute("title", "Apply grayscale filter to the image");
-            this.panelBodyFiltersElem.appendChild( this.panelGrayscaleButtonElem );
-            
-            this.panelSepiaButtonElem = document.createElement("DIV");
-            this.panelSepiaButtonElem.setAttribute("class", "panelSepiaButton");
-            this.panelSepiaButtonElem.setAttribute("title", "Apply sepia filter to the image");
-            this.panelBodyFiltersElem.appendChild( this.panelSepiaButtonElem );
-            
-            this.brightnessContainerElem = document.createElement("DIV");
-            this.brightnessContainerElem.setAttribute("class", "brightnessContainer");
-            this.panelElem.appendChild( this.brightnessContainerElem );
-            
-            this.brightnessIconElem = document.createElement("DIV");
-            this.brightnessIconElem.setAttribute("class", "brightnessIcon");
-            this.brightnessIconElem.setAttribute("title", "Adjust the brightness of your image");
-            this.brightnessContainerElem.appendChild( this.brightnessIconElem );
-            
-            this.brightnessRangeElem = document.createElement("INPUT");
-            this.brightnessRangeElem.setAttribute("class", "brightnessRange");
-            this.brightnessRangeElem.setAttribute("title", "Adjust the brightness of your image");
-            this.brightnessRangeElem.setAttribute("type", "range");
-            this.brightnessRangeElem.setAttribute("min", "-1");
-            this.brightnessRangeElem.setAttribute("max", "1");
-            this.brightnessRangeElem.setAttribute("step", "0.01");
-            this.brightnessRangeElem.value = 0;
-            this.brightnessContainerElem.appendChild( this.brightnessRangeElem );
-            
-            this.brightnessUndoElem = document.createElement("DIV");
-            this.brightnessUndoElem.setAttribute("class", "rangerUndo");
-            this.brightnessUndoElem.setAttribute("title", "Reset brightness value to original");
-            this.brightnessContainerElem.appendChild( this.brightnessUndoElem );
-            
-            this.blurContainerElem = document.createElement("DIV");
-            this.blurContainerElem.setAttribute("class", "blurContainer");
-            this.panelElem.appendChild( this.blurContainerElem );
-            
-            this.blurIconElem = document.createElement("DIV");
-            this.blurIconElem.setAttribute("class", "blurIcon");
-            this.blurIconElem.setAttribute("title", "Blur your image");
-            this.blurContainerElem.appendChild( this.blurIconElem );
-            
-            this.blurRangeElem = document.createElement("INPUT");
-            this.blurRangeElem.setAttribute("class", "blurRange");
-            this.blurRangeElem.setAttribute("title", "Blur your image");
-            this.blurRangeElem.setAttribute("type", "range");
-            this.blurRangeElem.setAttribute("min", "0");
-            this.blurRangeElem.setAttribute("max", "1");
-            this.blurRangeElem.setAttribute("step", "0.01");
-            this.blurRangeElem.value = 0;
-            this.blurContainerElem.appendChild( this.blurRangeElem );
-            
-            this.blurUndoElem = document.createElement("DIV");
-            this.blurUndoElem.setAttribute("class", "rangerUndo");
-            this.blurUndoElem.setAttribute("title", "Reset blurness value to original");
-            this.blurContainerElem.appendChild( this.blurUndoElem );
+        
+            this.panelBodyFiltersElem = appendElement({
+                tag: 'DIV',
+                class: 'panelBodyWallpFilters',
+                parent: this.panelElem
+            });
+        
+            this.panelGrayscaleButtonElem = appendElement({
+                tag: 'DIV',
+                class: 'panelGrayscaleButton',
+                title: 'Apply grayscale filter to the image',
+                parent: this.panelBodyFiltersElem
+            });
+        
+            this.panelSepiaButtonElem = appendElement({
+                tag: 'DIV',
+                class: 'panelSepiaButton',
+                title: 'Apply sepia filter to the image',
+                parent: this.panelBodyFiltersElem
+            });
+        
+            this.brightnessContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'brightnessContainer',
+                parent: this.panelElem
+            });
+        
+            this.brightnessIconElem = appendElement({
+                tag: 'DIV',
+                class: 'brightnessIcon',
+                title: 'Adjust the brightness of your image',
+                parent: this.brightnessContainerElem
+            });
+        
+            this.brightnessRangeElem = appendElement({
+                tag: 'INPUT',
+                class: 'brightnessRange',
+                title: 'Adjust the brightness of your image',
+                type: 'range',
+                min: '-1',
+                max: '1',
+                step: '0.01',
+                value: 0,
+                parent: this.brightnessContainerElem
+            });
+        
+            this.brightnessUndoElem = appendElement({
+                tag: 'DIV',
+                class: 'rangerUndo',
+                title: 'Reset brightness value to original',
+                parent: this.brightnessContainerElem
+            });
+        
+            this.blurContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'blurContainer',
+                parent: this.panelElem
+            });
+        
+            this.blurIconElem = appendElement({
+                tag: 'DIV',
+                class: 'blurIcon',
+                title: 'Blur your image',
+                parent: this.blurContainerElem
+            });
+        
+            this.blurRangeElem = appendElement({
+                tag: 'INPUT',
+                class: 'blurRange',
+                title: 'Blur your image',
+                type: 'range',
+                min: '0',
+                max: '1',
+                step: '0.01',
+                value: 0,
+                parent: this.blurContainerElem
+            });
+        
+            this.blurUndoElem = appendElement({
+                tag: 'DIV',
+                class: 'rangerUndo',
+                title: 'Reset blurness value to original',
+                parent: this.blurContainerElem
+            });
             
             this.panelGrayscaleButtonElem.addEventListener( 'click', this, false );
             this.panelSepiaButtonElem.addEventListener( 'click', this, false );
@@ -1035,12 +1092,20 @@ var Engine = function(){
             });
             
         } else if ( event.type === 'click' && event.target === this.addNewPartElem ){
+            
+            if ( this.toggleNewPart < 0 ) {
+                
+                this.addNewPartElem.style.backgroundColor = 'black';
+                this.addNewPartContainerElem.style.top = 0;
+                
+            } else {
+                
+                this.addNewPartElem.style.backgroundColor = '';
+                this.addNewPartContainerElem.style.top = '-92vh';
+                
+            }
 
-            this.addNewTextPartElem.style.opacity = 1;
-            this.addNewTextPartElem.style.cursor = 'pointer';
-
-            this.addNewDrawPartElem.style.opacity = 1;
-            this.addNewDrawPartElem.style.cursor = 'pointer';
+            this.toggleNewPart = this.toggleNewPart * (-1);
             
         } else if ( event.type === 'click' && event.target === this.addNewTextPartElem ){
 
@@ -1142,42 +1207,72 @@ var Engine = function(){
         this.exportToSvgElem.setAttribute("title", "Export to svg file");
         this.mainControlsElem.appendChild( this.exportToSvgElem );
         
-        this.downloadElem = document.createElement("DIV");
-        this.downloadElem.setAttribute("id", "download");
-        this.downloadElem.setAttribute("title", "Download the image");
-        this.mainControlsElem.appendChild( this.downloadElem );
+        this.downloadElem = appendElement({
+            tag: 'DIV',
+            id: 'download',
+            title: 'Download the image',
+            parent: this.mainControlsElem
+        });
         
-        this.shareToSocialElem = document.createElement("DIV");
-        this.shareToSocialElem.setAttribute("id", "shareSocial");
-        this.shareToSocialElem.setAttribute("title", "Share the image to social media");
-        this.mainControlsElem.appendChild( this.shareToSocialElem );
+        this.shareToSocialElem = appendElement({
+            tag: 'DIV',
+            id: 'shareSocial',
+            title: 'Share the image to social media',
+            parent: this.mainControlsElem
+        });
+        
+        this.addNewPartElem = appendElement({
+            tag: 'DIV',
+            id: 'addNewPart',
+            title: 'Add new elements to the image. Text, drawings, etc.',
+            parent: this.mainControlsElem
+        });
         
         this.panelContainerElem = document.createElement("DIV");
         this.panelContainerElem.setAttribute("id", "panelContainer");
         this.controlsContainerElem.appendChild( this.panelContainerElem );
         
-        this.addNewPartContainerElem = document.createElement("DIV");
-        this.addNewPartContainerElem.setAttribute("id", "addNewPartContainer");
-        this.controlsContainerElem.appendChild( this.addNewPartContainerElem );
-        
-        this.addNewPartElem = document.createElement("DIV");
-        this.addNewPartElem.setAttribute("id", "addNewPart");
-        this.addNewPartElem.setAttribute("title", "Add new elements to the image. Text, drawings, etc.");
-        this.addNewPartContainerElem.appendChild( this.addNewPartElem );
-        
-        this.addNewTextPartElem = document.createElement("DIV");
-        this.addNewTextPartElem.setAttribute("id", "addNewTextPart");
-        this.addNewTextPartElem.setAttribute("title", "Add text to the image");
-        this.addNewPartContainerElem.appendChild( this.addNewTextPartElem );
-        
-        this.addNewDrawPartElem = document.createElement("DIV");
-        this.addNewDrawPartElem.setAttribute("id", "addNewDrawPart");
-        this.addNewDrawPartElem.setAttribute("title", "Draw a line to the image");
-        this.addNewPartContainerElem.appendChild( this.addNewDrawPartElem );
+//        this.addNewTextPartElem = document.createElement("DIV");
+//        this.addNewTextPartElem.setAttribute("id", "addNewTextPart");
+//        this.addNewTextPartElem.setAttribute("title", "Add text to the image");
+//        this.addNewPartContainerElem.appendChild( this.addNewTextPartElem );
+//        
+//        this.addNewDrawPartElem = document.createElement("DIV");
+//        this.addNewDrawPartElem.setAttribute("id", "addNewDrawPart");
+//        this.addNewDrawPartElem.setAttribute("title", "Draw a line to the image");
+//        this.addNewPartContainerElem.appendChild( this.addNewDrawPartElem );
         
         this.downloadElem.addEventListener( 'click', this, false );
         this.addNewPartElem.addEventListener( 'click', this, false );
-        this.addNewTextPartElem.addEventListener( 'click', this, false );
+//        this.addNewTextPartElem.addEventListener( 'click', this, false );
+
+        this.buildModuleNewParts();
+        
+    };
+    
+    this.buildModuleNewParts = function(){
+        
+        this.addNewPartContainerElem = appendElement({
+            tag: 'DIV',
+            id: 'newPartsContainer',
+            parent: this.controlsContainerElem
+        });
+        
+        this.addNewTextPartElem = appendElement({
+            tag: 'DIV',
+            id: 'newPartText',
+            text: 'Text',
+            title: 'Add a new text element to your image',
+            parent: this.addNewPartContainerElem
+        });
+        
+        this.addNewDrawPartElem = appendElement({
+            tag: 'DIV',
+            id: 'newPartDraw',
+            text: 'Draw',
+            title: 'Draw freely on the image',
+            parent: this.addNewPartContainerElem
+        });
         
     };
     
@@ -1227,6 +1322,8 @@ var Engine = function(){
     this.canvasContainerHeight = 0;
     this.canvasWidth = 0;
     this.canvasHeight = 0;
+    
+    this.toggleNewPart = -1;
     
     this.ctx;
     this.canvas;
