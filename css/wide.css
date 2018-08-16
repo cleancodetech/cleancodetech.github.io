@@ -13,7 +13,7 @@
     background-color: rgb(10, 10, 10);
     border: dashed 3px white;
     cursor: pointer;
-    transition: background-position 0.4s ease 0s, background-size 0.4s ease 0s, background-color 0.4s ease 0s, left 0.3s ease 0s, top 0.3s ease 0.3s, bottom 0.3s ease 0.6s;
+    transition: background-position 0.4s ease 0s, background-size 0.4s ease 0s, background-color 0.4s ease 0s, left 0.3s ease 0s, top 0.3s ease 0.3s, bottom 0.3s ease 0.6s, border 0.4s ease 0s, box-shadow 0.4s ease 0s;
 }
 
 #drag{

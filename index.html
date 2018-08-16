@@ -4,7 +4,8 @@
         <title>makeameme</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel='stylesheet' media='screen and (min-width: 701px) and (max-width: 900px)' href='css/portrait.css' />
+        <link rel='stylesheet' media='screen and (min-width: 301px) and (max-width: 1140px)' href='css/mobileAll.css' />
+        <link rel='stylesheet' media='screen and (min-width: 301px) and (max-width: 1440px)' href='css/mobile.css' />
         <link rel='stylesheet' media='screen and (min-width: 1141px)' href='css/wideAll.css' />
         <link rel='stylesheet' media='screen and (min-width: 1141px)' href='css/wide.css' />
         <link href="https://fonts.googleapis.com/css?family=Lobster|Montserrat:200,400,700|Space+Mono:400,700" rel="stylesheet">
@@ -12,16 +13,28 @@
     </head>
     <body>
         <div id="header">makeameme</div>
-        <div id="power" title="Powered by Clean Code">
-            <p>by <a href="#" target="_blank">Clean Code</a></p>
-        </div>
-        <div id="copyright"></div>
-        <div id="sidebar">
-            <a href="/index.html" class="sidebarButton" title="Create a meme"><img src="imgs/paint.svg"></a>
-            <a href="/credits.html" class="sidebarButton" title="Credits"><img src="imgs/heart.svg"></a>
-            <a href="#" class="sidebarButton" title="Privacy Policy"><img src="imgs/read.svg"></a>
-            <a href="#" class="sidebarButton" title="Visit our Facebook Page"><img src="imgs/facebook.svg"></a>
-            <a href="#" class="sidebarButton" title="Visit our Twitter"><img src="imgs/twitter.svg"></a>
+        <div id="menu"></div>
+        <div id="environment">
+            <div id="backMobile"></div>
+            <div id="power" title="Powered by Clean Code">
+                <p>by <a href="#" target="_blank">Clean Code</a></p>
+            </div>
+            <a id="powerMobile" href="#" target="blank">Powered by Clean Code</a>
+            <div id="copyright"></div>
+            <div id="sidebar">
+                <a href="/index.html" id="sideNew" class="sidebarButton" title="Create a meme"></a>
+                <a href="/credits.html" id="sideCredits" class="sidebarButton" title="Credits"></a>
+                <a href="#" id="sidePrivacy" class="sidebarButton" title="Privacy Policy"></a>
+                <a href="#" id="sideFacebook" class="sidebarButton" title="Visit our Facebook Page"></a>
+                <a href="#" id="sideTwitter" class="sidebarButton" title="Visit our Twitter"></a>
+            </div>
+            <div id="sidebarMobile">
+                <a href="/index.html" id="sideNewMobile" class="sidebarButton" title="Create a meme">Create a meme</a>
+                <a href="/credits.html" id="sideCreditsMobile" class="sidebarButton" title="Credits">Credits</a>
+                <a href="#" id="sidePrivacyMobile" class="sidebarButton" title="Privacy Policy">Privacy Policy</a>
+                <a href="#" id="sideFacebookMobile" class="sidebarButton" title="Visit our Facebook Page">Facebook</a>
+                <a href="#" id="sideTwitterMobile" class="sidebarButton" title="Visit our Twitter">Twitter</a>
+            </div>
         </div>
         <div id="box">
             <div id="drag">

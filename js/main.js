@@ -14,6 +14,18 @@ function initFunc() {
     
     document.getElementById('photoUrl').addEventListener("input", photoDownload, true);
     
+    document.getElementById('drag').addEventListener("drop", dropFile, true);
+    
+    document.getElementById('drag').addEventListener("dragover", dragOver, true);
+    
+    document.getElementById('drag').addEventListener("dragenter", dragEnter, true);
+    
+    document.getElementById('drag').addEventListener("dragleave", dragLeave, true);
+    
+    document.getElementById('menu').addEventListener("click", expandMobileMenu, true);
+    
+    document.getElementById('backMobile').addEventListener("click", minimizeMobileMenu, true);
+    
     eng = new Engine();
     
 }
@@ -206,6 +218,60 @@ function photoDownload( event ) {
     img.src = event.target.value;
     
     event.target.value = '';
+    
+};
+
+function dropFile( event ) {
+    
+    console.log('File(s) dropped');
+
+    // Prevent default behavior (Prevent file from being opened)
+    event.preventDefault();
+    
+    var reader = new FileReader();
+
+    reader.onload = function( e ){
+        
+        var img = new Image;
+        
+        img.onload = function() {
+            
+            eng.createFromImageUpload( img );
+        };
+        
+        img.src = reader.result;
+        
+    };
+    
+    reader.readAsDataURL(event.dataTransfer.files[0]);
+    
+};
+
+function dragLeave( event ) {
+    
+    event.preventDefault();
+    
+    event.target.style.border = '';
+    event.target.style.boxShadow = '';
+    event.target.style.backgroundSize = '';
+    
+};
+
+function dragEnter( event ) {
+    
+    event.preventDefault();
+    
+    event.target.style.border = 'dashed 10px white';
+    event.target.style.boxShadow = '0 0 5vh rgb(127, 235, 127) inset';
+    event.target.style.backgroundSize = '0%';
+    
+};
+
+function dragOver( event ) {
+    
+    console.log('File(s) in drop zone'); 
+
+    event.preventDefault();
     
 };
 
@@ -1085,8 +1151,18 @@ var Engine = function(){
             
         if ( event.type === 'click' && event.target === this.downloadElem ){
 
-            this.downloadElem.href = _Engine.canvas.toDataURL();
-            this.downloadElem.download = "mypainting.png";
+            this.downloadImage();
+            
+        } else if ( event.type === 'click' && event.target === this.shareSocialFacebookElem ){
+            
+            var image = new Image();
+            image.src = _Engine.canvas.toDataURL();
+            
+            window.open(
+                'https://www.facebook.com/sharer/sharer.php?picture='+encodeURIComponent('https://m.media-amazon.com/images/M/MV5BMTk3OTE3ODg1Ml5BMl5BanBnXkFtZTgwMTI4NTE4NTM@._V1_SY1000_CR0,0,648,1000_AL_.jpg'), 
+                'facebook-share-dialog', 
+                'width=626,height=436');
+            
             
         } else if ( event.type === 'click' && event.target === this.addNewPartElem ){
             
@@ -1120,6 +1196,14 @@ var Engine = function(){
         
     };
     
+    this.downloadImage = function() {
+        
+        var name = domain + '-' + ( new Date() ).getTime() + '.png';
+        this.downloadElem.href = _Engine.canvas.toDataURL();
+        this.downloadElem.download = name;
+        
+    };
+    
     this.removeInitialBox = function() {
         
         while (this.initialBoxElem.firstChild) {
@@ -1133,6 +1217,8 @@ var Engine = function(){
     };
     
     this.createPlayground = function( img ) {
+        
+        this.imgWhole = img
         
         var width = window.innerWidth
             || document.documentElement.clientWidth
@@ -1213,13 +1299,13 @@ var Engine = function(){
             parent: this.mainControlsElem
         });
         
-        this.shareToSocialElem = appendElement({
-            tag: 'DIV',
-            id: 'shareSocial',
-            class: 'mainControlsButton',
-            title: 'Share the image to social media',
-            parent: this.mainControlsElem
-        });
+//        this.shareToSocialElem = appendElement({
+//            tag: 'DIV',
+//            id: 'shareSocial',
+//            class: 'mainControlsButton',
+//            title: 'Share the image to social media',
+//            parent: this.mainControlsElem
+//        });
         
         this.addNewPartElem = appendElement({
             tag: 'DIV',
@@ -1245,12 +1331,12 @@ var Engine = function(){
         
         this.downloadElem.addEventListener( 'click', this, false );
         this.addNewPartElem.addEventListener( 'click', this, false );
-        this.shareToSocialElem.addEventListener( 'click', this, false );
+//        this.shareToSocialElem.addEventListener( 'click', this, false );
 //        this.addNewTextPartElem.addEventListener( 'click', this, false );
 
         this.buildModuleNewParts();
         
-        this.buildModuleShareSocial();
+//        this.buildModuleShareSocial();
         
     };
     
@@ -1280,6 +1366,8 @@ var Engine = function(){
             title: 'Share this image to Twitter',
             parent: this.shareSocialContainerElem
         });
+        
+        this.shareSocialFacebookElem.addEventListener( 'click', this, false );
         
     };
     

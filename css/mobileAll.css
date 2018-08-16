@@ -1,0 +1,142 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(10, 10, 10);
+}
+
+#header{
+    color: rgb(127, 235, 127);
+    font-family: 'Lobster', cursive;
+    font-size: 5vh;
+    left: 0;
+    text-align: center;
+    width: 100vw;
+    box-sizing: border-box;
+    line-height: 6vh;
+    box-shadow: 0 0 1vh black;
+}
+
+#menu{
+    position: absolute;
+    top: 0.5vh;
+    left: 2vh;
+    width: 5vh;
+    height: 5vh;
+    background-image: url('/imgs/menu.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#environment{
+    width: 90vw;
+    position: absolute;
+    top: 0px;
+    left: -90vw;
+    z-index: 3;
+    background-color: white;
+    border-radius: 0 0 2vh 0;
+    box-shadow: 0 0 1vh black;
+    transition: left 0.3s ease 0s;
+}
+
+#backMobile{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-image: url('/imgs/backMobile.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#power{
+    display: none;
+}
+
+#powerMobile {
+    display: block;
+    width: 60vw;
+    margin: 0 0 0 30vw;
+    text-align: right;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    padding: 1rem 1.5rem 0 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+    font-family: "Montserrat";
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    outline: medium none;
+}
+
+#copyright{
+    width: 60vw;
+    margin: 0 0 0 30vw;
+    text-align: right;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: black;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: auto 50%;
+    background-position: 5% center;
+    padding: 0 1.5rem 1rem 0;
+    font-family: "Montserrat";
+}
+
+#copyright p::before{
+    content: "\00a9 \00a0";
+}
+
+#sidebar{
+    display: none;
+}
+
+#sidebarMobile{
+    width: 85vw;
+    margin: 2vh auto;
+    box-sizing: border-box;
+}
+
+#sidebarMobile .sidebarButton{
+    width: 100%;
+    margin: 1vh;
+    display: block;
+    border-radius: 1vh;
+    background-size: auto 80%;
+    background-repeat: no-repeat;
+    background-position: 5% center;
+    font-size: 2rem;
+    line-height: 3rem;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    font-family: Montserrat;
+}
+
+#sideNewMobile{
+    background-image: url('/imgs/paintBlack.svg');
+}
+
+#sideCreditsMobile{
+    background-image: url('/imgs/heartBlack.svg');
+}
+
+#sidePrivacyMobile{
+    background-image: url('/imgs/readBlack.svg');
+}
+
+#sideFacebookMobile{
+    background-image: url('/imgs/facebookBlack.svg');
+}
+
+#sideTwitterMobile{
+    background-image: url('/imgs/twitterBlack.svg');
+}

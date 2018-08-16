@@ -5,6 +5,9 @@
 
 body{
     background-color: rgb(10, 10, 10);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 #header{
@@ -19,6 +22,20 @@ body{
     text-align: center;
     width: 100vw;
     box-sizing: border-box;
+}
+
+#menu{
+    display: none;
+}
+
+#environment{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
 }
 
 #power{
@@ -48,6 +65,10 @@ body{
     color: rgb(235, 235, 235);
     text-decoration: none;
     outline: medium none;
+}
+
+#powerMobile{
+    display: none;
 }
 
 #copyright{
@@ -87,6 +108,9 @@ body{
     margin: 3vh 1vh;
     display: block;
     border-radius: 500px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
     transition: background-color 0.3s ease 0s;
 }
 
@@ -94,7 +118,33 @@ body{
     background-color: rgb(30, 30, 30);
 }
 
-#sidebar .sidebarButton img{
-    width: 4vh;
-    height: 4vh;
+#sideNew{
+    background-image: url('/imgs/paint.svg');
+}
+
+#sideCredits{
+    background-image: url('/imgs/heart.svg');
+}
+
+#sidePrivacy{
+    background-image: url('/imgs/read.svg');
+}
+
+#sideFacebook{
+    background-image: url('/imgs/facebook.svg');
+}
+
+#sideTwitter{
+    background-image: url('/imgs/twitter.svg');
+}
+
+
+
+
+#backMobile{
+    display: none;
+}
+
+#sidebarMobile{
+    display: none;
 }
