@@ -9,9 +9,9 @@ function createCopyright() {
 };
 
 function expandMobileMenu() {
-    console.log('expand');
+    
     document.getElementById('environment').style.left = '0';
-    console.log( document.getElementById('environment') );
+    
 };
 
 function minimizeMobileMenu() {

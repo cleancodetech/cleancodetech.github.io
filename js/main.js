@@ -22,9 +22,10 @@ function initFunc() {
     
     document.getElementById('drag').addEventListener("dragleave", dragLeave, true);
     
-    document.getElementById('menu').addEventListener("click", expandMobileMenu, true);
-    
-    document.getElementById('backMobile').addEventListener("click", minimizeMobileMenu, true);
+    document.getElementById('menu').addEventListener("mouseup", expandMobileMenu, true);    
+    document.getElementById('backMobile').addEventListener("mouseup", minimizeMobileMenu, true);
+    document.getElementById('menu').addEventListener("touchend", expandMobileMenu, true);    
+    document.getElementById('backMobile').addEventListener("touchend", minimizeMobileMenu, true);
     
     eng = new Engine();
     

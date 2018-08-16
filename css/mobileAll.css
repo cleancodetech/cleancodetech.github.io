@@ -10,12 +10,12 @@ body{
 #header{
     color: rgb(127, 235, 127);
     font-family: 'Lobster', cursive;
-    font-size: 5vh;
+    font-size: 2rem;
     left: 0;
     text-align: center;
     width: 100vw;
     box-sizing: border-box;
-    line-height: 6vh;
+    line-height: 2.5rem;
     box-shadow: 0 0 1vh black;
 }
 
@@ -23,8 +23,8 @@ body{
     position: absolute;
     top: 0.5vh;
     left: 2vh;
-    width: 5vh;
-    height: 5vh;
+    width: 2.5rem;
+    height: 2.5rem;
     background-image: url('/imgs/menu.svg');
     background-size: contain;
     background-repeat: no-repeat;
