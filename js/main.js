@@ -24,8 +24,8 @@ function initFunc() {
     
     document.getElementById('menu').addEventListener("mouseup", expandMobileMenu, true);    
     document.getElementById('backMobile').addEventListener("mouseup", minimizeMobileMenu, true);
-    document.getElementById('menu').addEventListener("touchend", expandMobileMenu, true);    
-    document.getElementById('backMobile').addEventListener("touchend", minimizeMobileMenu, true);
+    document.getElementById('menu').addEventListener("touchstart", expandMobileMenu, true);    
+    document.getElementById('backMobile').addEventListener("touchstart", minimizeMobileMenu, true);
     
     eng = new Engine();
     

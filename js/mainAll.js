@@ -8,14 +8,18 @@ function createCopyright() {
     
 };
 
-function expandMobileMenu() {
+function expandMobileMenu( event ) {
+    
+    event.preventDefault();
     
     document.getElementById('environment').style.left = '0';
     
 };
 
-function minimizeMobileMenu() {
-    console.log('minimize');
+function minimizeMobileMenu( event ) {
+    
+    event.preventDefault();
+    
     document.getElementById('environment').style.left = '-90vw';
     
 };
