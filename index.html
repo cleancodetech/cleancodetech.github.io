@@ -37,31 +37,40 @@
             </div>
         </div>
         <div id="box">
-            <div id="drag">
+            <div id="drag" data-mobilePanel="dragMobile">
                 <p>Drag and drop a file from your device or from another website, in this area</p>
             </div>
-            <div id="upload">
+            <div id="upload" data-mobilePanel="uploadMobile">
                 <input id="photoUpload" name="photo" accept="image/jpg,image/jpeg,image/png" data-max-size="548" type="file">
                 <p>Click this area to upload a file from your device</p>
             </div>
-            <div id="url">
+            <div id="url" data-mobilePanel="urlMobile">
                 <div id="urlBlock">
                     <p>Paste below the full url address of the image you want to use</p>
                     <input type="text" id="photoUrl" placeholder="https://example.com/image.png">
                 </div>
             </div>
         </div>
-        <div id="dragMobile" class="hiddenMobile">
-            <div id="dragMobileClose"></div>
-            <div id="dragArea">
+        <div id="dragMobile" class="mobileBox hiddenMobile">
+            <div id="dragMobileClose" class="mobileClose"></div>
+            <div id="dragArea" class="mobileArea">
                 <p>Drag and drop a file from your device or from another website, in this area</p>
             </div>
         </div>
-        <div id="uploadMobile" class="hiddenMobile">
-            <div id="uploadMobileClose"></div>
-            <div id="uploadArea">
+        <div id="uploadMobile" class="mobileBox hiddenMobile">
+            <div id="uploadMobileClose" class="mobileClose"></div>
+            <div id="uploadArea" class="mobileArea">
                 <input name="photo" accept="image/jpg,image/jpeg,image/png" data-max-size="548" type="file">
                 <p>Click this area to upload a file from your device</p>
+            </div>
+        </div>
+        <div id="urlMobile" class="mobileBox hiddenMobile">
+            <div id="urlMobileClose" class="mobileClose"></div>
+            <div id="urlArea" class="mobileArea">
+                <div id="urlBlock">
+                    <p>Paste below the full url address of the image you want to use</p>
+                    <input type="text" id="photoUrl" placeholder="https://example.com/image.png">
+                </div>
             </div>
         </div>
         <div id="delCCLayer">

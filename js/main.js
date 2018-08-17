@@ -19,25 +19,35 @@ function initFunc() {
     document.getElementById('drag').addEventListener("dragenter", dragEnter, true);    
     document.getElementById('drag').addEventListener("dragleave", dragLeave, true);
     
-    document.getElementById('drag').addEventListener("touchstart", dragMobileStart, true);
-    document.getElementById('drag').addEventListener("touchend", dragMobileEnd, true);
-    document.getElementById('drag').addEventListener("mousedown", dragMobileStart, true);
-    document.getElementById('drag').addEventListener("mouseup", dragMobileEnd, true);
+    document.getElementById('drag').addEventListener("touchstart", mobileIconTouchDown, true);
+    document.getElementById('drag').addEventListener("touchend", mobileIconTouchUp, true);
+    document.getElementById('drag').addEventListener("mousedown", mobileIconTouchDown, true);
+    document.getElementById('drag').addEventListener("mouseup", mobileIconTouchUp, true);
     
-    document.getElementById('dragMobileClose').addEventListener("touchstart", dragMobileCloseStart, true);
-    document.getElementById('dragMobileClose').addEventListener("touchend", dragMobileCloseEnd, true);
-    document.getElementById('dragMobileClose').addEventListener("mousedown", dragMobileCloseStart, true);
-    document.getElementById('dragMobileClose').addEventListener("mouseup", dragMobileCloseEnd, true);
+    document.getElementById('dragMobileClose').addEventListener("touchstart", mobileCloseTouchDown, true);
+    document.getElementById('dragMobileClose').addEventListener("touchend", mobileCloseTouchUp, true);
+    document.getElementById('dragMobileClose').addEventListener("mousedown", mobileCloseTouchDown, true);
+    document.getElementById('dragMobileClose').addEventListener("mouseup", mobileCloseTouchUp, true);
     
-    document.getElementById('upload').addEventListener("touchstart", dragMobileStart, true);
-    document.getElementById('upload').addEventListener("touchend", uploadMobileEnd, true);
-    document.getElementById('upload').addEventListener("mousedown", dragMobileStart, true);
-    document.getElementById('upload').addEventListener("mouseup", uploadMobileEnd, true);
+    document.getElementById('upload').addEventListener("touchstart", mobileIconTouchDown, true);
+    document.getElementById('upload').addEventListener("touchend", mobileIconTouchUp, true);
+    document.getElementById('upload').addEventListener("mousedown", mobileIconTouchDown, true);
+    document.getElementById('upload').addEventListener("mouseup", mobileIconTouchUp, true);
     
-    document.getElementById('uploadMobileClose').addEventListener("touchstart", dragMobileCloseStart, true);
-    document.getElementById('uploadMobileClose').addEventListener("touchend", uploadMobileCloseEnd, true);
-    document.getElementById('uploadMobileClose').addEventListener("mousedown", dragMobileCloseStart, true);
-    document.getElementById('uploadMobileClose').addEventListener("mouseup", uploadMobileCloseEnd, true);
+    document.getElementById('uploadMobileClose').addEventListener("touchstart", mobileCloseTouchDown, true);
+    document.getElementById('uploadMobileClose').addEventListener("touchend", mobileCloseTouchUp, true);
+    document.getElementById('uploadMobileClose').addEventListener("mousedown", mobileCloseTouchDown, true);
+    document.getElementById('uploadMobileClose').addEventListener("mouseup", mobileCloseTouchUp, true);
+    
+    document.getElementById('url').addEventListener("touchstart", mobileIconTouchDown, true);
+    document.getElementById('url').addEventListener("touchend", mobileIconTouchUp, true);
+    document.getElementById('url').addEventListener("mousedown", mobileIconTouchDown, true);
+    document.getElementById('url').addEventListener("mouseup", mobileIconTouchUp, true);
+    
+    document.getElementById('urlMobileClose').addEventListener("touchstart", mobileCloseTouchDown, true);
+    document.getElementById('urlMobileClose').addEventListener("touchend", mobileCloseTouchUp, true);
+    document.getElementById('urlMobileClose').addEventListener("mousedown", mobileCloseTouchDown, true);
+    document.getElementById('urlMobileClose').addEventListener("mouseup", mobileCloseTouchUp, true);
     
     document.getElementById('menu').addEventListener("mouseup", expandMobileMenu, true);    
     document.getElementById('backMobile').addEventListener("mouseup", minimizeMobileMenu, true);

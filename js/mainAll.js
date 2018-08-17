@@ -8,61 +8,75 @@ function createCopyright() {
     
 };
 
-function dragMobileCloseStart( event ) {
+
+
+
+function mobileCloseTouchDown( event ) {
     
     event.preventDefault();
+    
+    var width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+
+    if ( width > 1140 ) { return false; }
     
     event.target.style.boxShadow = '0 0 5vh rgb(235, 127, 127) inset';
     
 };
 
-function dragMobileStart( event ) {
+function mobileCloseTouchUp( event ) {
     
     event.preventDefault();
+    
+    var width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+
+    if ( width > 1140 ) { return false; }
+    
+    event.target.style.boxShadow = '';
+    
+    event.target.parentElement.classList.remove('revealedMobile');
+    event.target.parentElement.classList.add('hiddenMobile');
+    
+};
+
+function mobileIconTouchDown( event ) {
+    
+    event.preventDefault();
+    
+    var width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+
+    if ( width > 1140 ) { return false; }
     
     event.target.style.boxShadow = '0 0 5vh rgb(127, 235, 127) inset';
     
 };
 
-function dragMobileCloseEnd( event ) {
+function mobileIconTouchUp( event ) {
     
     event.preventDefault();
     
+    var width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+
+    if ( width > 1140 ) { return false; }
+    
     event.target.style.boxShadow = '';
     
-    document.getElementById('dragMobile').className = 'hiddenMobile';
+    var panel = event.target.getAttribute('data-mobilePanel');
+    
+    document.getElementById( panel ).classList.remove('hiddenMobile');
+    document.getElementById( panel ).classList.add('revealedMobile');
     
 };
 
-function uploadMobileCloseEnd( event ) {
-    
-    event.preventDefault();
-    
-    event.target.style.boxShadow = '';
-    
-    document.getElementById('uploadMobile').className = 'hiddenMobile';
-    
-};
 
-function dragMobileEnd( event ) {
-    
-    event.preventDefault();
-    
-    event.target.style.boxShadow = '';
-    
-    document.getElementById('dragMobile').className = 'revealedMobile';
-    
-};
 
-function uploadMobileEnd( event ) {
-    
-    event.preventDefault();
-    
-    event.target.style.boxShadow = '';
-    
-    document.getElementById('uploadMobile').className = 'revealedMobile';
-    
-};
 
 function expandMobileMenu( event ) {
     
