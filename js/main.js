@@ -175,38 +175,6 @@ function appendElement( args ) {
     
 };
 
-function initialArrange() {
-    
-    var width = window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
-
-    var vw = Math.floor( width / 100 );
-
-    var allowedWidth = Math.floor( width - rightVoid - ( 4 * vw ) );
-    
-    if ( allowedWidth > 950 ) { allowedWidth = 950; }
-    
-    var leftMargin = Math.floor( ( width - rightVoid - allowedWidth ) / 2 );
-    
-    while ( leftMargin < ( 4 * vw ) ) {
-        
-        allowedWidth = allowedWidth - 1;
-        
-        leftMargin = Math.floor( ( width - rightVoid - allowedWidth ) / 2 );
-        
-    }
-    
-//    var sidebarHeight = Math.floor( sidebarElemens *  );
-    
-    document.getElementById("box").style.width = allowedWidth + "px";
-    document.getElementById("box").style.left = leftMargin + "px";
-    document.getElementById("drag").style.left = 0;
-    document.getElementById("url").style.top = 0;
-    document.getElementById("upload").style.bottom = 0;
-    
-}
-
 function photoDownload( event ) {
     
     var img = new Image;
