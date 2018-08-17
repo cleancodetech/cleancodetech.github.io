@@ -19,7 +19,6 @@
     background-size: 50% auto;
     background-repeat: no-repeat;
     background-position: center center;
-    transition: background-position 0.4s ease 0s, background-size 0.4s ease 0s, background-color 0.4s ease 0s, left 0.3s ease 0s, top 0.3s ease 0.3s, bottom 0.3s ease 0.6s, border 0.4s ease 0s, box-shadow 0.4s ease 0s;
 }
 
 #drag{
@@ -79,16 +78,17 @@
 
 #dragMobileClose{
     position: absolute;
-    width: 35vw;
-    height: 95vh;
-    top: 0;
-    right: 0;
+    width: 33vw;
+    height: 93vh;
+    top: 1vh;
+    right: 1vw;
     background-image: url('/imgs/delete.svg');
     background-size: 65% auto;
     background-position: center center;
     background-repeat: no-repeat;
     box-sizing: border-box;
     cursor: pointer;
+    border-radius: 2vh;
 }
 
 #dragArea{
@@ -112,4 +112,72 @@
     font-size: 1.3rem;
     width: 90%;
     text-align: center;
+}
+
+
+
+
+#uploadMobile{
+    position: absolute;
+    width: 95vw;
+    height: 95vh;
+    top: 2.5vh;
+    left: 2.5vh;
+    background-color: rgb(10, 10, 10);
+    box-sizing: border-box;
+    padding: 1vh 1vw;
+    border-radius: 2vh;
+    box-shadow: 0 0 1vh rgb(235, 235, 235);
+    transition: opacity 0.3s ease 0s;
+}
+
+#uploadMobileClose{
+    position: absolute;
+    width: 33vw;
+    height: 93vh;
+    top: 1vh;
+    right: 1vw;
+    background-image: url('/imgs/delete.svg');
+    background-size: 65% auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 2vh;
+}
+
+#uploadArea{
+    position: absolute;
+    width: 59vw;
+    height: 93vh;
+    top: 1vh;
+    left: 1vw;
+    border: dashed 2px rgb(255, 255, 255);
+    box-sizing: border-box;
+    display: table;
+    border-radius: 2vh;
+    padding: 0 5%;
+}
+
+#uploadArea p{
+    display: table-cell;
+    vertical-align: middle;
+    color: white;
+    font-family: Montserrat;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+#uploadArea input{
+    position: absolute;
+    width: 59vw;
+    height: 93vh;
+    box-sizing: border-box;
+    background-color: red;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    border-radius: 2vh;
 }

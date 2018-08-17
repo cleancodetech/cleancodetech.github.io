@@ -34,6 +34,16 @@ function dragMobileCloseEnd( event ) {
     
 };
 
+function uploadMobileCloseEnd( event ) {
+    
+    event.preventDefault();
+    
+    event.target.style.boxShadow = '';
+    
+    document.getElementById('uploadMobile').className = 'hiddenMobile';
+    
+};
+
 function dragMobileEnd( event ) {
     
     event.preventDefault();
@@ -41,6 +51,16 @@ function dragMobileEnd( event ) {
     event.target.style.boxShadow = '';
     
     document.getElementById('dragMobile').className = 'revealedMobile';
+    
+};
+
+function uploadMobileEnd( event ) {
+    
+    event.preventDefault();
+    
+    event.target.style.boxShadow = '';
+    
+    document.getElementById('uploadMobile').className = 'revealedMobile';
     
 };
 

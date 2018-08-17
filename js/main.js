@@ -18,6 +18,7 @@ function initFunc() {
     document.getElementById('drag').addEventListener("dragover", dragOver, true);    
     document.getElementById('drag').addEventListener("dragenter", dragEnter, true);    
     document.getElementById('drag').addEventListener("dragleave", dragLeave, true);
+    
     document.getElementById('drag').addEventListener("touchstart", dragMobileStart, true);
     document.getElementById('drag').addEventListener("touchend", dragMobileEnd, true);
     document.getElementById('drag').addEventListener("mousedown", dragMobileStart, true);
@@ -27,6 +28,16 @@ function initFunc() {
     document.getElementById('dragMobileClose').addEventListener("touchend", dragMobileCloseEnd, true);
     document.getElementById('dragMobileClose').addEventListener("mousedown", dragMobileCloseStart, true);
     document.getElementById('dragMobileClose').addEventListener("mouseup", dragMobileCloseEnd, true);
+    
+    document.getElementById('upload').addEventListener("touchstart", dragMobileStart, true);
+    document.getElementById('upload').addEventListener("touchend", uploadMobileEnd, true);
+    document.getElementById('upload').addEventListener("mousedown", dragMobileStart, true);
+    document.getElementById('upload').addEventListener("mouseup", uploadMobileEnd, true);
+    
+    document.getElementById('uploadMobileClose').addEventListener("touchstart", dragMobileCloseStart, true);
+    document.getElementById('uploadMobileClose').addEventListener("touchend", uploadMobileCloseEnd, true);
+    document.getElementById('uploadMobileClose').addEventListener("mousedown", dragMobileCloseStart, true);
+    document.getElementById('uploadMobileClose').addEventListener("mouseup", uploadMobileCloseEnd, true);
     
     document.getElementById('menu').addEventListener("mouseup", expandMobileMenu, true);    
     document.getElementById('backMobile').addEventListener("mouseup", minimizeMobileMenu, true);
