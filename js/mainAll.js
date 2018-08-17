@@ -43,22 +43,16 @@ function initialArrange() {
         var heightAllowed = Math.floor( height - heightTaken - ( height * 0.03 ) );
         
         var dragHeight = Math.floor( heightAllowed * 0.98 );
-        var dragWidth = Math.floor( allowedWidth * 0.66 );
-        
-        var uploadHeight = Math.floor( heightAllowed * 0.48 );
-        var uploadWidth = Math.floor( allowedWidth * 0.31 );
+//        var dragWidth = Math.floor( allowedWidth * 0.66 );
         
         document.getElementById("box").style.width = allowedWidth + "px";
         document.getElementById("box").style.height = heightAllowed + "px";
         
-        document.getElementById("drag").style.width = dragWidth + "px";
         document.getElementById("drag").style.height = dragHeight + "px";
         
-        document.getElementById("upload").style.width = uploadWidth + "px";
-        document.getElementById("upload").style.height = uploadHeight + "px";
+        document.getElementById("upload").style.height = dragHeight + "px";
         
-        document.getElementById("url").style.width = uploadWidth + "px";
-        document.getElementById("url").style.height = uploadHeight + "px";
+        document.getElementById("url").style.height = dragHeight + "px";
         
     } else {
 
