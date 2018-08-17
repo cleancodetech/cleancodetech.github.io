@@ -4,6 +4,7 @@
     top: 7vh;
     left: 4vw;
     overflow: hidden;
+    z-index: 4;
 }
 
 #drag, #upload, #url{
@@ -139,6 +140,7 @@
     top: 7vh;
     left: 4vw;
     overflow: hidden;
+    z-index: 4;
 }
 
 #playground #canvasContainer{
