@@ -21,18 +21,11 @@
 
 #drag{
     float: left;
-    background-image: url('/imgs/cursor.svg');
-    background-size: 25% auto;
-    background-position: 5% 5%;
-    background-repeat: no-repeat;
+    position: relative;
 }
 
 #upload{
     float: right;
-    background-image: url('/imgs/upload.svg');
-    background-size: 25% auto;
-    background-position: 5% 5%;
-    background-repeat: no-repeat;
     position: relative;
 }
 
@@ -46,8 +39,11 @@
     font-size: 1rem;
     margin: auto;
     width: 95%;
+    top: 0;
+    bottom: 0;
     text-align: center;
-    padding: 40% 0 0 0;
+    position: absolute;
+    height: 2rem;
 }
 
 #upload p{
@@ -57,7 +53,10 @@
     margin: auto;
     width: 95%;
     text-align: center;
-    padding: 45% 0 0 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    height: 2rem;
 }
 
 #photoUpload{
