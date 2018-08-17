@@ -14,13 +14,19 @@ function initFunc() {
     
     document.getElementById('photoUrl').addEventListener("input", photoDownload, true);
     
-    document.getElementById('drag').addEventListener("drop", dropFile, true);
-    
-    document.getElementById('drag').addEventListener("dragover", dragOver, true);
-    
-    document.getElementById('drag').addEventListener("dragenter", dragEnter, true);
-    
+    document.getElementById('drag').addEventListener("drop", dropFile, true);    
+    document.getElementById('drag').addEventListener("dragover", dragOver, true);    
+    document.getElementById('drag').addEventListener("dragenter", dragEnter, true);    
     document.getElementById('drag').addEventListener("dragleave", dragLeave, true);
+    document.getElementById('drag').addEventListener("touchstart", dragMobileStart, true);
+    document.getElementById('drag').addEventListener("touchend", dragMobileEnd, true);
+    document.getElementById('drag').addEventListener("mousedown", dragMobileStart, true);
+    document.getElementById('drag').addEventListener("mouseup", dragMobileEnd, true);
+    
+    document.getElementById('dragMobileClose').addEventListener("touchstart", dragMobileCloseStart, true);
+    document.getElementById('dragMobileClose').addEventListener("touchend", dragMobileCloseEnd, true);
+    document.getElementById('dragMobileClose').addEventListener("mousedown", dragMobileCloseStart, true);
+    document.getElementById('dragMobileClose').addEventListener("mouseup", dragMobileCloseEnd, true);
     
     document.getElementById('menu').addEventListener("mouseup", expandMobileMenu, true);    
     document.getElementById('backMobile').addEventListener("mouseup", minimizeMobileMenu, true);

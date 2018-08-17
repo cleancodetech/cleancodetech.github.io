@@ -49,3 +49,67 @@
 #url #urlBlock{
     display: none;
 }
+
+
+
+
+.hiddenMobile{
+    display: none;
+    opacity: 0;
+}
+
+.revealedMobile{
+    display: block;
+    opacity: 1;
+}
+
+#dragMobile{
+    position: absolute;
+    width: 95vw;
+    height: 95vh;
+    top: 2.5vh;
+    left: 2.5vh;
+    background-color: rgb(10, 10, 10);
+    box-sizing: border-box;
+    padding: 1vh 1vw;
+    border-radius: 2vh;
+    box-shadow: 0 0 1vh rgb(235, 235, 235);
+    transition: opacity 0.3s ease 0s;
+}
+
+#dragMobileClose{
+    position: absolute;
+    width: 35vw;
+    height: 95vh;
+    top: 0;
+    right: 0;
+    background-image: url('/imgs/delete.svg');
+    background-size: 65% auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#dragArea{
+    position: absolute;
+    width: 59vw;
+    height: 93vh;
+    top: 1vh;
+    left: 1vw;
+    border: dashed 2px rgb(255, 255, 255);
+    box-sizing: border-box;
+    display: table;
+    border-radius: 2vh;
+    padding: 0 5%;
+}
+
+#dragArea p{
+    display: table-cell;
+    vertical-align: middle;
+    color: white;
+    font-family: Montserrat;
+    font-size: 1.3rem;
+    width: 90%;
+    text-align: center;
+}

@@ -740,3 +740,10 @@
 #shareSocialTwitter:hover {
     box-shadow: 0 0 1vh rgb(29, 161, 242);
 }
+
+
+
+
+#dragMobile{
+    display: none;
+}

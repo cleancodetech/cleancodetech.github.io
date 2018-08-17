@@ -8,6 +8,42 @@ function createCopyright() {
     
 };
 
+function dragMobileCloseStart( event ) {
+    
+    event.preventDefault();
+    
+    event.target.style.boxShadow = '0 0 5vh rgb(235, 127, 127) inset';
+    
+};
+
+function dragMobileStart( event ) {
+    
+    event.preventDefault();
+    
+    event.target.style.boxShadow = '0 0 5vh rgb(127, 235, 127) inset';
+    
+};
+
+function dragMobileCloseEnd( event ) {
+    
+    event.preventDefault();
+    
+    event.target.style.boxShadow = '';
+    
+    document.getElementById('dragMobile').className = 'hiddenMobile';
+    
+};
+
+function dragMobileEnd( event ) {
+    
+    event.preventDefault();
+    
+    event.target.style.boxShadow = '';
+    
+    document.getElementById('dragMobile').className = 'revealedMobile';
+    
+};
+
 function expandMobileMenu( event ) {
     
     event.preventDefault();
