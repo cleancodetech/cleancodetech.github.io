@@ -170,3 +170,22 @@
     padding: 0 1vh;
     text-align: center;
 }
+
+
+
+
+#playground{
+    margin: 0 auto;
+}
+
+#canvasContainer{
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#controlsContainer{
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 1vh 1vh 0 0;
+    overflow: hidden;
+}

@@ -78,6 +78,7 @@
     text-align: center;
     opacity: 0;
     transition: opacity 0.3s ease 0s;
+    display: block;
 }
 
 #upload p{
@@ -89,6 +90,7 @@
     text-align: center;
     opacity: 0;
     transition: opacity 0.3s ease 0s;
+    display: block;
 }
 
 #url #urlBlock{
@@ -99,6 +101,7 @@
     width: 80%;
     text-align: center;
     opacity: 0;
+    display: block;
     transition: opacity 0.3s ease 0s;
 }
 
@@ -123,6 +126,7 @@
     background-color: red;
     opacity: 0;
     cursor: pointer;
+    display: block;
 }
 
 #controlsBox{
