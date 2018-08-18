@@ -1102,33 +1102,15 @@ var Engine = function(){
     
     this.createMobilePlayground = function() {
         
-        this.playgroundElem = appendElement({
-            tag: 'DIV',
-            id: 'playground',
-            parent: document.body
-        });
-        
         var allowedPerc = Math.floor( clientWidth * 0.95 );
         
         this.playgroundElem.style.width = allowedPerc + "px";
-        
-        this.canvasContainerElem = appendElement({
-            tag: 'DIV',
-            id: 'canvasContainer',
-            parent: this.playgroundElem
-        });
-        
-        this.controlsContainerElem = appendElement({
-            tag: 'DIV',
-            id: 'controlsContainer',
-            parent: this.playgroundElem
-        });
         
         this.canvasContainerWidth = this.canvasContainerElem.offsetWidth;
         
         var imgRatio = (  this.imgWhole.width /  this.imgWhole.height );
         
-        if ( this.imgWhole.width != this.canvasContainerWidth ) {
+        if ( this.imgWhole.width !== this.canvasContainerWidth ) {
 
             this.canvasWidth = this.canvasContainerWidth;
             this.canvasHeight = Math.floor( ( this.canvasContainerWidth * this.imgWhole.height ) / this.imgWhole.width );
@@ -1143,70 +1125,29 @@ var Engine = function(){
         this.canvasContainerHeight = this.canvasHeight;
         this.canvasRatio = ( this.canvasContainerWidth / this.canvasContainerHeight );
         
-        this.canvasElem = appendElement({
-            tag: 'CANVAS',
-            id: 'canvas',
-            parent: this.canvasContainerElem
-        });
-        
-        this.canvas = new fabric.Canvas("canvas", {                         
-            width: this.canvasWidth,
-            height: this.canvasHeight,
-            preserveObjectStacking: true
-        });
-        
-        this.fabricContainerElem = this.canvasContainerElem.firstChild;
-        
     };
     
-    this.createPlayground = function( img ) {
+    this.createDesktopPlayground = function() {
         
-        this.imgWhole = img;
+        var allowedPerc = Math.floor( ( ( clientWidth - rightVoid ) / clientWidth ) * 100 ) - 4;
         
-        if ( clientWidth < 1141 ) {
-            
-            this.createMobilePlayground();
-            
-            return false;
-            
-        }
-        
-        var width = window.innerWidth
-            || document.documentElement.clientWidth
-            || document.body.clientWidth;
-
-        var height = window.innerHeight
-            || document.documentElement.clientHeight
-            || document.body.clientHeight;
-    
-        this.playgroundElem = document.createElement("DIV");
-        this.playgroundElem.setAttribute("id", "playground");
-        document.body.appendChild( this.playgroundElem );
-        var allowedPerc = Math.floor( ( ( width - rightVoid ) / width ) * 100 ) - 4;
         this.playgroundElem.style.width = allowedPerc + "vw";
-        
-        this.canvasContainerElem = document.createElement("DIV");
-        this.canvasContainerElem.setAttribute("id", "canvasContainer");
-        this.playgroundElem.appendChild( this.canvasContainerElem );
-        
-        this.controlsContainerElem = document.createElement("DIV");
-        this.controlsContainerElem.setAttribute("id", "controlsContainer");
-        this.playgroundElem.appendChild( this.controlsContainerElem );
         
         this.canvasContainerWidth = this.canvasContainerElem.offsetWidth;
         this.canvasContainerHeight = this.canvasContainerElem.offsetHeight;
+        
         this.canvasRatio = ( this.canvasContainerWidth / this.canvasContainerHeight );
-        var imgRatio = ( img.width / img.height );
+        var imgRatio = ( this.imgWhole.width / this.imgWhole.height );
 
         if ( imgRatio > this.canvasRatio ) {
 
             this.canvasWidth = this.canvasContainerWidth;
-            this.canvasHeight = Math.floor( ( this.canvasWidth * img.height ) / img.width );
+            this.canvasHeight = Math.floor( ( this.canvasWidth * this.imgWhole.height ) / this.imgWhole.width );
 
         } else if ( imgRatio < this.canvasRatio ) {
 
             this.canvasHeight = this.canvasContainerHeight;
-            this.canvasWidth = Math.floor( ( this.canvasHeight * img.width ) / img.height );
+            this.canvasWidth = Math.floor( ( this.canvasHeight * this.imgWhole.width ) / this.imgWhole.height );
 
         } else {
 
@@ -1217,30 +1158,43 @@ var Engine = function(){
         
         var canvasTopMargin = Math.floor( ( this.canvasContainerHeight - this.canvasHeight ) / 2 );
         
-        this.canvasElem = document.createElement("CANVAS");
-        this.canvasElem.setAttribute("id", "canvas");
-        this.canvasContainerElem.appendChild( this.canvasElem );
         this.canvasElem.style.top = canvasTopMargin + 'px';
         
-        this.canvas = new fabric.Canvas("canvas", {                         
-            width: this.canvasWidth,
-            height: this.canvasHeight,
-            preserveObjectStacking: true
+    };
+    
+    this.createPlayground = function( img ) {
+        
+        this.imgWhole = img;
+        
+        this.playgroundElem = appendElement({
+            tag: 'DIV',
+            id: 'playground',
+            parent: document.body
         });
         
-        this.fabricContainerElem = this.canvasContainerElem.firstChild;
+        this.canvasContainerElem = appendElement({
+            tag: 'DIV',
+            id: 'canvasContainer',
+            parent: this.playgroundElem
+        });
         
-        this.mainControlsElem = document.createElement("DIV");
-        this.mainControlsElem.setAttribute("id", "mainControls");
-        this.controlsContainerElem.appendChild( this.mainControlsElem );
+        this.controlsContainerElem = appendElement({
+            tag: 'DIV',
+            id: 'controlsContainer',
+            parent: this.playgroundElem
+        });
         
-//        this.exportToSvgElem = appendElement({
-//            tag: 'DIV',
-//            id: 'exportToSvg',
-//            class: 'mainControlsButton',
-//            title: 'Export to svg file',
-//            parent: this.mainControlsElem
-//        });
+        this.canvasElem = appendElement({
+            tag: 'CANVAS',
+            id: 'canvas',
+            parent: this.canvasContainerElem
+        });
+        
+        this.mainControlsElem = appendElement({
+            tag: 'DIV',
+            id: 'mainControls',
+            parent: this.controlsContainerElem
+        });
         
         this.downloadElem = appendElement({
             tag: 'A',
@@ -1250,14 +1204,6 @@ var Engine = function(){
             parent: this.mainControlsElem
         });
         
-//        this.shareToSocialElem = appendElement({
-//            tag: 'DIV',
-//            id: 'shareSocial',
-//            class: 'mainControlsButton',
-//            title: 'Share the image to social media',
-//            parent: this.mainControlsElem
-//        });
-        
         this.addNewPartElem = appendElement({
             tag: 'DIV',
             id: 'addNewPart',
@@ -1266,28 +1212,34 @@ var Engine = function(){
             parent: this.mainControlsElem
         });
         
-        this.panelContainerElem = document.createElement("DIV");
-        this.panelContainerElem.setAttribute("id", "panelContainer");
-        this.controlsContainerElem.appendChild( this.panelContainerElem );
-        
-//        this.addNewTextPartElem = document.createElement("DIV");
-//        this.addNewTextPartElem.setAttribute("id", "addNewTextPart");
-//        this.addNewTextPartElem.setAttribute("title", "Add text to the image");
-//        this.addNewPartContainerElem.appendChild( this.addNewTextPartElem );
-//        
-//        this.addNewDrawPartElem = document.createElement("DIV");
-//        this.addNewDrawPartElem.setAttribute("id", "addNewDrawPart");
-//        this.addNewDrawPartElem.setAttribute("title", "Draw a line to the image");
-//        this.addNewPartContainerElem.appendChild( this.addNewDrawPartElem );
+        this.panelContainerElem = appendElement({
+            tag: 'DIV',
+            id: 'panelContainer',
+            parent: this.controlsContainerElem
+        });
         
         this.downloadElem.addEventListener( 'click', this, false );
         this.addNewPartElem.addEventListener( 'click', this, false );
-//        this.shareToSocialElem.addEventListener( 'click', this, false );
-//        this.addNewTextPartElem.addEventListener( 'click', this, false );
+        
+        if ( clientWidth < 1141 ) {
+            
+            this.createMobilePlayground();
+            
+        } else {
+            
+            this.createDesktopPlayground();
+            
+        }
+        
+        this.canvas = new fabric.Canvas("canvas", {                         
+            width: this.canvasWidth,
+            height: this.canvasHeight,
+            preserveObjectStacking: true
+        });
+        
+        this.fabricContainerElem = this.canvasContainerElem.firstChild;
 
         this.buildModuleNewParts();
-        
-//        this.buildModuleShareSocial();
         
     };
     

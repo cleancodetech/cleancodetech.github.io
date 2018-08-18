@@ -175,7 +175,7 @@
 
 
 #playground{
-    margin: 0 auto;
+    margin: 0 auto 0 1vw;
 }
 
 #canvasContainer{
@@ -188,4 +188,36 @@
     width: 100%;
     border-radius: 1vh 1vh 0 0;
     overflow: hidden;
+}
+
+#mainControls{
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(30, 30, 30);
+    display: flex;
+    justify-content: space-around;
+    margin: 2vh 0;
+}
+
+.mainControlsButton{
+    width: 4rem;
+    height: 4rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    cursor: pointer;
+    background-color: rgb(30, 30, 30);
+    transition: background-color 0.3s ease-out 0s;
+}
+
+.mainControlsButton:active{
+    background-color: black;
+}
+
+#download{
+    background-image: url('/imgs/download.svg');
+}
+
+#addNewPart{
+    background-image: url('/imgs/add.svg');
 }
