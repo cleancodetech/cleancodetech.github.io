@@ -438,7 +438,7 @@
     box-sizing: border-box;
     position: absolute;
     top: 12vh;
-    overflow-y: auto;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
 
