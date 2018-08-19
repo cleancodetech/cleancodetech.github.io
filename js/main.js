@@ -1391,31 +1391,3 @@ var Engine = function(){
     this.parts = [];
     
 };
-
-function createLab( img ) {
-    
-    var eng = new canvasEngine( canvas, img, canvasWidth, canvasHeight );
-    
-    var controls = new Controls( eng );
-    
-}
-
-var Controls = function( canvasEngine ) {
-    
-    var _Controls = this;
-    
-    this.box;
-    
-    this.box = document.createElement("DIV");
-    this.box.setAttribute("id", "controlsBox");
-    document.body.appendChild( this.box );
-    
-};
-
-var canvasEngine = function( canvas, img, canvasWidth, canvasHeight ) {
-    
-    var ctx = canvas.getContext("2d");
-    
-    ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
-    
-};
