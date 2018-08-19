@@ -350,3 +350,126 @@
     width: 70%;
     height: 3rem;
 }
+
+
+
+
+.panelHeaderCCIcon{
+    background-image: url('/imgs/cc.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 3rem;
+    height: 3rem;
+    margin: 1vh;
+}
+
+
+
+
+#delCCLayer{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#delCCWindow {
+    width: 96vw;
+    height: 96vh;
+    position: absolute;
+    top: 2vh;
+    left: 2vw;
+    background-color: black;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 0 2vh rgba(255, 255, 255, 0.1);
+}
+
+#delCCIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20vw;
+    height: 96vh;
+    background-image: url('/imgs/sad1.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-right: solid 1px lime;
+    box-sizing: border-box;
+}
+
+#delCCText {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 76vw;
+    height: 76vh;
+    border-bottom: solid 1px lime;
+    box-sizing: border-box;
+}
+
+#delCCText h2{
+    color: lime;
+    font-family: "Space Mono";
+    padding: 1vh 0 1vh 3vh;
+    font-weight: normal;
+    font-size: 2rem;
+    letter-spacing: -1px;
+}
+
+#delCCText p{
+    color: #ebebeb;
+    font-family: "Space Mono";
+    padding: 1vh 0 1vh 3vh;
+    font-weight: normal;
+    font-size: 1rem;
+    letter-spacing: -1px;
+}
+
+#delCCControls{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50vw;
+    height: 30vh;
+    box-sizing: border-box;
+}
+
+#delCCdelete {
+    position: absolute;
+    width: 20vw;
+    height: 15vh;
+    bottom: 2.5vh;
+    right: 46.5vw;
+    background-color: rgb(255, 40, 40);
+    border: medium none;
+    border-radius: 1vh;
+    font-size: 1rem;
+    font-family: "Space Mono";
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease 0s;
+}
+
+#delCCkeep {
+    position: absolute;
+    width: 20vw;
+    height: 15vh;
+    bottom: 2.5vh;
+    right: 7.5vw;
+    background-color: rgb(40, 255, 40);
+    border: medium none;
+    border-radius: 1vh;
+    font-size: 1rem;
+    font-family: "Space Mono";
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease 0s;
+}

@@ -183,6 +183,10 @@ var Engine = function(){
                 
                 this.showDeleteConfirm();
                 
+            } else if ( event.type === 'touchstart' && event.target === this.panelHeaderDelElem ){
+                
+                this.showDeleteConfirm();
+                
             } else if ( event.type === 'click' && event.target === this.offButton ){
                 
                 this.hideDeleteConfirm();
@@ -191,9 +195,33 @@ var Engine = function(){
                 
                 this.remove();
                 
+            } else if ( event.type === 'touchstart' && event.target === this.offButton ){
+                
+                this.delIcon.style.backgroundImage = "url('/imgs/sad2.svg')";
+                
+            } else if ( event.type === 'touchend' && event.target === this.offButton ){
+                
+                this.hideDeleteConfirm();
+                
+                _Engine.canvas.remove( this.textInstance );
+                
+                this.remove();
+                
+                this.delIcon.style.backgroundImage = "url('/imgs/sad1.svg')";
+                
             } else if ( event.type === 'click' && event.target === this.onButton ){
                 
                 this.hideDeleteConfirm();
+                
+            } else if ( event.type === 'touchstart' && event.target === this.onButton ){
+                
+                this.delIcon.style.backgroundImage = "url('/imgs/heart.svg')";
+                
+            } else if ( event.type === 'touchend' && event.target === this.onButton ){
+                
+                this.hideDeleteConfirm();
+                
+                this.delIcon.style.backgroundImage = "url('/imgs/sad1.svg')";
                 
             }
             
@@ -204,7 +232,11 @@ var Engine = function(){
             this.layer.style.display = 'none';
 
             this.offButton.removeEventListener( 'click', this, false );
+            this.offButton.removeEventListener( 'touchstart', this, false );
+            this.offButton.removeEventListener( 'touchend', this, false );
             this.onButton.removeEventListener( 'click', this, false );
+            this.onButton.removeEventListener( 'touchstart', this, false );
+            this.onButton.removeEventListener( 'touchend', this, false );
             
         };
         
@@ -213,7 +245,11 @@ var Engine = function(){
             this.layer.style.display = 'block';
 
             this.offButton.addEventListener( 'click', this, false );
+            this.offButton.addEventListener( 'touchstart', this, false );
+            this.offButton.addEventListener( 'touchend', this, false );
             this.onButton.addEventListener( 'click', this, false );
+            this.onButton.addEventListener( 'touchstart', this, false );
+            this.onButton.addEventListener( 'touchend', this, false );
             
         };
         
@@ -225,7 +261,7 @@ var Engine = function(){
                 width: 110,
                 fill: 'rgb(255, 255, 255)',
                 fontFamily: 'Montserrat',
-                fontSize: 15,
+                fontSize: Math.floor( ( _Engine.canvasWidth * 15 ) / 970 ),
                 editable: false,
                 fontWeight: 900,
                 hasRotatingPoint: false,
@@ -282,11 +318,13 @@ var Engine = function(){
             this.panelElem.addEventListener( 'mouseover', this, false );
             this.panelElem.addEventListener( 'mouseout', this, false );            
             this.panelHeaderDelElem.addEventListener( 'click', this, false );
+            this.panelHeaderDelElem.addEventListener( 'touchstart', this, false );
             
         };
         
         this.remove = function() {
             
+            this.panelHeaderDelElem.removeEventListener( 'touchstart', this, false );
             this.panelHeaderDelElem.removeEventListener( 'click', this, false );
             
             this.panelHeaderIconElem.remove();
@@ -310,6 +348,7 @@ var Engine = function(){
         this.layer = document.getElementById('delCCLayer');
         this.offButton = document.getElementById('delCCdelete');
         this.onButton = document.getElementById('delCCkeep');
+        this.delIcon = document.getElementById('delCCIcon');
         
         this.buildCanvasModule();
         this.buildControlPanel();
@@ -336,6 +375,14 @@ var Engine = function(){
                 
                 this.reapplyFilters();
                 
+            } else if ( event.type === 'touchend' && event.target === this.panelSepiaButtonElem ){
+                
+                this.filterSepiaFlag = this.filterSepiaFlag * (-1);
+                
+                this.toggleButtonSepia();
+                
+                this.reapplyFilters();
+                
             } else if ( event.type === 'click' && event.target === this.panelSepiaButtonElem ){
                 
                 this.filterSepiaFlag = this.filterSepiaFlag * (-1);
@@ -350,6 +397,14 @@ var Engine = function(){
                 
                 this.reapplyFilters();
                 
+            } else if ( event.type === 'touchend' && event.target === this.brightnessUndoElem ){
+                
+                this.filterBrightness = 0;
+                
+                this.brightnessRangeElem.value = 0;
+                
+                this.reapplyFilters();
+                
             } else if ( event.type === 'click' && event.target === this.brightnessUndoElem ){
                 
                 this.filterBrightness = 0;
@@ -361,6 +416,14 @@ var Engine = function(){
             } else if ( event.type === 'input' && event.target === this.blurRangeElem ){
                 
                 this.filterBlur = event.target.value;
+                
+                this.reapplyFilters();
+                
+            } else if ( event.type === 'touchend' && event.target === this.blurUndoElem ){
+                
+                this.filterBlur = 0;
+                
+                this.blurRangeElem.value = 0;
                 
                 this.reapplyFilters();
                 
