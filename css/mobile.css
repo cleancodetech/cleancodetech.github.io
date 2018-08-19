@@ -434,10 +434,12 @@
     letter-spacing: -1px;
     line-height: 1.2rem;
     width: 76vw;
+    height: 64vh;
     box-sizing: border-box;
     position: absolute;
     top: 12vh;
-    overflow-y: scroll;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 #delCCControls{
