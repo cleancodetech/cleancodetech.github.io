@@ -416,21 +416,28 @@
 }
 
 #delCCText h2{
-    color: lime;
+    color: rgb(0, 255, 0);
     font-family: "Space Mono";
-    padding: 1vh 0 1vh 3vh;
+    padding: 0 1vh 0 3vh;
     font-weight: normal;
-    font-size: 2rem;
+    font-size: 10vh;
     letter-spacing: -1px;
+    line-height: 12vh;
 }
 
 #delCCText p{
-    color: #ebebeb;
+    color: rgb(235, 235, 235);
     font-family: "Space Mono";
-    padding: 1vh 0 1vh 3vh;
+    padding: 0 1vh 0 3vh;
     font-weight: normal;
     font-size: 1rem;
     letter-spacing: -1px;
+    line-height: 1.2rem;
+    width: 76vw;
+    box-sizing: border-box;
+    position: absolute;
+    top: 12vh;
+    overflow-y: scroll;
 }
 
 #delCCControls{
