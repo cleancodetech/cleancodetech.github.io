@@ -430,9 +430,9 @@
     font-family: "Space Mono";
     padding: 0 1vh 0 3vh;
     font-weight: normal;
-    font-size: 1rem;
+    font-size: 0.9rem;
     letter-spacing: -1px;
-    line-height: 1.2rem;
+    line-height: 1rem;
     width: 76vw;
     height: 64vh;
     box-sizing: border-box;
