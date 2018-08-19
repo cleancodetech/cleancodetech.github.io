@@ -320,7 +320,15 @@ var Engine = function(){
         
         this.handleEvent = function( event ) {
             
-            if ( event.type === 'click' && event.target === this.panelGrayscaleButtonElem ){
+            if ( event.type === 'touchend' && event.target === this.panelGrayscaleButtonElem ){
+                
+                this.filterGrayscaleFlag = this.filterGrayscaleFlag * (-1);
+                
+                this.toggleButtonGrayscale();
+                
+                this.reapplyFilters();
+                
+            } else if ( event.type === 'click' && event.target === this.panelGrayscaleButtonElem ){
                 
                 this.filterGrayscaleFlag = this.filterGrayscaleFlag * (-1);
                 
@@ -592,12 +600,20 @@ var Engine = function(){
                 parent: this.blurContainerElem
             });
             
+            
+            /**
+             * @TODO remove touchend events on deletion
+             */
             this.panelGrayscaleButtonElem.addEventListener( 'click', this, false );
+            this.panelGrayscaleButtonElem.addEventListener( 'touchend', this, false );
             this.panelSepiaButtonElem.addEventListener( 'click', this, false );
+            this.panelSepiaButtonElem.addEventListener( 'touchend', this, false );
             this.brightnessRangeElem.addEventListener( 'input', this, false );
             this.brightnessUndoElem.addEventListener( 'click', this, false );
+            this.brightnessUndoElem.addEventListener( 'touchend', this, false );
             this.blurRangeElem.addEventListener( 'input', this, false );
             this.blurUndoElem.addEventListener( 'click', this, false );
+            this.blurUndoElem.addEventListener( 'touchend', this, false );
             
         };
         

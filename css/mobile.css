@@ -326,3 +326,27 @@
     background-repeat: no-repeat;
     background-position: center center;
 }
+
+
+
+
+.blurContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.blurIcon{
+    width: 10%;
+    height: 3rem;
+    background-image: url('/imgs/blur.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.blurRange{
+    width: 70%;
+    height: 3rem;
+}
