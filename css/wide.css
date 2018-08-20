@@ -648,6 +648,7 @@
     z-index: 2;
     top: -92vh;
     box-shadow: 0 -10px 10px -7px rgb(127, 235, 127) inset;
+    display: block;
     transition: top 0.3s ease 0s;
 }
 
@@ -704,7 +705,7 @@
     font-size: 3vh;
     line-height: 4vh;
     font-family: Montserrat;
-    color: #ebebeb;
+    color: rgb(235, 235, 235);
     border-radius: 1vh;
     background-position: 1vh center;
     background-repeat: no-repeat;
@@ -713,6 +714,8 @@
     box-shadow: 0 0 0.5vh rgb(127, 235, 127);
     cursor: pointer;
     transition: box-shadow 0.3s ease 0s;
+    height: 6vh;
+    background-size: 4vh;
 }
 
 .mainControlsOptionsHeader:hover {
@@ -725,6 +728,10 @@
 
 #newPartDraw {
     background-image: url('/imgs/pencil.svg');
+}
+
+#newPartExplain{
+    display: none;
 }
 
 #shareSocialFacebook {

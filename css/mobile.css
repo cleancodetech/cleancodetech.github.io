@@ -610,6 +610,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 4rem;
 }
 
 .mainControlsOptionsHeader {
@@ -636,4 +637,17 @@
 
 #newPartDraw {
     background-image: url('/imgs/pencil.svg');
+}
+
+#newPartExplain {
+    color: white;
+    font-family: Montserrat;
+    font-size: 1rem;
+    width: 80%;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    box-shadow: 0 0 0.5vh rgb(127, 235, 127);
+    margin: 1rem auto;
+    line-height: 2rem;
 }

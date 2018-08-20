@@ -1459,6 +1459,14 @@ var Engine = function(){
             parent: this.controlsContainerElem
         });
         
+        this.addNewPartExplainElem = appendElement({
+            tag: 'P',
+            id: 'newPartExplain',
+            class: 'mainControlsOptionsExplain',
+            text: 'Add new elements to the image',
+            parent: this.addNewPartContainerElem
+        });
+        
         this.addNewTextPartElem = appendElement({
             tag: 'DIV',
             id: 'newPartText',
@@ -1546,6 +1554,7 @@ var Engine = function(){
     this.downloadElem;
     this.shareToSocialElem;
     this.addNewPartContainerElem;
+    this.addNewPartExplainElem;
     this.addNewPartElem;
     this.addNewTextPartElem;
     this.addNewDrawPartElem;
