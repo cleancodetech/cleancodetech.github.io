@@ -873,6 +873,14 @@ var Engine = function(){
                 
             }
             
+            if ( this.args.alignMiddle === true ) {
+                
+                var topMargin = Math.floor( ( _Engine.canvasHeight - this.textInstance.height ) / 2 );
+
+                this.textInstance.set( 'top', topMargin );
+                
+            }
+            
             _Engine.canvas.add( this.textInstance );
             
         };
@@ -1224,19 +1232,17 @@ var Engine = function(){
             
             this.toggleMainControlsContainer();
             
-        } else if ( event.type === 'click' && event.target === this.addNewTextPartElem ){
+        } else if ( ( event.type === 'click' || event.type === 'touchstart' ) && event.target === this.addNewTextPartElem ){
 
-            this.addNewTextPartElem.style.opacity = 0;
-            this.addNewTextPartElem.style.cursor = 'default';
-
-            this.addNewDrawPartElem.style.opacity = 0;
-            this.addNewDrawPartElem.style.cursor = 'default';
+            this.toggleShareSocial = -1;
+            this.toggleNewPart = -1;
             
-            var textPart = new PartText();
-            textPart.buildControlModule();
-            textPart.buildCanvasModule();
+            this.toggleMainControlsContainer();
             
-            this.parts.push( textPart );
+            var textPart = new PartText({
+                text: 'Additional Text',
+                alignMiddle: true
+            });
             
         }
         
@@ -1501,6 +1507,8 @@ var Engine = function(){
         });
         
         this.addNewPartExitElem.addEventListener( 'touchstart', this, false );
+        this.addNewTextPartElem.addEventListener( 'click', this, false );
+        this.addNewTextPartElem.addEventListener( 'touchstart', this, false );
         
     };
     
@@ -1518,17 +1526,17 @@ var Engine = function(){
 
         }
         
-        if ( this.toggleShareSocial > 0 ) {
-                
-            this.shareToSocialElem.style.backgroundColor = 'black';
-            this.shareSocialContainerElem.style.top = 0;
-
-        } else {
-
-            this.shareToSocialElem.style.backgroundColor = '';
-            this.shareSocialContainerElem.style.top = '-92vh';
-
-        }
+//        if ( this.toggleShareSocial > 0 ) {
+//                
+//            this.shareToSocialElem.style.backgroundColor = 'black';
+//            this.shareSocialContainerElem.style.top = 0;
+//
+//        } else {
+//
+//            this.shareToSocialElem.style.backgroundColor = '';
+//            this.shareSocialContainerElem.style.top = '-92vh';
+//
+//        }
         
     };
     
