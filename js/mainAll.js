@@ -30,15 +30,16 @@ function appendElement( args ) {
     
     var elem = document.createElement( args.tag );
     
-    if ( args.hasOwnProperty('id') )        { elem.id = args.id; }
-    if ( args.hasOwnProperty('title') )     { elem.setAttribute("title", args.title ); }
-    if ( args.hasOwnProperty('class') )     { elem.setAttribute("class", args.class ); }
-    if ( args.hasOwnProperty('type') )      { elem.setAttribute("type", args.type ); }
-    if ( args.hasOwnProperty('min') )       { elem.setAttribute("min", args.min ); }
-    if ( args.hasOwnProperty('max') )       { elem.setAttribute("max", args.max ); }
-    if ( args.hasOwnProperty('step') )      { elem.setAttribute("step", args.step ); }
-    if ( args.hasOwnProperty('value') )     { elem.setAttribute("value", args.value ); }
-    if ( args.hasOwnProperty('text') )      { elem.innerHTML = args.text; }
+    if ( args.hasOwnProperty('id') )            { elem.id = args.id; }
+    if ( args.hasOwnProperty('title') )         { elem.setAttribute("title", args.title ); }
+    if ( args.hasOwnProperty('class') )         { elem.setAttribute("class", args.class ); }
+    if ( args.hasOwnProperty('type') )          { elem.setAttribute("type", args.type ); }
+    if ( args.hasOwnProperty('min') )           { elem.setAttribute("min", args.min ); }
+    if ( args.hasOwnProperty('max') )           { elem.setAttribute("max", args.max ); }
+    if ( args.hasOwnProperty('step') )          { elem.setAttribute("step", args.step ); }
+    if ( args.hasOwnProperty('value') )         { elem.setAttribute("value", args.value ); }
+    if ( args.hasOwnProperty('placeholder') )   { elem.setAttribute("placeholder", args.placeholder ); }
+    if ( args.hasOwnProperty('text') )          { elem.innerHTML = args.text; }
     
     args.parent.appendChild( elem );
     

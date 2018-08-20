@@ -305,7 +305,7 @@
 }
 
 .brightnessIcon{
-    width: 10%;
+    width: 3rem;
     height: 3rem;
     background-image: url('/imgs/brightness.svg');
     background-size: contain;
@@ -338,7 +338,7 @@
 }
 
 .blurIcon{
-    width: 10%;
+    width: 3rem;
     height: 3rem;
     background-image: url('/imgs/blur.svg');
     background-size: contain;
@@ -347,6 +347,118 @@
 }
 
 .blurRange{
+    width: 70%;
+    height: 3rem;
+}
+
+
+
+
+.panelHeaderTextIcon{
+    background-image: url('/imgs/text.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 3rem;
+    height: 3rem;
+    margin: 1vh;
+}
+
+.panelInputText{
+    display: block;
+    width: 95%;
+    margin: 1vh auto;
+    border: medium none;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    padding: 0 1vh;
+    box-sizing: border-box;
+    border-radius: 0.5vh;
+    background-color: rgb(235, 235, 235);
+    color: rgb(10, 10, 10);
+    font-family: Montserrat, "sans serif";
+}
+
+
+
+
+.fontSizeRangeContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.panelInputColor{
+    border: medium none;
+    width: 3rem;
+    height: 3rem;
+}
+
+.fontSizeRange{
+    width: 70%;
+    height: 3rem;
+}
+
+
+
+
+.fontStrokeRangeContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fontSizeRangeIcon{
+    width: 10%;
+    height: 3rem;
+    background-image: url('/imgs/text.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.fontStrokeRange{
+    width: 70%;
+    height: 3rem;
+}
+
+
+
+
+.bgRangeContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bgRange{
+    width: 70%;
+    height: 3rem;
+}
+
+
+
+
+.fontWeightRangeContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fontWeightRangeIcon{
+    width: 3rem;
+    height: 3rem;
+    background-image: url('/imgs/bold.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.fontWeightRange{
     width: 70%;
     height: 3rem;
 }

@@ -735,6 +735,16 @@ var Engine = function(){
                 
                 this.textInstance.set("fontSize", event.target.value );
                 
+            } else if ( event.type === 'touchstart' && event.target === this.fontSizeRangeUndoElem ){
+                
+                this.panelInputColorElem.value = '#ffffff';
+                
+                this.textInstance.set("fill", 'rgb(255, 255, 255)' );
+                
+                this.fontSizeRangeElem.value = 40;
+                
+                this.textInstance.set("fontSize", this.fontSizeRangeElem.value );
+                
             } else if ( event.type === 'click' && event.target === this.fontSizeRangeUndoElem ){
                 
                 this.panelInputColorElem.value = '#ffffff';
@@ -748,6 +758,12 @@ var Engine = function(){
             } else if ( event.type === 'input' && event.target === this.fontWeightRangeElem ){
                 
                 this.textInstance.set("fontWeight", event.target.value );
+                
+            } else if ( event.type === 'touchstart' && event.target === this.fontWeightRangeUndoElem ){
+                
+                this.fontWeightRangeElem.value = 900;
+                
+                this.textInstance.set("fontWeight", this.fontWeightRangeElem.value );
                 
             } else if ( event.type === 'click' && event.target === this.fontWeightRangeUndoElem ){
                 
@@ -763,6 +779,16 @@ var Engine = function(){
                 
                 this.textInstance.set('strokeWidth', parseInt( this.fontStrokeRangeElem.value ) );
                 
+            } else if ( event.type === 'touchstart' && event.target === this.fontStrokeRangeUndoElem ){
+                
+                this.fontStrokeColorElem.value = '#000000';
+                
+                this.textInstance.set("stroke", 'rgb(0, 0, 0)' );
+                
+                this.fontStrokeRangeElem.value = 1;
+                
+                this.textInstance.set("strokeWidth", parseInt( this.fontStrokeRangeElem.value ) );
+                
             } else if ( event.type === 'click' && event.target === this.fontStrokeRangeUndoElem ){
                 
                 this.fontStrokeColorElem.value = '#000000';
@@ -772,6 +798,10 @@ var Engine = function(){
                 this.fontStrokeRangeElem.value = 1;
                 
                 this.textInstance.set("strokeWidth", parseInt( this.fontStrokeRangeElem.value ) );
+                
+            } else if ( event.type === 'touchstart' && event.target === this.panelHeaderDelElem ){
+                
+                this.remove();
                 
             } else if ( event.type === 'click' && event.target === this.panelHeaderDelElem ){
                 
@@ -832,168 +862,214 @@ var Engine = function(){
         };
         
         this.buildBgControl = function() {
-            
-            this.bgRangeContainerElem = document.createElement("DIV");
-            this.bgRangeContainerElem.setAttribute("class", "bgRangeContainer");
-            this.panelElem.appendChild( this.bgRangeContainerElem );
-            
-            this.bgColorElem = document.createElement("INPUT");
-            this.bgColorElem.setAttribute("class", "panelInputColor");
-            this.bgColorElem.setAttribute("type", "color");
-            this.bgColorElem.setAttribute("title", "Change the text's background color");
-            this.bgColorElem.value = '#ff0000';
-            this.bgRangeContainerElem.appendChild( this.bgColorElem );
-            
-            this.bgRangeElem = document.createElement("INPUT");
-            this.bgRangeElem.setAttribute("class", "bgRange");
-            this.bgRangeElem.setAttribute("title", "Adjust the text's background color opacity");
-            this.bgRangeElem.setAttribute("type", "range");
-            this.bgRangeElem.setAttribute("min", "0");
-            this.bgRangeElem.setAttribute("max", "1");
-            this.bgRangeElem.setAttribute("step", "0.01");
-            this.bgRangeElem.value = 0.50;
-            this.bgRangeContainerElem.appendChild( this.bgRangeElem );
-            
-            this.bgRangeUndoElem = document.createElement("DIV");
-            this.bgRangeUndoElem.setAttribute("class", "rangerUndo");
-            this.bgRangeUndoElem.setAttribute("title", "Reset the the text's background color to original");
-            this.bgRangeContainerElem.appendChild( this.bgRangeUndoElem );
+        
+            this.bgRangeContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'bgRangeContainer',
+                parent: this.panelElem
+            });
+        
+            this.bgColorElem = appendElement({
+                tag: 'INPUT',
+                class: 'panelInputColor',
+                type: 'color',
+                title: "Change the text's background color",
+                value: '#ff0000',
+                parent: this.bgRangeContainerElem
+            });
+        
+            this.bgRangeElem = appendElement({
+                tag: 'INPUT',
+                class: 'bgRange',
+                type: 'range',
+                title: "Adjust the text's background color opacity",
+                min: '0',
+                max: '1',
+                step: '0.01',
+                value: 0.50,
+                parent: this.bgRangeContainerElem
+            });
+        
+            this.bgRangeUndoElem = appendElement({
+                tag: 'DIV',
+                class: 'rangerUndo',
+                title: "Reset the the text's background color to original",
+                parent: this.bgRangeContainerElem
+            });
             
             this.bgColorElem.addEventListener( 'input', this, false );
             this.bgRangeElem.addEventListener( 'input', this, false );
             this.bgRangeUndoElem.addEventListener( 'click', this, false );
+            this.bgRangeUndoElem.addEventListener( 'touchstart', this, false );
             
         };
         
         this.buildStrokeControl = function() {
-            
-            this.fontStrokeRangeContainerElem = document.createElement("DIV");
-            this.fontStrokeRangeContainerElem.setAttribute("class", "fontStrokeRangeContainer");
-            this.panelElem.appendChild( this.fontStrokeRangeContainerElem );
-            
-            this.fontStrokeColorElem = document.createElement("INPUT");
-            this.fontStrokeColorElem.setAttribute("class", "panelInputColor");
-            this.fontStrokeColorElem.setAttribute("type", "color");
-            this.fontStrokeColorElem.setAttribute("title", "Change the stroke color around the text");
-            this.fontStrokeColorElem.value = '#000000';
-            this.fontStrokeRangeContainerElem.appendChild( this.fontStrokeColorElem );
-            
-            this.fontStrokeRangeElem = document.createElement("INPUT");
-            this.fontStrokeRangeElem.setAttribute("class", "fontStrokeRange");
-            this.fontStrokeRangeElem.setAttribute("title", "Adjust the stroke size around the text");
-            this.fontStrokeRangeElem.setAttribute("type", "range");
-            this.fontStrokeRangeElem.setAttribute("min", "0");
-            this.fontStrokeRangeElem.setAttribute("max", "40");
-            this.fontStrokeRangeElem.setAttribute("step", "1");
-            this.fontStrokeRangeElem.value = 1;
-            this.fontStrokeRangeContainerElem.appendChild( this.fontStrokeRangeElem );
-            
-            this.fontStrokeRangeUndoElem = document.createElement("DIV");
-            this.fontStrokeRangeUndoElem.setAttribute("class", "rangerUndo");
-            this.fontStrokeRangeUndoElem.setAttribute("title", "Reset the stroke color and size to original");
-            this.fontStrokeRangeContainerElem.appendChild( this.fontStrokeRangeUndoElem );
+        
+            this.fontStrokeRangeContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'fontStrokeRangeContainer',
+                parent: this.panelElem
+            });
+        
+            this.fontStrokeColorElem = appendElement({
+                tag: 'INPUT',
+                class: 'panelInputColor',
+                type: 'color',
+                title: 'Change the stroke color around the text',
+                value: '#000000',
+                parent: this.fontStrokeRangeContainerElem
+            });
+        
+            this.fontStrokeRangeElem = appendElement({
+                tag: 'INPUT',
+                class: 'fontStrokeRange',
+                type: 'range',
+                title: 'Adjust the stroke size around the text',
+                min: '0',
+                max: '40',
+                step: '1',
+                value: 1,
+                parent: this.fontStrokeRangeContainerElem
+            });
+        
+            this.fontStrokeRangeUndoElem = appendElement({
+                tag: 'DIV',
+                class: 'rangerUndo',
+                title: 'Reset the stroke color and size to original',
+                parent: this.fontStrokeRangeContainerElem
+            });
             
             this.fontStrokeColorElem.addEventListener( 'input', this, false );
             this.fontStrokeRangeElem.addEventListener( 'input', this, false );
             this.fontStrokeRangeUndoElem.addEventListener( 'click', this, false );
+            this.fontStrokeRangeUndoElem.addEventListener( 'touchstart', this, false );
             
         };
         
         this.buildWeightControl = function() {
-            
-            this.fontWeightRangeContainerElem = document.createElement("DIV");
-            this.fontWeightRangeContainerElem.setAttribute("class", "fontWeightRangeContainer");
-            this.panelElem.appendChild( this.fontWeightRangeContainerElem );
-            
-            this.fontWeightRangeIcon = document.createElement("DIV");
-            this.fontWeightRangeIcon.setAttribute("class", "fontWeightRangeIcon");
-            this.fontWeightRangeIcon.setAttribute("title", "Adjust the font weight");
-            this.fontWeightRangeContainerElem.appendChild( this.fontWeightRangeIcon );
-            
-            this.fontWeightRangeElem = document.createElement("INPUT");
-            this.fontWeightRangeElem.setAttribute("class", "fontWeightRange");
-            this.fontWeightRangeElem.setAttribute("title", "Adjust the font weight");
-            this.fontWeightRangeElem.setAttribute("type", "range");
-            this.fontWeightRangeElem.setAttribute("min", "100");
-            this.fontWeightRangeElem.setAttribute("max", "900");
-            this.fontWeightRangeElem.setAttribute("step", "100");
-            this.fontWeightRangeElem.value = 900;
-            this.fontWeightRangeContainerElem.appendChild( this.fontWeightRangeElem );
-            
-            this.fontWeightRangeUndoElem = document.createElement("DIV");
-            this.fontWeightRangeUndoElem.setAttribute("class", "rangerUndo");
-            this.fontWeightRangeUndoElem.setAttribute("title", "Reset font weight to original");
-            this.fontWeightRangeContainerElem.appendChild( this.fontWeightRangeUndoElem );
+        
+            this.fontWeightRangeContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'fontWeightRangeContainer',
+                parent: this.panelElem
+            });
+        
+            this.fontWeightRangeIcon = appendElement({
+                tag: 'DIV',
+                class: 'fontWeightRangeIcon',
+                title: 'Adjust the font weight',
+                parent: this.fontWeightRangeContainerElem
+            });
+        
+            this.fontWeightRangeElem = appendElement({
+                tag: 'INPUT',
+                class: 'fontWeightRange',
+                title: 'Adjust the font weight',
+                type: 'range',
+                min: '100',
+                max: '900',
+                step: '100',
+                value: 900,
+                parent: this.fontWeightRangeContainerElem
+            });
+        
+            this.fontWeightRangeUndoElem = appendElement({
+                tag: 'DIV',
+                class: 'rangerUndo',
+                title: 'Reset font weight to original',
+                parent: this.fontWeightRangeContainerElem
+            });
             
             this.fontWeightRangeElem.addEventListener( 'input', this, false );
             this.fontWeightRangeUndoElem.addEventListener( 'click', this, false );
+            this.fontWeightRangeUndoElem.addEventListener( 'touchstart', this, false );
             
         };
         
         this.buildSizeControl = function() {
-            
-            this.fontSizeRangeContainerElem = document.createElement("DIV");
-            this.fontSizeRangeContainerElem.setAttribute("class", "fontSizeRangeContainer");
-            this.panelElem.appendChild( this.fontSizeRangeContainerElem );
-            
-            this.panelInputColorElem = document.createElement("INPUT");
-            this.panelInputColorElem.setAttribute("class", "panelInputColor");
-            this.panelInputColorElem.setAttribute("type", "color");
-            this.panelInputColorElem.setAttribute("title", "Change the font color");
-            this.panelInputColorElem.value = '#ffffff';
-            this.fontSizeRangeContainerElem.appendChild( this.panelInputColorElem );
-            
-            this.fontSizeRangeElem = document.createElement("INPUT");
-            this.fontSizeRangeElem.setAttribute("class", "fontSizeRange");
-            this.fontSizeRangeElem.setAttribute("title", "Adjust the font size");
-            this.fontSizeRangeElem.setAttribute("type", "range");
-            this.fontSizeRangeElem.setAttribute("min", "8");
-            this.fontSizeRangeElem.setAttribute("max", "120");
-            this.fontSizeRangeElem.setAttribute("step", "1");
-            this.fontSizeRangeElem.value = 40;
-            this.fontSizeRangeContainerElem.appendChild( this.fontSizeRangeElem );
-            
-            this.fontSizeRangeUndoElem = document.createElement("DIV");
-            this.fontSizeRangeUndoElem.setAttribute("class", "rangerUndo");
-            this.fontSizeRangeUndoElem.setAttribute("title", "Reset font size to original");
-            this.fontSizeRangeContainerElem.appendChild( this.fontSizeRangeUndoElem );
+        
+            this.fontSizeRangeContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'fontSizeRangeContainer',
+                parent: this.panelElem
+            });
+        
+            this.panelInputColorElem = appendElement({
+                tag: 'INPUT',
+                class: 'panelInputColor',
+                type: 'color',
+                title: 'Change the font color',
+                value: '#ffffff',
+                parent: this.fontSizeRangeContainerElem
+            });
+        
+            this.fontSizeRangeElem = appendElement({
+                tag: 'INPUT',
+                class: 'fontSizeRange',
+                type: 'range',
+                title: 'Adjust the font size',
+                min: '8',
+                max: '120',
+                step: '1',
+                value: 40,
+                parent: this.fontSizeRangeContainerElem
+            });
+        
+            this.fontSizeRangeUndoElem = appendElement({
+                tag: 'DIV',
+                class: 'rangerUndo',
+                title: 'Reset font size to original',
+                parent: this.fontSizeRangeContainerElem
+            });
             
             this.panelInputColorElem.addEventListener( 'input', this, false );
             this.fontSizeRangeElem.addEventListener( 'input', this, false );
             this.fontSizeRangeUndoElem.addEventListener( 'click', this, false );
+            this.fontSizeRangeUndoElem.addEventListener( 'touchstart', this, false );
             
         };
         
         this.buildInputControl = function() {
-            
-            this.panelInputTextElem = document.createElement("INPUT");
-            this.panelInputTextElem.setAttribute("class", "panelInputText");
-            this.panelInputTextElem.setAttribute("type", "text");
-            this.panelInputTextElem.setAttribute("placeholder", "Add some text");
-            this.panelInputTextElem.value = this.args.text;
-            this.panelElem.appendChild( this.panelInputTextElem );
+        
+            this.panelInputTextElem = appendElement({
+                tag: 'INPUT',
+                class: 'panelInputText',
+                type: 'text',
+                placeholder: 'Add some text',
+                value: this.args.text,
+                parent: this.panelElem
+            });
             
             this.panelInputTextElem.addEventListener( 'input', this, false );
             
         };
         
         this.buildControlModule = function() {
-            
-            this.panelElem = document.createElement("DIV");
-            this.panelElem.setAttribute("class", "panel");
-            _Engine.panelContainerElem.appendChild( this.panelElem );
-            
-            this.panelHeaderElem = document.createElement("DIV");
-            this.panelHeaderElem.setAttribute("class", "panelHeader");
-            this.panelElem.appendChild( this.panelHeaderElem );
-            
-            this.panelHeaderIconElem = document.createElement("DIV");
-            this.panelHeaderIconElem.setAttribute("class", "panelHeaderTextIcon");
-            this.panelHeaderElem.appendChild( this.panelHeaderIconElem );
-            
-            this.panelHeaderDelElem = document.createElement("DIV");
-            this.panelHeaderDelElem.setAttribute("class", "panelHeaderDel");
-            this.panelHeaderElem.appendChild( this.panelHeaderDelElem );
+        
+            this.panelElem = appendElement({
+                tag: 'DIV',
+                class: 'panel',
+                parent: _Engine.panelContainerElem
+            });
+        
+            this.panelHeaderElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeader',
+                parent: this.panelElem
+            });
+        
+            this.panelHeaderIconElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeaderTextIcon',
+                parent: this.panelHeaderElem
+            });
+        
+            this.panelHeaderDelElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeaderDel',
+                parent: this.panelHeaderElem
+            });
             
             this.buildInputControl();
             
@@ -1008,6 +1084,7 @@ var Engine = function(){
             this.panelElem.addEventListener( 'mouseover', this, false );
             this.panelElem.addEventListener( 'mouseout', this, false );
             this.panelHeaderDelElem.addEventListener( 'click', this, false );
+            this.panelHeaderDelElem.addEventListener( 'touchstart', this, false );
             
         };
         
@@ -1015,14 +1092,18 @@ var Engine = function(){
             
             _Engine.canvas.remove( this.textInstance );
             
+            this.bgRangeUndoElem.removeEventListener( 'touchstart', this, false );
             this.bgRangeUndoElem.removeEventListener( 'click', this, false );
             this.bgRangeElem.removeEventListener( 'input', this, false );
             this.bgColorElem.removeEventListener( 'input', this, false );
+            this.fontWeightRangeUndoElem.removeEventListener( 'touchstart', this, false );
             this.fontWeightRangeUndoElem.removeEventListener( 'click', this, false );
             this.fontWeightRangeElem.removeEventListener( 'input', this, false );
+            this.fontStrokeRangeUndoElem.removeEventListener( 'touchstart', this, false );
             this.fontStrokeRangeUndoElem.removeEventListener( 'click', this, false );
             this.fontStrokeRangeElem.removeEventListener( 'input', this, false );
             this.fontStrokeColorElem.removeEventListener( 'input', this, false );
+            this.fontSizeRangeUndoElem.removeEventListener( 'touchstart', this, false );
             this.fontSizeRangeUndoElem.removeEventListener( 'click', this, false );
             this.fontSizeRangeElem.removeEventListener( 'input', this, false );
             this.panelInputColorElem.removeEventListener( 'input', this, false );
