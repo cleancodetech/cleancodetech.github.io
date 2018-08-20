@@ -299,7 +299,7 @@
 
 .brightnessContainer{
     width: 95%;
-    margin: 1vh auto;
+    margin: 1rem auto;
     display: flex;
     justify-content: space-between;
 }
@@ -332,7 +332,7 @@
 
 .blurContainer{
     width: 95%;
-    margin: 1vh auto;
+    margin: 1rem auto;
     display: flex;
     justify-content: space-between;
 }
@@ -367,7 +367,7 @@
 .panelInputText{
     display: block;
     width: 95%;
-    margin: 1vh auto;
+    margin: 1rem auto;
     border: medium none;
     font-size: 2rem;
     line-height: 2.5rem;
@@ -384,7 +384,7 @@
 
 .fontSizeRangeContainer{
     width: 95%;
-    margin: 1vh auto;
+    margin: 1rem auto;
     display: flex;
     justify-content: space-between;
 }
@@ -405,7 +405,7 @@
 
 .fontStrokeRangeContainer{
     width: 95%;
-    margin: 1vh auto;
+    margin: 1rem auto;
     display: flex;
     justify-content: space-between;
 }
@@ -429,7 +429,7 @@
 
 .bgRangeContainer{
     width: 95%;
-    margin: 1vh auto;
+    margin: 1rem auto;
     display: flex;
     justify-content: space-between;
 }
@@ -444,7 +444,7 @@
 
 .fontWeightRangeContainer{
     width: 95%;
-    margin: 1vh auto;
+    margin: 1rem auto;
     display: flex;
     justify-content: space-between;
 }

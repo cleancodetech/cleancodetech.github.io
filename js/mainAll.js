@@ -67,6 +67,20 @@ function getClientHeight() {
     
 };
 
+Element.prototype.addEvent = function( event, handler, bubbling ) {
+    
+    if ( this.addEventListener ) {
+        
+        this.addEventListener( event, handler, bubbling );
+        
+    } else if ( this.attachEvent ) {
+        
+        this.attachEvent( 'on' + event, handler, bubbling );
+        
+    }
+    
+};
+
 
 
 

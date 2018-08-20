@@ -20,50 +20,50 @@ function initFunc() {
     
     initialArrange();
     
-    document.getElementById('photoUpload').addEventListener("change", photoUploadPreview, true);
-    document.getElementById('mobilePhotoUpload').addEventListener("change", photoUploadPreview, true);
+    document.getElementById('photoUpload').addEvent("change", photoUploadPreview, true);
+    document.getElementById('mobilePhotoUpload').addEvent("change", photoUploadPreview, true);
     
-    document.getElementById('photoUrl').addEventListener("input", photoDownload, true);
+    document.getElementById('photoUrl').addEvent("input", photoDownload, true);
     
-    document.getElementById('drag').addEventListener("drop", dropFile, true);    
-    document.getElementById('drag').addEventListener("dragover", dragOver, true);    
-    document.getElementById('drag').addEventListener("dragenter", dragEnter, true);    
-    document.getElementById('drag').addEventListener("dragleave", dragLeave, true);
+    document.getElementById('drag').addEvent("drop", dropFile, true);    
+    document.getElementById('drag').addEvent("dragover", dragOver, true);    
+    document.getElementById('drag').addEvent("dragenter", dragEnter, true);    
+    document.getElementById('drag').addEvent("dragleave", dragLeave, true);
     
-    document.getElementById('drag').addEventListener("touchstart", mobileIconTouchDown, true);
-    document.getElementById('drag').addEventListener("touchend", mobileIconTouchUp, true);
-    document.getElementById('drag').addEventListener("mousedown", mobileIconTouchDown, true);
-    document.getElementById('drag').addEventListener("mouseup", mobileIconTouchUp, true);
+    document.getElementById('drag').addEvent("touchstart", mobileIconTouchDown, true);
+    document.getElementById('drag').addEvent("touchend", mobileIconTouchUp, true);
+    document.getElementById('drag').addEvent("mousedown", mobileIconTouchDown, true);
+    document.getElementById('drag').addEvent("mouseup", mobileIconTouchUp, true);
     
-    document.getElementById('dragMobileClose').addEventListener("touchstart", mobileCloseTouchDown, true);
-    document.getElementById('dragMobileClose').addEventListener("touchend", mobileCloseTouchUp, true);
-    document.getElementById('dragMobileClose').addEventListener("mousedown", mobileCloseTouchDown, true);
-    document.getElementById('dragMobileClose').addEventListener("mouseup", mobileCloseTouchUp, true);
+    document.getElementById('dragMobileClose').addEvent("touchstart", mobileCloseTouchDown, true);
+    document.getElementById('dragMobileClose').addEvent("touchend", mobileCloseTouchUp, true);
+    document.getElementById('dragMobileClose').addEvent("mousedown", mobileCloseTouchDown, true);
+    document.getElementById('dragMobileClose').addEvent("mouseup", mobileCloseTouchUp, true);
     
-    document.getElementById('upload').addEventListener("touchstart", mobileIconTouchDown, true);
-    document.getElementById('upload').addEventListener("touchend", mobileIconTouchUp, true);
-    document.getElementById('upload').addEventListener("mousedown", mobileIconTouchDown, true);
-    document.getElementById('upload').addEventListener("mouseup", mobileIconTouchUp, true);
+    document.getElementById('upload').addEvent("touchstart", mobileIconTouchDown, true);
+    document.getElementById('upload').addEvent("touchend", mobileIconTouchUp, true);
+    document.getElementById('upload').addEvent("mousedown", mobileIconTouchDown, true);
+    document.getElementById('upload').addEvent("mouseup", mobileIconTouchUp, true);
     
-    document.getElementById('uploadMobileClose').addEventListener("touchstart", mobileCloseTouchDown, true);
-    document.getElementById('uploadMobileClose').addEventListener("touchend", mobileCloseTouchUp, true);
-    document.getElementById('uploadMobileClose').addEventListener("mousedown", mobileCloseTouchDown, true);
-    document.getElementById('uploadMobileClose').addEventListener("mouseup", mobileCloseTouchUp, true);
+    document.getElementById('uploadMobileClose').addEvent("touchstart", mobileCloseTouchDown, true);
+    document.getElementById('uploadMobileClose').addEvent("touchend", mobileCloseTouchUp, true);
+    document.getElementById('uploadMobileClose').addEvent("mousedown", mobileCloseTouchDown, true);
+    document.getElementById('uploadMobileClose').addEvent("mouseup", mobileCloseTouchUp, true);
     
-    document.getElementById('url').addEventListener("touchstart", mobileIconTouchDown, true);
-    document.getElementById('url').addEventListener("touchend", mobileIconTouchUp, true);
-    document.getElementById('url').addEventListener("mousedown", mobileIconTouchDown, true);
-    document.getElementById('url').addEventListener("mouseup", mobileIconTouchUp, true);
+    document.getElementById('url').addEvent("touchstart", mobileIconTouchDown, true);
+    document.getElementById('url').addEvent("touchend", mobileIconTouchUp, true);
+    document.getElementById('url').addEvent("mousedown", mobileIconTouchDown, true);
+    document.getElementById('url').addEvent("mouseup", mobileIconTouchUp, true);
     
-    document.getElementById('urlMobileClose').addEventListener("touchstart", mobileCloseTouchDown, true);
-    document.getElementById('urlMobileClose').addEventListener("touchend", mobileCloseTouchUp, true);
-    document.getElementById('urlMobileClose').addEventListener("mousedown", mobileCloseTouchDown, true);
-    document.getElementById('urlMobileClose').addEventListener("mouseup", mobileCloseTouchUp, true);
+    document.getElementById('urlMobileClose').addEvent("touchstart", mobileCloseTouchDown, true);
+    document.getElementById('urlMobileClose').addEvent("touchend", mobileCloseTouchUp, true);
+    document.getElementById('urlMobileClose').addEvent("mousedown", mobileCloseTouchDown, true);
+    document.getElementById('urlMobileClose').addEvent("mouseup", mobileCloseTouchUp, true);
     
-    document.getElementById('menu').addEventListener("mouseup", expandMobileMenu, true);    
-    document.getElementById('backMobile').addEventListener("mouseup", minimizeMobileMenu, true);
-    document.getElementById('menu').addEventListener("touchstart", expandMobileMenu, true);    
-    document.getElementById('backMobile').addEventListener("touchstart", minimizeMobileMenu, true);
+    document.getElementById('menu').addEvent("mouseup", expandMobileMenu, true);    
+    document.getElementById('backMobile').addEvent("mouseup", minimizeMobileMenu, true);
+    document.getElementById('menu').addEvent("touchstart", expandMobileMenu, true);    
+    document.getElementById('backMobile').addEvent("touchstart", minimizeMobileMenu, true);
     
     eng = new Engine();
     
@@ -244,12 +244,12 @@ var Engine = function(){
             
             this.layer.style.display = 'block';
 
-            this.offButton.addEventListener( 'click', this, false );
-            this.offButton.addEventListener( 'touchstart', this, false );
-            this.offButton.addEventListener( 'touchend', this, false );
-            this.onButton.addEventListener( 'click', this, false );
-            this.onButton.addEventListener( 'touchstart', this, false );
-            this.onButton.addEventListener( 'touchend', this, false );
+            this.offButton.addEvent( 'click', this, false );
+            this.offButton.addEvent( 'touchstart', this, false );
+            this.offButton.addEvent( 'touchend', this, false );
+            this.onButton.addEvent( 'click', this, false );
+            this.onButton.addEvent( 'touchstart', this, false );
+            this.onButton.addEvent( 'touchend', this, false );
             
         };
         
@@ -315,10 +315,10 @@ var Engine = function(){
                 parent: this.panelHeaderElem
             });
             
-            this.panelElem.addEventListener( 'mouseover', this, false );
-            this.panelElem.addEventListener( 'mouseout', this, false );            
-            this.panelHeaderDelElem.addEventListener( 'click', this, false );
-            this.panelHeaderDelElem.addEventListener( 'touchstart', this, false );
+            this.panelElem.addEvent( 'mouseover', this, false );
+            this.panelElem.addEvent( 'mouseout', this, false );            
+            this.panelHeaderDelElem.addEvent( 'click', this, false );
+            this.panelHeaderDelElem.addEvent( 'touchstart', this, false );
             
         };
         
@@ -667,16 +667,17 @@ var Engine = function(){
             /**
              * @TODO remove touchend events on deletion
              */
-            this.panelGrayscaleButtonElem.addEventListener( 'click', this, false );
-            this.panelGrayscaleButtonElem.addEventListener( 'touchend', this, false );
-            this.panelSepiaButtonElem.addEventListener( 'click', this, false );
-            this.panelSepiaButtonElem.addEventListener( 'touchend', this, false );
-            this.brightnessRangeElem.addEventListener( 'input', this, false );
-            this.brightnessUndoElem.addEventListener( 'click', this, false );
-            this.brightnessUndoElem.addEventListener( 'touchend', this, false );
-            this.blurRangeElem.addEventListener( 'input', this, false );
-            this.blurUndoElem.addEventListener( 'click', this, false );
-            this.blurUndoElem.addEventListener( 'touchend', this, false );
+            this.panelGrayscaleButtonElem.addEvent( 'click', this, false );
+            this.panelGrayscaleButtonElem.addEvent( 'touchend', this, false );
+            this.panelSepiaButtonElem.addEvent( 'click', this, false );
+            this.panelSepiaButtonElem.addEvent( 'touchend', this, false );
+            this.brightnessRangeElem.addEvent( 'input', this, false );
+            this.brightnessRangeElem.addEvent( 'input', this, false );
+            this.brightnessUndoElem.addEvent( 'click', this, false );
+            this.brightnessUndoElem.addEvent( 'touchend', this, false );
+            this.blurRangeElem.addEvent( 'input', this, false );
+            this.blurUndoElem.addEvent( 'click', this, false );
+            this.blurUndoElem.addEvent( 'touchend', this, false );
             
         };
         
@@ -921,10 +922,10 @@ var Engine = function(){
                 parent: this.bgRangeContainerElem
             });
             
-            this.bgColorElem.addEventListener( 'input', this, false );
-            this.bgRangeElem.addEventListener( 'input', this, false );
-            this.bgRangeUndoElem.addEventListener( 'click', this, false );
-            this.bgRangeUndoElem.addEventListener( 'touchstart', this, false );
+            this.bgColorElem.addEvent( 'input', this, false );
+            this.bgRangeElem.addEvent( 'input', this, false );
+            this.bgRangeUndoElem.addEvent( 'click', this, false );
+            this.bgRangeUndoElem.addEvent( 'touchstart', this, false );
             
         };
         
@@ -964,10 +965,10 @@ var Engine = function(){
                 parent: this.fontStrokeRangeContainerElem
             });
             
-            this.fontStrokeColorElem.addEventListener( 'input', this, false );
-            this.fontStrokeRangeElem.addEventListener( 'input', this, false );
-            this.fontStrokeRangeUndoElem.addEventListener( 'click', this, false );
-            this.fontStrokeRangeUndoElem.addEventListener( 'touchstart', this, false );
+            this.fontStrokeColorElem.addEvent( 'input', this, false );
+            this.fontStrokeRangeElem.addEvent( 'input', this, false );
+            this.fontStrokeRangeUndoElem.addEvent( 'click', this, false );
+            this.fontStrokeRangeUndoElem.addEvent( 'touchstart', this, false );
             
         };
         
@@ -1005,9 +1006,9 @@ var Engine = function(){
                 parent: this.fontWeightRangeContainerElem
             });
             
-            this.fontWeightRangeElem.addEventListener( 'input', this, false );
-            this.fontWeightRangeUndoElem.addEventListener( 'click', this, false );
-            this.fontWeightRangeUndoElem.addEventListener( 'touchstart', this, false );
+            this.fontWeightRangeElem.addEvent( 'input', this, false );
+            this.fontWeightRangeUndoElem.addEvent( 'click', this, false );
+            this.fontWeightRangeUndoElem.addEvent( 'touchstart', this, false );
             
         };
         
@@ -1047,10 +1048,10 @@ var Engine = function(){
                 parent: this.fontSizeRangeContainerElem
             });
             
-            this.panelInputColorElem.addEventListener( 'input', this, false );
-            this.fontSizeRangeElem.addEventListener( 'input', this, false );
-            this.fontSizeRangeUndoElem.addEventListener( 'click', this, false );
-            this.fontSizeRangeUndoElem.addEventListener( 'touchstart', this, false );
+            this.panelInputColorElem.addEvent( 'input', this, false );
+            this.fontSizeRangeElem.addEvent( 'input', this, false );
+            this.fontSizeRangeUndoElem.addEvent( 'click', this, false );
+            this.fontSizeRangeUndoElem.addEvent( 'touchstart', this, false );
             
         };
         
@@ -1065,7 +1066,7 @@ var Engine = function(){
                 parent: this.panelElem
             });
             
-            this.panelInputTextElem.addEventListener( 'input', this, false );
+            this.panelInputTextElem.addEvent( 'input', this, false );
             
         };
         
@@ -1105,10 +1106,10 @@ var Engine = function(){
             
             this.buildWeightControl();
             
-            this.panelElem.addEventListener( 'mouseover', this, false );
-            this.panelElem.addEventListener( 'mouseout', this, false );
-            this.panelHeaderDelElem.addEventListener( 'click', this, false );
-            this.panelHeaderDelElem.addEventListener( 'touchstart', this, false );
+            this.panelElem.addEvent( 'mouseover', this, false );
+            this.panelElem.addEvent( 'mouseout', this, false );
+            this.panelHeaderDelElem.addEvent( 'click', this, false );
+            this.panelHeaderDelElem.addEvent( 'touchstart', this, false );
             
         };
         
@@ -1407,8 +1408,8 @@ var Engine = function(){
             parent: this.controlsContainerElem
         });
         
-        this.downloadElem.addEventListener( 'click', this, false );
-        this.addNewPartElem.addEventListener( 'click', this, false );
+        this.downloadElem.addEvent( 'click', this, false );
+        this.addNewPartElem.addEvent( 'click', this, false );
         
         if ( clientWidth < 1141 ) {
             
@@ -1459,7 +1460,7 @@ var Engine = function(){
             parent: this.shareSocialContainerElem
         });
         
-        this.shareSocialFacebookElem.addEventListener( 'click', this, false );
+        this.shareSocialFacebookElem.addEvent( 'click', this, false );
         
     };
     
@@ -1506,9 +1507,9 @@ var Engine = function(){
             parent: this.addNewPartContainerElem
         });
         
-        this.addNewPartExitElem.addEventListener( 'touchstart', this, false );
-        this.addNewTextPartElem.addEventListener( 'click', this, false );
-        this.addNewTextPartElem.addEventListener( 'touchstart', this, false );
+        this.addNewPartExitElem.addEvent( 'touchstart', this, false );
+        this.addNewTextPartElem.addEvent( 'click', this, false );
+        this.addNewTextPartElem.addEvent( 'touchstart', this, false );
         
     };
     

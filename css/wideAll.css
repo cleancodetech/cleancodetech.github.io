@@ -107,15 +107,11 @@ body{
     height: 4vh;
     margin: 3vh 1vh;
     display: block;
-    border-radius: 500px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
+    outline: medium none;
     transition: background-color 0.3s ease 0s;
-}
-
-#sidebar .sidebarButton:hover{
-    background-color: rgb(30, 30, 30);
 }
 
 #sideNew{
