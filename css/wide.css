@@ -734,6 +734,10 @@
     display: none;
 }
 
+#newPartExit{
+    display: none;
+}
+
 #shareSocialFacebook {
     background-image: url('/imgs/facebookBlue.svg');
     box-shadow: 0 0 0.5vh rgb(66, 103, 178);

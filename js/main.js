@@ -1210,6 +1210,13 @@ var Engine = function(){
             
             this.toggleMainControlsContainer();
             
+        } else if ( event.type === 'click' && event.target === this.addNewPartExitElem ){
+            
+            this.toggleShareSocial = -1;
+            this.toggleNewPart = -1;
+            
+            this.toggleMainControlsContainer();
+            
         } else if ( event.type === 'click' && event.target === this.shareToSocialElem ){
             
             this.toggleNewPart = -1;
@@ -1485,6 +1492,16 @@ var Engine = function(){
             parent: this.addNewPartContainerElem
         });
         
+        this.addNewPartExitElem = appendElement({
+            tag: 'DIV',
+            id: 'newPartExit',
+            class: 'mainControlsOptionsHeader',
+            text: 'Back',
+            parent: this.addNewPartContainerElem
+        });
+        
+        this.addNewPartExitElem.addEventListener( 'touchstart', this, false );
+        
     };
     
     this.toggleMainControlsContainer = function() {
@@ -1558,6 +1575,7 @@ var Engine = function(){
     this.addNewPartElem;
     this.addNewTextPartElem;
     this.addNewDrawPartElem;
+    this.addNewPartExitElem;
     this.panelContainerElem;
     this.shareSocialContainerElem;
     this.shareSocialFacebookElem;

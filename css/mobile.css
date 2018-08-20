@@ -639,6 +639,11 @@
     background-image: url('/imgs/pencil.svg');
 }
 
+#newPartExit {
+    background-image: url('/imgs/delete.svg');
+    box-shadow: 0 0 0.5vh rgb(235, 127, 127);
+}
+
 #newPartExplain {
     color: white;
     font-family: Montserrat;
