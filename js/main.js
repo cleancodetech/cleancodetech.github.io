@@ -1210,7 +1210,7 @@ var Engine = function(){
             
             this.toggleMainControlsContainer();
             
-        } else if ( event.type === 'click' && event.target === this.addNewPartExitElem ){
+        } else if ( event.type === 'touchstart' && event.target === this.addNewPartExitElem ){
             
             this.toggleShareSocial = -1;
             this.toggleNewPart = -1;
