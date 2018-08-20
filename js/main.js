@@ -732,6 +732,8 @@ var Engine = function(){
                 
                 this.textInstance.set("fill", convertHex( this.panelInputColorElem.value ) );
                 
+                this.fontInputColorContainerElem.style.backgroundColor = this.panelInputColorElem.value;
+                
             } else if ( event.type === 'input' && event.target === this.fontSizeRangeElem ){
                 
                 this.textInstance.set("fontSize", event.target.value );
@@ -740,9 +742,11 @@ var Engine = function(){
                 
                 this.panelInputColorElem.value = '#ffffff';
                 
+                this.fontInputColorContainerElem.style.backgroundColor = this.panelInputColorElem.value;
+                
                 this.textInstance.set("fill", 'rgb(255, 255, 255)' );
                 
-                this.fontSizeRangeElem.value = 40;
+                this.fontSizeRangeElem.value = 50;
                 
                 this.textInstance.set("fontSize", this.fontSizeRangeElem.value );
                 
@@ -750,9 +754,11 @@ var Engine = function(){
                 
                 this.panelInputColorElem.value = '#ffffff';
                 
+                this.fontInputColorContainerElem.style.backgroundColor = this.panelInputColorElem.value;
+                
                 this.textInstance.set("fill", 'rgb(255, 255, 255)' );
                 
-                this.fontSizeRangeElem.value = 40;
+                this.fontSizeRangeElem.value = 50;
                 
                 this.textInstance.set("fontSize", this.fontSizeRangeElem.value );
                 
@@ -776,6 +782,8 @@ var Engine = function(){
                 
                 this.textInstance.set("stroke", convertHex( this.fontStrokeColorElem.value ) );
                 
+                this.fontStrokeInputColorContainerElem.style.backgroundColor = this.fontStrokeColorElem.value;
+                
             } else if ( event.type === 'input' && event.target === this.fontStrokeRangeElem ){
                 
                 this.textInstance.set('strokeWidth', parseInt( this.fontStrokeRangeElem.value ) );
@@ -783,6 +791,8 @@ var Engine = function(){
             } else if ( event.type === 'touchstart' && event.target === this.bgRangeUndoElem ){
                 
                 this.bgColorElem.value = '#ff0000';
+                
+                this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
                 
                 this.textInstance.set("backgroundColor", 'rgba(255, 0, 0, 0.5)' );
                 
@@ -792,6 +802,8 @@ var Engine = function(){
                 
                 this.bgColorElem.value = '#ff0000';
                 
+                this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
+                
                 this.textInstance.set("backgroundColor", 'rgba(255, 0, 0, 0.5)' );
                 
                 this.bgRangeElem.value = 0.50;
@@ -799,6 +811,8 @@ var Engine = function(){
             } else if ( event.type === 'touchstart' && event.target === this.fontStrokeRangeUndoElem ){
                 
                 this.fontStrokeColorElem.value = '#000000';
+                
+                this.fontStrokeInputColorContainerElem.style.backgroundColor = this.fontStrokeColorElem.value;
                 
                 this.textInstance.set("stroke", 'rgb(0, 0, 0)' );
                 
@@ -809,6 +823,8 @@ var Engine = function(){
             } else if ( event.type === 'click' && event.target === this.fontStrokeRangeUndoElem ){
                 
                 this.fontStrokeColorElem.value = '#000000';
+                
+                this.fontStrokeInputColorContainerElem.style.backgroundColor = this.fontStrokeColorElem.value;
                 
                 this.textInstance.set("stroke", 'rgb(0, 0, 0)' );
                 
@@ -828,9 +844,13 @@ var Engine = function(){
                 
                 this.textInstance.set('backgroundColor', convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
                 
+                this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
+                
             } else if ( event.type === 'input' && event.target === this.bgRangeElem ){
                 
                 this.textInstance.set('backgroundColor', convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
+                
+                this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
                 
             }
             
@@ -893,6 +913,13 @@ var Engine = function(){
                 class: 'bgRangeContainer',
                 parent: this.panelElem
             });
+            
+            this.bgInputColorContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'inputColorContainer',
+                title: "Change the text's background color",
+                parent: this.bgRangeContainerElem
+            });
         
             this.bgColorElem = appendElement({
                 tag: 'INPUT',
@@ -900,7 +927,7 @@ var Engine = function(){
                 type: 'color',
                 title: "Change the text's background color",
                 value: '#ff0000',
-                parent: this.bgRangeContainerElem
+                parent: this.bgInputColorContainerElem
             });
         
             this.bgRangeElem = appendElement({
@@ -922,6 +949,8 @@ var Engine = function(){
                 parent: this.bgRangeContainerElem
             });
             
+            this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
+            
             this.bgColorElem.addEvent( 'input', this, false );
             this.bgRangeElem.addEvent( 'input', this, false );
             this.bgRangeUndoElem.addEvent( 'click', this, false );
@@ -936,6 +965,13 @@ var Engine = function(){
                 class: 'fontStrokeRangeContainer',
                 parent: this.panelElem
             });
+            
+            this.fontStrokeInputColorContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'inputColorContainer',
+                title: "Change the stroke color around the text",
+                parent: this.fontStrokeRangeContainerElem
+            });
         
             this.fontStrokeColorElem = appendElement({
                 tag: 'INPUT',
@@ -943,7 +979,7 @@ var Engine = function(){
                 type: 'color',
                 title: 'Change the stroke color around the text',
                 value: '#000000',
-                parent: this.fontStrokeRangeContainerElem
+                parent: this.fontStrokeInputColorContainerElem
             });
         
             this.fontStrokeRangeElem = appendElement({
@@ -964,6 +1000,8 @@ var Engine = function(){
                 title: 'Reset the stroke color and size to original',
                 parent: this.fontStrokeRangeContainerElem
             });
+            
+            this.fontStrokeInputColorContainerElem.style.backgroundColor = this.fontStrokeColorElem.value;
             
             this.fontStrokeColorElem.addEvent( 'input', this, false );
             this.fontStrokeRangeElem.addEvent( 'input', this, false );
@@ -1019,6 +1057,13 @@ var Engine = function(){
                 class: 'fontSizeRangeContainer',
                 parent: this.panelElem
             });
+            
+            this.fontInputColorContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'inputColorContainer',
+                title: "Change the font color",
+                parent: this.fontSizeRangeContainerElem
+            });
         
             this.panelInputColorElem = appendElement({
                 tag: 'INPUT',
@@ -1026,7 +1071,7 @@ var Engine = function(){
                 type: 'color',
                 title: 'Change the font color',
                 value: '#ffffff',
-                parent: this.fontSizeRangeContainerElem
+                parent: this.fontInputColorContainerElem
             });
         
             this.fontSizeRangeElem = appendElement({
@@ -1037,7 +1082,7 @@ var Engine = function(){
                 min: '8',
                 max: '120',
                 step: '1',
-                value: 40,
+                value: 50,
                 parent: this.fontSizeRangeContainerElem
             });
         
@@ -1047,6 +1092,8 @@ var Engine = function(){
                 title: 'Reset font size to original',
                 parent: this.fontSizeRangeContainerElem
             });
+            
+            this.fontInputColorContainerElem.style.backgroundColor = this.panelInputColorElem.value;
             
             this.panelInputColorElem.addEvent( 'input', this, false );
             this.fontSizeRangeElem.addEvent( 'input', this, false );
@@ -1184,6 +1231,9 @@ var Engine = function(){
         this.bgColorElem;
         this.bgRangeElem;
         this.bgRangeUndoElem;
+        this.bgInputColorContainerElem;
+        this.fontStrokeInputColorContainerElem;
+        this.fontInputColorContainerElem;
         
         this.fontStrokeRangeContainerElem;
         this.fontStrokeColorElem;

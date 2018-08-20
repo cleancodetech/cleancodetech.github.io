@@ -330,6 +330,7 @@
     width: 3vh;
     height: 3vh;
     cursor: pointer;
+    opacity: 0;
 }
 
 .panelBodyWallpFilters{
@@ -761,4 +762,13 @@
 
 #dragMobile{
     display: none;
+}
+
+
+
+
+.inputColorContainer {
+    background-color: #ffffff;
+    width: 3vh;
+    height: 3vh;
 }
