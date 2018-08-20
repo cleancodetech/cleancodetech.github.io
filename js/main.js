@@ -779,6 +779,22 @@ var Engine = function(){
                 
                 this.textInstance.set('strokeWidth', parseInt( this.fontStrokeRangeElem.value ) );
                 
+            } else if ( event.type === 'touchstart' && event.target === this.bgRangeUndoElem ){
+                
+                this.bgColorElem.value = '#ff0000';
+                
+                this.textInstance.set("backgroundColor", 'rgba(255, 0, 0, 0.5)' );
+                
+                this.bgRangeElem.value = 0.50;
+                
+            } else if ( event.type === 'click' && event.target === this.bgRangeUndoElem ){
+                
+                this.bgColorElem.value = '#ff0000';
+                
+                this.textInstance.set("backgroundColor", 'rgba(255, 0, 0, 0.5)' );
+                
+                this.bgRangeElem.value = 0.50;
+                
             } else if ( event.type === 'touchstart' && event.target === this.fontStrokeRangeUndoElem ){
                 
                 this.fontStrokeColorElem.value = '#000000';

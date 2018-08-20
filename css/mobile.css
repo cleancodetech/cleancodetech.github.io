@@ -594,3 +594,46 @@
     cursor: pointer;
     transition: background-color 0.3s ease 0s;
 }
+
+
+
+
+.mainControlsDropDownContainer{
+    width: 100vw;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.98);
+    height: 100vh;
+    padding: 0 0 0 0;
+    position: fixed;
+    z-index: 2;
+    box-shadow: 0 -10px 10px -7px rgb(127, 235, 127) inset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainControlsOptionsHeader {
+    width: 6rem;
+    margin: 2vh auto;
+    box-sizing: border-box;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    font-family: Montserrat;
+    color: rgb(235, 235, 235);
+    border-radius: 1vh;
+    background-position: center 0.5rem;
+    background-repeat: no-repeat;
+    padding: 4rem 0 0 0;
+    text-align: center;
+    box-shadow: 0 0 0.5vh rgb(127, 235, 127);
+    height: 6rem;
+    background-size: 3rem;
+}
+
+#newPartText {
+    background-image: url('/imgs/text.svg');
+}
+
+#newPartDraw {
+    background-image: url('/imgs/pencil.svg');
+}
