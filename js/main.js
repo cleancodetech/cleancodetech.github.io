@@ -15,6 +15,7 @@ function initFunc() {
     sidebarElemens = 5;
     clientWidth = getClientWidth();
     clientHeight = getClientHeight();
+    fontsAvail = [ 'Lobster', 'Montserrat', 'Space Mono' ];
     
     createCopyright();
     
@@ -722,11 +723,156 @@ var Engine = function(){
     
     var PartText = function( args ) {
         
+        var FontSelector = function() {
+            
+            this.build = function() {
+                
+                this.wrapperElem = appendElement({
+                    tag: 'DIV',
+                    class: 'fsWrapper',
+                    parent: document.body
+                });
+                
+                this.wrapperElem.style.width = _Engine.canvasContainerWidth + 'px';
+                this.wrapperElem.style.height = _Engine.canvasContainerHeight + 'px';
+                
+                for ( var i=0 ; i<fontsAvail.length ; i++ ) {
+                    
+                    var fontWrapper = appendElement({
+                        tag: 'DIV',
+                        class: 'ftWrapper',
+                        parent: this.wrapperElem
+                    });
+                    
+                    var fontName = appendElement({
+                        tag: 'DIV',
+                        class: 'ftName',
+                        text: fontsAvail[ i ],
+                        parent: fontWrapper
+                    });
+                    
+                    var fontDisplay = appendElement({
+                        tag: 'DIV',
+                        class: 'ftDisplay',
+                        text: 'Top Text',
+                        parent: fontWrapper
+                    });
+                    
+                    fontDisplay.style.fontFamily = '"' + fontsAvail[ i ] + '"';
+                    
+                    this.elements.push( fontDisplay );
+                    
+                }
+                
+                console.log( this.elements );
+                
+            };
+            
+            this.toggleAppearance = function ( event ) {
+                
+                this.visible = this.visible * (-1);
+                
+                if ( this.visible > 0 ) {
+                    
+                    event.target.style.boxShadow = '0 0 1vh white';
+                    this.wrapperElem.style.zIndex = 6;
+                    this.wrapperElem.style.opacity = 1;
+                    
+                } else {
+                    
+                    event.target.style.boxShadow = '';
+                    this.wrapperElem.style.opacity = 0;
+                    this.wrapperElem.style.zIndex = -1;
+                    
+                }
+                
+            };
+            
+            this.adjustText = function( text ) {
+                
+                for ( var i=0 ; i<this.elements.length ; i++ ) {
+                    
+                    this.elements[ i ].innerHTML = text;
+                    
+                }
+                
+            };
+            
+            this.adjustColor = function( color ) {
+                
+                for ( var i=0 ; i<this.elements.length ; i++ ) {
+                    
+                    this.elements[ i ].style.color = color;
+                    
+                }
+                
+            };
+            
+            this.adjustFontSize = function( fontSize ) {
+                
+                for ( var i=0 ; i<this.elements.length ; i++ ) {
+                    
+                    this.elements[ i ].style.fontSize = fontSize + 'px';
+                    
+                }
+                
+            };
+            
+            this.adjustFontWeight = function( fontWeight ) {
+                
+                for ( var i=0 ; i<this.elements.length ; i++ ) {
+                    
+                    this.elements[ i ].style.fontWeight = fontWeight;
+                    
+                }
+                
+            };
+            
+            this.adjustStrokeWidth = function( size ) {
+                
+                for ( var i=0 ; i<this.elements.length ; i++ ) {
+                    
+                    this.elements[ i ].style.webkitTextStrokeWidth = size + 'px';
+                    
+                }
+                
+            };
+            
+            this.adjustStrokeColor = function( color ) {
+                
+                for ( var i=0 ; i<this.elements.length ; i++ ) {
+                    
+                    this.elements[ i ].style.webkitTextStrokeColor = color;
+                    
+                }
+                
+            };
+            
+            this.adjustBackgroundColor = function( color ) {
+                
+                for ( var i=0 ; i<this.elements.length ; i++ ) {
+                    
+                    this.elements[ i ].style.backgroundColor = color;
+                    
+                }
+                
+            };
+            
+            var _FontSelector = this;
+            
+            this.wrapperElem;
+            this.visible = -1;
+            this.elements = [];
+            
+        };
+        
         this.handleEvent = function( event ) {
             
             if ( event.type === 'input' && event.target === this.panelInputTextElem ){
                 
                 this.textInstance.text = this.panelInputTextElem.value;
+                
+                this.fsSelector.adjustText( this.panelInputTextElem.value );
                 
             } else if ( event.type === 'input' && event.target === this.panelInputColorElem ){
                 
@@ -734,9 +880,13 @@ var Engine = function(){
                 
                 this.fontInputColorContainerElem.style.backgroundColor = this.panelInputColorElem.value;
                 
+                this.fsSelector.adjustColor( this.panelInputColorElem.value );
+                
             } else if ( event.type === 'input' && event.target === this.fontSizeRangeElem ){
                 
                 this.textInstance.set("fontSize", event.target.value );
+                
+                this.fsSelector.adjustFontSize( event.target.value );
                 
             } else if ( event.type === 'touchstart' && event.target === this.fontSizeRangeUndoElem ){
                 
@@ -762,9 +912,15 @@ var Engine = function(){
                 
                 this.textInstance.set("fontSize", this.fontSizeRangeElem.value );
                 
+                this.fsSelector.adjustColor( '#ffffff' );
+                
+                this.fsSelector.adjustFontSize( 50 );
+                
             } else if ( event.type === 'input' && event.target === this.fontWeightRangeElem ){
                 
                 this.textInstance.set("fontWeight", event.target.value );
+                
+                this.fsSelector.adjustFontWeight( event.target.value );
                 
             } else if ( event.type === 'touchstart' && event.target === this.fontWeightRangeUndoElem ){
                 
@@ -776,15 +932,21 @@ var Engine = function(){
                 
                 this.fontWeightRangeElem.value = 900;
                 
+                this.fsSelector.adjustFontWeight( 900 );
+                
                 this.textInstance.set("fontWeight", this.fontWeightRangeElem.value );
                 
             } else if ( event.type === 'input' && event.target === this.fontStrokeColorElem ){
                 
                 this.textInstance.set("stroke", convertHex( this.fontStrokeColorElem.value ) );
                 
+                this.fsSelector.adjustStrokeColor( this.fontStrokeColorElem.value );
+                
                 this.fontStrokeInputColorContainerElem.style.backgroundColor = this.fontStrokeColorElem.value;
                 
             } else if ( event.type === 'input' && event.target === this.fontStrokeRangeElem ){
+                
+                this.fsSelector.adjustStrokeWidth( this.fontStrokeRangeElem.value );
                 
                 this.textInstance.set('strokeWidth', parseInt( this.fontStrokeRangeElem.value ) );
                 
@@ -805,6 +967,8 @@ var Engine = function(){
                 this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
                 
                 this.textInstance.set("backgroundColor", 'rgba(255, 0, 0, 0.5)' );
+                
+                this.fsSelector.adjustBackgroundColor( 'rgba(255, 0, 0, 0.5)' );
                 
                 this.bgRangeElem.value = 0.50;
                 
@@ -830,6 +994,10 @@ var Engine = function(){
                 
                 this.fontStrokeRangeElem.value = 1;
                 
+                this.fsSelector.adjustStrokeWidth( 1 );
+                
+                this.fsSelector.adjustStrokeColor( '#000000' );
+                
                 this.textInstance.set("strokeWidth", parseInt( this.fontStrokeRangeElem.value ) );
                 
             } else if ( event.type === 'touchstart' && event.target === this.panelHeaderDelElem ){
@@ -844,13 +1012,21 @@ var Engine = function(){
                 
                 this.textInstance.set('backgroundColor', convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
                 
+                this.fsSelector.adjustBackgroundColor( convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
+                
                 this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
                 
             } else if ( event.type === 'input' && event.target === this.bgRangeElem ){
                 
                 this.textInstance.set('backgroundColor', convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
                 
+                this.fsSelector.adjustBackgroundColor( convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
+                
                 this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
+                
+            } else if ( event.type === 'click' && event.target === this.horizontalFontFamilyElem ) {
+                
+                this.fsSelector.toggleAppearance( event );
                 
             }
             
@@ -1117,6 +1293,25 @@ var Engine = function(){
             
         };
         
+        this.buildHorizontalControl = function() {
+        
+            this.panelHorizontalElem = appendElement({
+                tag: 'DIV',
+                class: 'textPanelHorizontal',
+                parent: this.panelElem
+            });
+        
+            this.horizontalFontFamilyElem = appendElement({
+                tag: 'DIV',
+                class: 'fontFamilyButton',
+                title: 'Choose a font family for the text',
+                parent: this.panelHorizontalElem
+            });
+            
+            this.horizontalFontFamilyElem.addEvent( 'click', this, false );
+            
+        };
+        
         this.buildControlModule = function() {
         
             this.panelElem = appendElement({
@@ -1143,6 +1338,8 @@ var Engine = function(){
                 parent: this.panelHeaderElem
             });
             
+            this.buildHorizontalControl();
+            
             this.buildInputControl();
             
             this.buildSizeControl();
@@ -1157,6 +1354,15 @@ var Engine = function(){
             this.panelElem.addEvent( 'mouseout', this, false );
             this.panelHeaderDelElem.addEvent( 'click', this, false );
             this.panelHeaderDelElem.addEvent( 'touchstart', this, false );
+            
+            this.fsSelector.build();
+            this.fsSelector.adjustText( this.panelInputTextElem.value );
+            this.fsSelector.adjustColor( this.panelInputColorElem.value );
+            this.fsSelector.adjustFontSize( this.fontSizeRangeElem.value );
+            this.fsSelector.adjustFontWeight( this.fontWeightRangeElem.value );
+            this.fsSelector.adjustStrokeWidth( this.fontStrokeRangeElem.value );
+            this.fsSelector.adjustStrokeColor( this.fontStrokeColorElem.value );
+            this.fsSelector.adjustBackgroundColor( convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
             
         };
         
@@ -1234,11 +1440,15 @@ var Engine = function(){
         this.bgInputColorContainerElem;
         this.fontStrokeInputColorContainerElem;
         this.fontInputColorContainerElem;
+        this.panelHorizontalElem;
+        this.horizontalFontFamilyElem;
         
         this.fontStrokeRangeContainerElem;
         this.fontStrokeColorElem;
         this.fontStrokeRangeElem;
         this.fontStrokeRangeUndoElem;
+        
+        this.fsSelector = new FontSelector();
         
         this.buildControlModule();
         this.buildCanvasModule();
