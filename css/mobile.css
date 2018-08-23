@@ -636,8 +636,8 @@
     background-image: url('/imgs/text.svg');
 }
 
-#newPartDraw {
-    background-image: url('/imgs/pencil.svg');
+#newPartImage {
+    background-image: url('/imgs/image.svg');
 }
 
 #newPartExit {

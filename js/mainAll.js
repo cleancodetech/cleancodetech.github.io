@@ -40,6 +40,7 @@ function appendElement( args ) {
     if ( args.hasOwnProperty('value') )         { elem.setAttribute("value", args.value ); }
     if ( args.hasOwnProperty('placeholder') )   { elem.setAttribute("placeholder", args.placeholder ); }
     if ( args.hasOwnProperty('text') )          { elem.innerHTML = args.text; }
+    if ( args.hasOwnProperty('accept') )        { elem.setAttribute("accept", args.accept ); }
     
     args.parent.appendChild( elem );
     
@@ -1524,6 +1525,433 @@ var Engine = function(){
         
     };
     
+    var PartImage = function( args ) {
+        
+        this.event_clickGrayFilterButton = function() {
+            
+            this.filterGrayscaleFlag = this.filterGrayscaleFlag * (-1);
+                
+            this.toggleButtonGrayscale();
+            
+        };
+        
+        this.event_clickSepiaFilterButton = function() {
+            
+            this.filterSepiaFlag = this.filterSepiaFlag * (-1);
+                
+            this.toggleButtonSepia();
+            
+        };
+        
+        this.event_changeBrightness = function() {
+            
+            this.filterBrightness = this.brightnessRangeElem.value;
+            
+        };
+        
+        this.event_clickBrightnessUndo = function() {
+            
+            this.filterBrightness = 0;
+                
+            this.brightnessRangeElem.value = 0;
+            
+        };
+        
+        this.event_clickUndoOpacity = function() {
+            
+            this.opacityRangeElem.value = this.args.opacity;
+            
+            this.imgCanvasInstance.set( 'opacity', this.args.opacity );
+            
+        };
+        
+        this.event_changeBlur = function() {
+            
+            this.filterBlur = this.blurRangeElem.value;
+            
+        };
+        
+        this.event_changeOpacity = function() {
+            
+            this.imgCanvasInstance.set( 'opacity', this.opacityRangeElem.value );
+            
+        };
+        
+        this.event_clickBlurUndo = function() {
+            
+            this.filterBlur = 0;
+                
+            this.blurRangeElem.value = 0;
+            
+        };
+        
+        this.remove = function() {
+            
+            _Engine.canvas.remove( this.imgCanvasInstance );
+            
+            this.panelElemNew = this.panelElem.cloneNode(true);
+            
+            this.panelElem.parentNode.replaceChild( this.panelElemNew, this.panelElem );
+            
+            while (this.panelElemNew.firstChild) {
+        
+                this.panelElemNew.removeChild( this.panelElemNew.firstChild );
+
+            }
+            
+            this.panelElemNew.remove();
+            
+        };
+        
+        this.handleEvent = function( event ) {
+            
+            if ( event.type === 'touchend' && event.target === this.panelGrayscaleButtonElem ){
+                
+                this.event_clickGrayFilterButton();
+                
+            } else if ( event.type === 'click' && event.target === this.panelGrayscaleButtonElem ){
+                
+                this.event_clickGrayFilterButton();
+                
+            } else if ( event.type === 'touchend' && event.target === this.panelSepiaButtonElem ){
+                
+                this.event_clickSepiaFilterButton();
+                
+            } else if ( event.type === 'click' && event.target === this.panelSepiaButtonElem ){
+                
+                this.event_clickSepiaFilterButton();
+                
+            } else if ( event.type === 'input' && event.target === this.opacityRangeElem ){
+                
+                this.event_changeOpacity();
+                
+            } else if ( event.type === 'input' && event.target === this.brightnessRangeElem ){
+                
+                this.event_changeBrightness();
+                
+            } else if ( event.type === 'touchend' && event.target === this.brightnessUndoElem ){
+                
+                this.event_clickBrightnessUndo();
+                
+            } else if ( event.type === 'click' && event.target === this.brightnessUndoElem ){
+                
+                this.event_clickBrightnessUndo();
+                
+            } else if ( event.type === 'input' && event.target === this.blurRangeElem ){
+                
+                this.event_changeBlur();
+                
+            } else if ( event.type === 'touchend' && event.target === this.blurUndoElem ){
+                
+                this.event_clickBlurUndo();
+                
+            } else if ( event.type === 'click' && event.target === this.blurUndoElem ){
+                
+                this.event_clickBlurUndo();
+                
+            } else if ( ( event.type === 'touchstart' || event.type === 'click' ) && event.target === this.panelHeaderDelElem ){
+                
+                this.remove();
+                
+            } else if ( ( event.type === 'touchstart' || event.type === 'click' ) && event.target === this.opacityUndoElem ){
+                
+                this.event_clickUndoOpacity();
+                
+            }
+
+            this.reapplyFilters();
+            
+        };
+        
+        this.reapplyFilters = function() {
+            
+            this.imgCanvasInstance.filters = [];
+            
+            if ( this.filterGrayscaleFlag > 0 ) {
+                
+                this.imgCanvasInstance.filters.push( new fabric.Image.filters.Grayscale() );
+                
+            }
+            
+            if ( this.filterSepiaFlag > 0 ) {
+                
+                this.imgCanvasInstance.filters.push( new fabric.Image.filters.Sepia() );
+                
+            }
+            
+            if ( this.filterBrightness !== 0 ) {
+                
+                this.imgCanvasInstance.filters.push( new fabric.Image.filters.Brightness({
+                    brightness: this.filterBrightness
+                }) );
+                
+            }
+            
+            if ( this.filterBlur !== 0 ) {
+                
+                this.imgCanvasInstance.filters.push( new fabric.Image.filters.Blur({
+                    blur: this.filterBlur
+                }) );
+                
+            }
+            
+            this.imgCanvasInstance.applyFilters();
+            
+            _Engine.canvas.renderAll();
+            
+        };
+        
+        this.toggleButtonGrayscale = function() {
+            
+            console.log( this.panelGrayscaleButtonElem );
+            
+            if ( this.filterGrayscaleFlag > 0 ) {
+                
+                this.panelGrayscaleButtonElem.style.boxShadow = '0 0 0.5vh black inset, 0 0 0.5vh white';
+                this.panelGrayscaleButtonElem.style.opacity = 1;
+                this.panelGrayscaleButtonElem.setAttribute("title", "There is an active grayscale filter to the image");
+                
+            } else {
+                
+                this.panelGrayscaleButtonElem.style.boxShadow = '0 0 0.5vh black';
+                this.panelGrayscaleButtonElem.style.opacity = 0.8;
+                this.panelGrayscaleButtonElem.setAttribute("title", "Apply grayscale filter to the image");
+                
+            }
+            
+        };
+        
+        this.toggleButtonSepia = function() {
+            
+            if ( this.filterSepiaFlag > 0 ) {
+                
+                this.panelSepiaButtonElem.style.boxShadow = '0 0 0.5vh black inset, 0 0 0.5vh white';
+                this.panelSepiaButtonElem.style.opacity = 1;
+                this.panelSepiaButtonElem.setAttribute("title", "There is an active sepia filter to the image");
+                
+            } else {
+                
+                this.panelSepiaButtonElem.style.boxShadow = '0 0 0.5vh black';
+                this.panelSepiaButtonElem.style.opacity = 0.8;
+                this.panelSepiaButtonElem.setAttribute("title", "Apply sepia filter to the image");
+                
+            }
+            
+        };
+        
+        this.buildControlPanel = function() {
+        
+            this.panelElem = appendElement({
+                tag: 'DIV',
+                class: 'panel',
+                parent: _Engine.panelContainerElem
+            });
+        
+            this.panelHeaderElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeader',
+                parent: this.panelElem
+            });
+        
+            this.panelHeaderIconElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeaderImageIcon',
+                parent: this.panelHeaderElem
+            });
+            
+            this.panelHeaderDelElem = appendElement({
+                tag: 'DIV',
+                class: 'panelHeaderDel',
+                title: 'Delete this picture from image',
+                parent: this.panelHeaderElem
+            });
+            
+            this.panelHeaderDelElem.addEvent( 'click', this, false );
+            this.panelHeaderDelElem.addEvent( 'touchstart', this, false );
+            
+        };
+        
+        this.buildControlModule = function(){
+            
+            this.buildControlPanel();
+        
+            this.panelBodyFiltersElem = appendElement({
+                tag: 'DIV',
+                class: 'panelBodyWallpFilters',
+                parent: this.panelElem
+            });
+        
+            this.panelGrayscaleButtonElem = appendElement({
+                tag: 'DIV',
+                class: 'panelGrayscaleButton',
+                title: 'Apply grayscale filter to the image',
+                parent: this.panelBodyFiltersElem
+            });
+        
+            this.panelSepiaButtonElem = appendElement({
+                tag: 'DIV',
+                class: 'panelSepiaButton',
+                title: 'Apply sepia filter to the image',
+                parent: this.panelBodyFiltersElem
+            });
+        
+            this.brightnessContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'brightnessContainer',
+                parent: this.panelElem
+            });
+        
+            this.brightnessIconElem = appendElement({
+                tag: 'DIV',
+                class: 'brightnessIcon',
+                title: 'Adjust the brightness of your image',
+                parent: this.brightnessContainerElem
+            });
+        
+            this.brightnessRangeElem = appendElement({
+                tag: 'INPUT',
+                class: 'brightnessRange',
+                title: 'Adjust the brightness of your image',
+                type: 'range',
+                min: '-1',
+                max: '1',
+                step: '0.01',
+                value: 0,
+                parent: this.brightnessContainerElem
+            });
+        
+            this.brightnessUndoElem = appendElement({
+                tag: 'DIV',
+                class: 'rangerUndo',
+                title: 'Reset brightness value to original',
+                parent: this.brightnessContainerElem
+            });
+        
+            this.blurContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'blurContainer',
+                parent: this.panelElem
+            });
+        
+            this.blurIconElem = appendElement({
+                tag: 'DIV',
+                class: 'blurIcon',
+                title: 'Blur your image',
+                parent: this.blurContainerElem
+            });
+        
+            this.blurRangeElem = appendElement({
+                tag: 'INPUT',
+                class: 'blurRange',
+                title: 'Blur your image',
+                type: 'range',
+                min: '0',
+                max: '1',
+                step: '0.01',
+                value: 0,
+                parent: this.blurContainerElem
+            });
+        
+            this.blurUndoElem = appendElement({
+                tag: 'DIV',
+                class: 'rangerUndo',
+                title: 'Reset blurness value to original',
+                parent: this.blurContainerElem
+            });
+        
+            this.opacityContainerElem = appendElement({
+                tag: 'DIV',
+                class: 'opacityContainer',
+                parent: this.panelElem
+            });
+        
+            this.opacityIconElem = appendElement({
+                tag: 'DIV',
+                class: 'opacityIcon',
+                title: 'Change the opacity',
+                parent: this.opacityContainerElem
+            });
+        
+            this.opacityRangeElem = appendElement({
+                tag: 'INPUT',
+                class: 'opacityRange',
+                title: 'Change the opacity',
+                type: 'range',
+                min: '0',
+                max: '1',
+                step: '0.01',
+                value: this.args.opacity,
+                parent: this.opacityContainerElem
+            });
+        
+            this.opacityUndoElem = appendElement({
+                tag: 'DIV',
+                class: 'rangerUndo',
+                title: 'Reset opacity value to original',
+                parent: this.opacityContainerElem
+            });
+            
+            
+            /**
+             * @TODO remove touchend events on deletion
+             */
+            this.panelGrayscaleButtonElem.addEvent( 'click', this, false );
+            this.panelGrayscaleButtonElem.addEvent( 'touchend', this, false );
+            this.panelSepiaButtonElem.addEvent( 'click', this, false );
+            this.panelSepiaButtonElem.addEvent( 'touchend', this, false );
+            this.brightnessRangeElem.addEvent( 'input', this, false );
+            this.brightnessRangeElem.addEvent( 'input', this, false );
+            this.opacityRangeElem.addEvent( 'input', this, false );
+            this.brightnessUndoElem.addEvent( 'click', this, false );
+            this.brightnessUndoElem.addEvent( 'touchend', this, false );
+            this.blurRangeElem.addEvent( 'input', this, false );
+            this.blurUndoElem.addEvent( 'click', this, false );
+            this.blurUndoElem.addEvent( 'touchend', this, false );
+            this.opacityUndoElem.addEvent( 'click', this, false );
+            this.opacityUndoElem.addEvent( 'touchend', this, false );
+            
+        };
+        
+        this.buildCanvasModule = function() {
+            
+            this.imgCanvasInstance = new fabric.Image(this.args.imgSrc, {
+                opacity: this.args.opacity,
+                borderColor: 'rgb(0, 0, 255)',
+                cornerColor: 'rgb(0, 0, 255)',
+                cornerStyle: 'circle',
+                borderOpacityWhenMoving: 1
+            });
+            
+            this.imgCanvasInstance.on( 'mouseover', function() {
+                
+                _PartImage.panelHeaderElem.style.backgroundColor = 'rgb(210, 55, 55)';
+                
+            });
+            
+            this.imgCanvasInstance.on( 'mouseout', function() {
+                
+                _PartImage.panelHeaderElem.style.backgroundColor = '';
+                
+            });
+            
+            _Engine.canvas.add( this.imgCanvasInstance );
+            
+        };
+        
+        var _PartImage = this;
+        this.args = args;
+        this.imgCanvasInstance;
+        
+        this.filterGrayscaleFlag = -1;
+        this.filterSepiaFlag = -1;
+        this.filterBrightness = 0;
+        this.filterBlur = 0;
+        
+        this.buildControlModule();
+        this.buildCanvasModule();
+        
+    };
+    
     this.handleEvent = function( event ) {
             
         if ( event.type === 'click' && event.target === this.downloadElem ){
@@ -1571,10 +1999,51 @@ var Engine = function(){
             
             var textPart = new PartText({
                 text: 'Additional Text',
-                alignMiddle: true
+                alignMiddle: true,
+                fontSize: 50,
+                color: '#ffffff',
+                fontFamily: 'Montserrat',
+                stroke: '#000000',
+                strokeWidth: 1,
+                backgroundColor: '#ff0000',
+                backgroundOpacity: 0.50,
+                fontWeight: 900
             });
             
+        } else if ( event.type === 'change' && event.target === this.addNewImageInputElem ){
+
+            this.toggleShareSocial = -1;
+            this.toggleNewPart = -1;
+            
+            this.toggleMainControlsContainer();
+            
+            var reader = new FileReader();
+
+            reader.onload = function( e ){
+
+                var img = new Image;
+
+                img.onload = function() {
+
+                    _Engine.addNewImagePart( img );
+                };
+
+                img.src = reader.result;
+
+            };
+
+            reader.readAsDataURL(event.target.files[0]);
+            
         }
+        
+    };
+    
+    this.addNewImagePart = function( img ) {
+        
+        var imagePart = new PartImage({
+                imgSrc: img,
+                opacity: 1
+            });
         
     };
     
@@ -1819,13 +2288,23 @@ var Engine = function(){
             parent: this.addNewPartContainerElem
         });
         
-        this.addNewDrawPartElem = appendElement({
+        this.addNewImagePartElem = appendElement({
             tag: 'DIV',
-            id: 'newPartDraw',
+            id: 'newPartImage',
             class: 'mainControlsOptionsHeader',
-            text: 'Draw',
-            title: 'Draw freely on the image',
+            text: 'Image',
+            title: 'Add an additional picture to your image',
             parent: this.addNewPartContainerElem
+        });
+        
+        this.addNewImageInputElem = appendElement({
+            tag: 'INPUT',
+            id: 'newPartImageInput',
+            class: 'mainControlsHiddenInput',
+            type: 'file',
+            accept: 'image/jpg,image/jpeg,image/png',
+            title: 'Add an additional picture to your image',
+            parent: this.addNewImagePartElem
         });
         
         this.addNewPartExitElem = appendElement({
@@ -1839,6 +2318,7 @@ var Engine = function(){
         this.addNewPartExitElem.addEvent( 'touchstart', this, false );
         this.addNewTextPartElem.addEvent( 'click', this, false );
         this.addNewTextPartElem.addEvent( 'touchstart', this, false );
+        this.addNewImageInputElem.addEvent("change", this, true);
         
     };
     
@@ -1928,7 +2408,7 @@ var Engine = function(){
     this.addNewPartExplainElem;
     this.addNewPartElem;
     this.addNewTextPartElem;
-    this.addNewDrawPartElem;
+    this.addNewImagePartElem;
     this.addNewPartExitElem;
     this.panelContainerElem;
     this.shareSocialContainerElem;

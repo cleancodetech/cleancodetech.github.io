@@ -280,6 +280,16 @@
     margin: 1vh;
 }
 
+.panelHeaderImageIcon{
+    background-image: url('/imgs/image.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 4vh;
+    height: 4vh;
+    margin: 1vh;
+}
+
 .panelHeaderCCIcon{
     background-image: url('/imgs/cc.svg');
     background-size: contain;
@@ -407,6 +417,30 @@
 }
 
 .blurRange{
+    width: 70%;
+    height: 3vh;
+}
+
+
+
+
+.opacityContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.opacityIcon{
+    width: 10%;
+    height: 3vh;
+    background-image: url('/imgs/eye.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.opacityRange{
     width: 70%;
     height: 3vh;
 }
@@ -718,6 +752,8 @@
     transition: box-shadow 0.3s ease 0s;
     height: 6vh;
     background-size: 4vh;
+    position: relative;
+    overflow: hidden;
 }
 
 .mainControlsOptionsHeader:hover {
@@ -728,8 +764,19 @@
     background-image: url('/imgs/text.svg');
 }
 
-#newPartDraw {
-    background-image: url('/imgs/pencil.svg');
+#newPartImage {
+    background-image: url('/imgs/image.svg');
+}
+
+#newPartImageInput {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
 }
 
 #newPartExplain{
