@@ -15,7 +15,7 @@ function initFunc() {
     sidebarElemens = 5;
     clientWidth = getClientWidth();
     clientHeight = getClientHeight();
-    fontsAvail = [ 'Lobster', 'Montserrat', 'Space Mono' ];
+    fontsAvail = [ 'Lobster', 'Montserrat', 'Space Mono', 'Open Sans', 'GFS Didot' ];
     
     createCopyright();
     
@@ -164,21 +164,49 @@ var Engine = function(){
     
     var CopyrightPart = function(){
         
+        this.event_mouseoverPanel = function() {
+            
+            this.textInstance.set( 'selectionBackgroundColor', 'rgba(255, 0, 0, 0.5)' );
+                
+            _Engine.canvas.setActiveObject( this.textInstance );
+
+            _Engine.canvas.renderAll();
+            
+        };
+        
+        this.event_mouseoutPanel = function() {
+            
+            this.textInstance.set( 'selectionBackgroundColor', 'rgba(255, 0, 0, 0)' );
+                
+            _Engine.canvas.renderAll();
+            
+        };
+        
+        this.event_clickDeleteCopyright = function() {
+            
+            this.hideDeleteConfirm();
+
+            this.remove();
+            
+        };
+        
+        this.event_clickKeepCopyright = function() {
+            
+            this.hideDeleteConfirm();
+                
+            this.delIcon.style.backgroundImage = "url('/imgs/sad1.svg')";
+            
+        };
+        
         this.handleEvent = function( event ) {
             
             if ( event.type === 'mouseover' ){
                 
-                this.textInstance.set( 'selectionBackgroundColor', 'rgba(255, 0, 0, 0.5)' );
-                
-                _Engine.canvas.setActiveObject( this.textInstance );
-                
-                _Engine.canvas.renderAll();
+                this.event_mouseoverPanel();
                 
             } else if ( event.type === 'mouseout' ){
                 
-                this.textInstance.set( 'selectionBackgroundColor', 'rgba(255, 0, 0, 0)' );
-                
-                _Engine.canvas.renderAll();
+                this.event_mouseoutPanel();
                 
             } else if ( event.type === 'click' && event.target === this.panelHeaderDelElem ){
                 
@@ -190,39 +218,19 @@ var Engine = function(){
                 
             } else if ( event.type === 'click' && event.target === this.offButton ){
                 
-                this.hideDeleteConfirm();
-                
-                _Engine.canvas.remove( this.textInstance );
-                
-                this.remove();
-                
-            } else if ( event.type === 'touchstart' && event.target === this.offButton ){
-                
-                this.delIcon.style.backgroundImage = "url('/imgs/sad2.svg')";
+                this.event_clickDeleteCopyright();
                 
             } else if ( event.type === 'touchend' && event.target === this.offButton ){
                 
-                this.hideDeleteConfirm();
-                
-                _Engine.canvas.remove( this.textInstance );
-                
-                this.remove();
-                
-                this.delIcon.style.backgroundImage = "url('/imgs/sad1.svg')";
+                this.event_clickDeleteCopyright();
                 
             } else if ( event.type === 'click' && event.target === this.onButton ){
                 
                 this.hideDeleteConfirm();
                 
-            } else if ( event.type === 'touchstart' && event.target === this.onButton ){
-                
-                this.delIcon.style.backgroundImage = "url('/imgs/heart.svg')";
-                
             } else if ( event.type === 'touchend' && event.target === this.onButton ){
                 
-                this.hideDeleteConfirm();
-                
-                this.delIcon.style.backgroundImage = "url('/imgs/sad1.svg')";
+                this.event_clickKeepCopyright();
                 
             }
             
@@ -325,14 +333,19 @@ var Engine = function(){
         
         this.remove = function() {
             
-            this.panelHeaderDelElem.removeEventListener( 'touchstart', this, false );
-            this.panelHeaderDelElem.removeEventListener( 'click', this, false );
+            _Engine.canvas.remove( this.textInstance );
             
-            this.panelHeaderIconElem.remove();
-            this.panelHeaderDelElem.remove();
-            this.panelHeaderIconElem.remove();
-            this.panelHeaderElem.remove();
-            this.panelElem.remove();
+            this.panelElemNew = this.panelElem.cloneNode(true);
+            
+            this.panelElem.parentNode.replaceChild( this.panelElemNew, this.panelElem );
+            
+            while (this.panelElemNew.firstChild) {
+        
+                this.panelElemNew.removeChild( this.panelElemNew.firstChild );
+
+            }
+            
+            this.panelElemNew.remove();
             
         };
         
@@ -341,102 +354,107 @@ var Engine = function(){
         this.textInstance;
         this.topMargin;
         
-        this.panelElem;
-        this.panelHeaderElem;
-        this.panelHeaderIconElem;
-        this.panelHeaderDelElem;
-        
         this.layer = document.getElementById('delCCLayer');
         this.offButton = document.getElementById('delCCdelete');
         this.onButton = document.getElementById('delCCkeep');
         this.delIcon = document.getElementById('delCCIcon');
         
-        this.buildCanvasModule();
         this.buildControlPanel();
+        this.buildCanvasModule();
         
     };
     
     var PartWallpaper = function( args ) {
         
+        this.event_clickGrayFilterButton = function() {
+            
+            this.filterGrayscaleFlag = this.filterGrayscaleFlag * (-1);
+                
+            this.toggleButtonGrayscale();
+            
+        };
+        
+        this.event_clickSepiaFilterButton = function() {
+            
+            this.filterSepiaFlag = this.filterSepiaFlag * (-1);
+                
+            this.toggleButtonSepia();
+            
+        };
+        
+        this.event_changeBrightness = function() {
+            
+            this.filterBrightness = this.brightnessRangeElem.value;
+            
+        };
+        
+        this.event_clickBrightnessUndo = function() {
+            
+            this.filterBrightness = 0;
+                
+            this.brightnessRangeElem.value = 0;
+            
+        };
+        
+        this.event_changeBlur = function() {
+            
+            this.filterBlur = this.blurRangeElem.value;
+            
+        };
+        
+        this.event_clickBlurUndo = function() {
+            
+            this.filterBlur = 0;
+                
+            this.blurRangeElem.value = 0;
+            
+        };
+        
         this.handleEvent = function( event ) {
             
             if ( event.type === 'touchend' && event.target === this.panelGrayscaleButtonElem ){
                 
-                this.filterGrayscaleFlag = this.filterGrayscaleFlag * (-1);
-                
-                this.toggleButtonGrayscale();
-                
-                this.reapplyFilters();
+                this.event_clickGrayFilterButton();
                 
             } else if ( event.type === 'click' && event.target === this.panelGrayscaleButtonElem ){
                 
-                this.filterGrayscaleFlag = this.filterGrayscaleFlag * (-1);
-                
-                this.toggleButtonGrayscale();
-                
-                this.reapplyFilters();
+                this.event_clickGrayFilterButton();
                 
             } else if ( event.type === 'touchend' && event.target === this.panelSepiaButtonElem ){
                 
-                this.filterSepiaFlag = this.filterSepiaFlag * (-1);
-                
-                this.toggleButtonSepia();
-                
-                this.reapplyFilters();
+                this.event_clickSepiaFilterButton();
                 
             } else if ( event.type === 'click' && event.target === this.panelSepiaButtonElem ){
                 
-                this.filterSepiaFlag = this.filterSepiaFlag * (-1);
-                
-                this.toggleButtonSepia();
-                
-                this.reapplyFilters();
+                this.event_clickSepiaFilterButton();
                 
             } else if ( event.type === 'input' && event.target === this.brightnessRangeElem ){
                 
-                this.filterBrightness = event.target.value;
-                
-                this.reapplyFilters();
+                this.event_changeBrightness();
                 
             } else if ( event.type === 'touchend' && event.target === this.brightnessUndoElem ){
                 
-                this.filterBrightness = 0;
-                
-                this.brightnessRangeElem.value = 0;
-                
-                this.reapplyFilters();
+                this.event_clickBrightnessUndo();
                 
             } else if ( event.type === 'click' && event.target === this.brightnessUndoElem ){
                 
-                this.filterBrightness = 0;
-                
-                this.brightnessRangeElem.value = 0;
-                
-                this.reapplyFilters();
+                this.event_clickBrightnessUndo();
                 
             } else if ( event.type === 'input' && event.target === this.blurRangeElem ){
                 
-                this.filterBlur = event.target.value;
-                
-                this.reapplyFilters();
+                this.event_changeBlur();
                 
             } else if ( event.type === 'touchend' && event.target === this.blurUndoElem ){
                 
-                this.filterBlur = 0;
-                
-                this.blurRangeElem.value = 0;
-                
-                this.reapplyFilters();
+                this.event_clickBlurUndo();
                 
             } else if ( event.type === 'click' && event.target === this.blurUndoElem ){
                 
-                this.filterBlur = 0;
-                
-                this.blurRangeElem.value = 0;
-                
-                this.reapplyFilters();
+                this.event_clickBlurUndo();
                 
             }
+
+            this.reapplyFilters();
             
         };
         
@@ -723,146 +741,105 @@ var Engine = function(){
     
     var PartText = function( args ) {
         
-        var FontSelector = function() {
+        this.event_inputText = function( event ) {
             
-            this.build = function() {
-                
-                this.wrapperElem = appendElement({
-                    tag: 'DIV',
-                    class: 'fsWrapper',
-                    parent: document.body
-                });
-                
-                this.wrapperElem.style.width = _Engine.canvasContainerWidth + 'px';
-                this.wrapperElem.style.height = _Engine.canvasContainerHeight + 'px';
-                
-                for ( var i=0 ; i<fontsAvail.length ; i++ ) {
-                    
-                    var fontWrapper = appendElement({
-                        tag: 'DIV',
-                        class: 'ftWrapper',
-                        parent: this.wrapperElem
-                    });
-                    
-                    var fontName = appendElement({
-                        tag: 'DIV',
-                        class: 'ftName',
-                        text: fontsAvail[ i ],
-                        parent: fontWrapper
-                    });
-                    
-                    var fontDisplay = appendElement({
-                        tag: 'DIV',
-                        class: 'ftDisplay',
-                        text: 'Top Text',
-                        parent: fontWrapper
-                    });
-                    
-                    fontDisplay.style.fontFamily = '"' + fontsAvail[ i ] + '"';
-                    
-                    this.elements.push( fontDisplay );
-                    
-                }
-                
-                console.log( this.elements );
-                
-            };
+            this.textInstance.text = event.target.value;
             
-            this.toggleAppearance = function ( event ) {
-                
-                this.visible = this.visible * (-1);
-                
-                if ( this.visible > 0 ) {
-                    
-                    event.target.style.boxShadow = '0 0 1vh white';
-                    this.wrapperElem.style.zIndex = 6;
-                    this.wrapperElem.style.opacity = 1;
-                    
-                } else {
-                    
-                    event.target.style.boxShadow = '';
-                    this.wrapperElem.style.opacity = 0;
-                    this.wrapperElem.style.zIndex = -1;
-                    
-                }
-                
-            };
+        };
+        
+        this.event_changeFontFamily = function( event ) {
             
-            this.adjustText = function( text ) {
-                
-                for ( var i=0 ; i<this.elements.length ; i++ ) {
-                    
-                    this.elements[ i ].innerHTML = text;
-                    
-                }
-                
-            };
+            this.textInstance.set("fontFamily", event.target.value );
             
-            this.adjustColor = function( color ) {
-                
-                for ( var i=0 ; i<this.elements.length ; i++ ) {
-                    
-                    this.elements[ i ].style.color = color;
-                    
-                }
-                
-            };
+        };
+        
+        this.event_changeFontColor = function( event ) {
             
-            this.adjustFontSize = function( fontSize ) {
+            this.textInstance.set("fill", convertHex( event.target.value ) );
                 
-                for ( var i=0 ; i<this.elements.length ; i++ ) {
-                    
-                    this.elements[ i ].style.fontSize = fontSize + 'px';
-                    
-                }
-                
-            };
+            this.fontInputColorContainerElem.style.backgroundColor = event.target.value;
             
-            this.adjustFontWeight = function( fontWeight ) {
-                
-                for ( var i=0 ; i<this.elements.length ; i++ ) {
-                    
-                    this.elements[ i ].style.fontWeight = fontWeight;
-                    
-                }
-                
-            };
+        };
+        
+        this.event_changeFontSize = function( event ) {
             
-            this.adjustStrokeWidth = function( size ) {
-                
-                for ( var i=0 ; i<this.elements.length ; i++ ) {
-                    
-                    this.elements[ i ].style.webkitTextStrokeWidth = size + 'px';
-                    
-                }
-                
-            };
+            this.textInstance.set("fontSize", event.target.value );
             
-            this.adjustStrokeColor = function( color ) {
-                
-                for ( var i=0 ; i<this.elements.length ; i++ ) {
-                    
-                    this.elements[ i ].style.webkitTextStrokeColor = color;
-                    
-                }
-                
-            };
+        };
+        
+        this.event_clickUndoFontSizeColor = function() {
             
-            this.adjustBackgroundColor = function( color ) {
-                
-                for ( var i=0 ; i<this.elements.length ; i++ ) {
-                    
-                    this.elements[ i ].style.backgroundColor = color;
-                    
-                }
-                
-            };
+            this.panelInputColorElem.value = this.args.color;
             
-            var _FontSelector = this;
+            this.fontInputColorContainerElem.style.backgroundColor = this.args.color;
             
-            this.wrapperElem;
-            this.visible = -1;
-            this.elements = [];
+            this.textInstance.set("fill", this.args.color );
+            
+            this.fontSizeRangeElem.value = this.args.fontSize;
+            
+            this.textInstance.set("fontSize", this.args.fontSize );
+            
+        };
+        
+        this.event_changeFontWeight = function( event ) {
+            
+            this.textInstance.set("fontWeight", event.target.value );
+            
+        };
+        
+        this.event_clickUndoFontWeight = function() {
+            
+            this.fontWeightRangeElem.value = this.args.fontWeight;
+            
+            this.textInstance.set("fontWeight", this.args.fontWeight );
+            
+        };
+        
+        this.event_changeFontStrokeColor = function( event ) {
+            
+            this.textInstance.set("stroke", convertHex( event.target.value ) );
+            
+            this.fontStrokeInputColorContainerElem.style.backgroundColor = event.target.value;
+            
+        };
+        
+        this.event_changeFontStrokeWidth = function( event ) {
+            
+            this.textInstance.set('strokeWidth', parseInt( event.target.value ) );
+            
+        };
+        
+        this.event_clickUndoBackgroundColorOpacity = function() {
+            
+            this.bgColorElem.value = this.args.backgroundColor;
+            
+            this.bgInputColorContainerElem.style.backgroundColor = this.args.backgroundColor;
+            
+            this.textInstance.set("backgroundColor", convertHexOpacity( this.args.backgroundColor, this.args.backgroundOpacity ) );
+            
+            this.bgRangeElem.value = this.args.backgroundOpacity;
+            
+        };
+        
+        this.event_clickUndoFontStrokeWidth = function() {
+            
+            this.fontStrokeColorElem.value = this.args.stroke;
+            
+            this.fontStrokeInputColorContainerElem.style.backgroundColor = this.args.stroke;
+            
+            this.textInstance.set("stroke", this.args.stroke );
+            
+            this.fontStrokeRangeElem.value = this.args.strokeWidth;
+            
+            this.textInstance.set("strokeWidth", parseInt( this.args.strokeWidth ) );
+            
+        };
+        
+        this.event_changeBackground = function() {
+            
+            this.textInstance.set('backgroundColor', convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
+            
+            this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
             
         };
         
@@ -870,135 +847,63 @@ var Engine = function(){
             
             if ( event.type === 'input' && event.target === this.panelInputTextElem ){
                 
-                this.textInstance.text = this.panelInputTextElem.value;
+                this.event_inputText( event );
                 
-                this.fsSelector.adjustText( this.panelInputTextElem.value );
+            } else if ( event.type === 'change' && event.target === this.fontFamilySelectElem ){
                 
-            } else if ( event.type === 'input' && event.target === this.panelInputColorElem ){
+                this.event_changeFontFamily( event );
                 
-                this.textInstance.set("fill", convertHex( this.panelInputColorElem.value ) );
+            }  else if ( event.type === 'input' && event.target === this.panelInputColorElem ){
                 
-                this.fontInputColorContainerElem.style.backgroundColor = this.panelInputColorElem.value;
-                
-                this.fsSelector.adjustColor( this.panelInputColorElem.value );
+                this.event_changeFontColor( event );
                 
             } else if ( event.type === 'input' && event.target === this.fontSizeRangeElem ){
                 
-                this.textInstance.set("fontSize", event.target.value );
-                
-                this.fsSelector.adjustFontSize( event.target.value );
+                this.event_changeFontSize( event );
                 
             } else if ( event.type === 'touchstart' && event.target === this.fontSizeRangeUndoElem ){
                 
-                this.panelInputColorElem.value = '#ffffff';
-                
-                this.fontInputColorContainerElem.style.backgroundColor = this.panelInputColorElem.value;
-                
-                this.textInstance.set("fill", 'rgb(255, 255, 255)' );
-                
-                this.fontSizeRangeElem.value = 50;
-                
-                this.textInstance.set("fontSize", this.fontSizeRangeElem.value );
+                this.event_clickUndoFontSizeColor();
                 
             } else if ( event.type === 'click' && event.target === this.fontSizeRangeUndoElem ){
                 
-                this.panelInputColorElem.value = '#ffffff';
-                
-                this.fontInputColorContainerElem.style.backgroundColor = this.panelInputColorElem.value;
-                
-                this.textInstance.set("fill", 'rgb(255, 255, 255)' );
-                
-                this.fontSizeRangeElem.value = 50;
-                
-                this.textInstance.set("fontSize", this.fontSizeRangeElem.value );
-                
-                this.fsSelector.adjustColor( '#ffffff' );
-                
-                this.fsSelector.adjustFontSize( 50 );
+                this.event_clickUndoFontSizeColor();
                 
             } else if ( event.type === 'input' && event.target === this.fontWeightRangeElem ){
                 
-                this.textInstance.set("fontWeight", event.target.value );
-                
-                this.fsSelector.adjustFontWeight( event.target.value );
+                this.event_changeFontWeight( event );
                 
             } else if ( event.type === 'touchstart' && event.target === this.fontWeightRangeUndoElem ){
                 
-                this.fontWeightRangeElem.value = 900;
-                
-                this.textInstance.set("fontWeight", this.fontWeightRangeElem.value );
+                this.event_clickUndoFontWeight();
                 
             } else if ( event.type === 'click' && event.target === this.fontWeightRangeUndoElem ){
                 
-                this.fontWeightRangeElem.value = 900;
-                
-                this.fsSelector.adjustFontWeight( 900 );
-                
-                this.textInstance.set("fontWeight", this.fontWeightRangeElem.value );
+                this.event_clickUndoFontWeight();
                 
             } else if ( event.type === 'input' && event.target === this.fontStrokeColorElem ){
                 
-                this.textInstance.set("stroke", convertHex( this.fontStrokeColorElem.value ) );
-                
-                this.fsSelector.adjustStrokeColor( this.fontStrokeColorElem.value );
-                
-                this.fontStrokeInputColorContainerElem.style.backgroundColor = this.fontStrokeColorElem.value;
+                this.event_changeFontStrokeColor( event );
                 
             } else if ( event.type === 'input' && event.target === this.fontStrokeRangeElem ){
                 
-                this.fsSelector.adjustStrokeWidth( this.fontStrokeRangeElem.value );
-                
-                this.textInstance.set('strokeWidth', parseInt( this.fontStrokeRangeElem.value ) );
+                this.event_changeFontStrokeWidth( event );
                 
             } else if ( event.type === 'touchstart' && event.target === this.bgRangeUndoElem ){
                 
-                this.bgColorElem.value = '#ff0000';
-                
-                this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
-                
-                this.textInstance.set("backgroundColor", 'rgba(255, 0, 0, 0.5)' );
-                
-                this.bgRangeElem.value = 0.50;
+                this.event_clickUndoBackgroundColorOpacity();
                 
             } else if ( event.type === 'click' && event.target === this.bgRangeUndoElem ){
                 
-                this.bgColorElem.value = '#ff0000';
-                
-                this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
-                
-                this.textInstance.set("backgroundColor", 'rgba(255, 0, 0, 0.5)' );
-                
-                this.fsSelector.adjustBackgroundColor( 'rgba(255, 0, 0, 0.5)' );
-                
-                this.bgRangeElem.value = 0.50;
+                this.event_clickUndoBackgroundColorOpacity();
                 
             } else if ( event.type === 'touchstart' && event.target === this.fontStrokeRangeUndoElem ){
                 
-                this.fontStrokeColorElem.value = '#000000';
-                
-                this.fontStrokeInputColorContainerElem.style.backgroundColor = this.fontStrokeColorElem.value;
-                
-                this.textInstance.set("stroke", 'rgb(0, 0, 0)' );
-                
-                this.fontStrokeRangeElem.value = 1;
-                
-                this.textInstance.set("strokeWidth", parseInt( this.fontStrokeRangeElem.value ) );
+                this.event_clickUndoFontStrokeWidth();
                 
             } else if ( event.type === 'click' && event.target === this.fontStrokeRangeUndoElem ){
                 
-                this.fontStrokeColorElem.value = '#000000';
-                
-                this.fontStrokeInputColorContainerElem.style.backgroundColor = this.fontStrokeColorElem.value;
-                
-                this.textInstance.set("stroke", 'rgb(0, 0, 0)' );
-                
-                this.fontStrokeRangeElem.value = 1;
-                
-                this.fsSelector.adjustStrokeWidth( 1 );
-                
-                this.fsSelector.adjustStrokeColor( '#000000' );
-                
-                this.textInstance.set("strokeWidth", parseInt( this.fontStrokeRangeElem.value ) );
+                this.event_clickUndoFontStrokeWidth();
                 
             } else if ( event.type === 'touchstart' && event.target === this.panelHeaderDelElem ){
                 
@@ -1010,23 +915,11 @@ var Engine = function(){
                 
             } else if ( event.type === 'input' && event.target === this.bgColorElem ){
                 
-                this.textInstance.set('backgroundColor', convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
-                
-                this.fsSelector.adjustBackgroundColor( convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
-                
-                this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
+                this.event_changeBackground();
                 
             } else if ( event.type === 'input' && event.target === this.bgRangeElem ){
                 
-                this.textInstance.set('backgroundColor', convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
-                
-                this.fsSelector.adjustBackgroundColor( convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
-                
-                this.bgInputColorContainerElem.style.backgroundColor = this.bgColorElem.value;
-                
-            } else if ( event.type === 'click' && event.target === this.horizontalFontFamilyElem ) {
-                
-                this.fsSelector.toggleAppearance( event );
+                this.event_changeBackground();
                 
             }
             
@@ -1044,22 +937,22 @@ var Engine = function(){
                 borderColor: 'rgba(255, 0, 0, 1)',
                 cornerColor: 'rgba(255, 0, 0, 1)',
                 cornerStyle: 'circle',
-                fill: 'rgb(255, 255, 255)',
-                fontFamily: 'Montserrat',
-                fontSize: 50,
+                fill: this.args.color,
+                fontFamily: this.args.fontFamily,
+                fontSize: this.args.fontSize,
                 editable: false,
-                fontWeight: 900,
+                fontWeight: this.args.fontWeight,
                 hasRotatingPoint: false,
                 hasBorders: false,
                 hasControls: false,
                 lockMovementX: true,
                 lockScalingX: true,
                 lockScalingY: true,
-                stroke: 'rgb(0, 0, 0)',
-                strokeWidth: 1,
+                stroke: this.args.stroke,
+                strokeWidth: this.args.strokeWidth,
                 breakWords: true,
                 textAlign: 'center',
-                backgroundColor: 'rgba(255, 0, 0, 0.5)'
+                backgroundColor: convertHexOpacity( this.args.backgroundColor, this.args.backgroundOpacity )
             });
             
             if ( this.args.alignBottom === true ) {
@@ -1102,7 +995,7 @@ var Engine = function(){
                 class: 'panelInputColor',
                 type: 'color',
                 title: "Change the text's background color",
-                value: '#ff0000',
+                value: this.args.backgroundColor,
                 parent: this.bgInputColorContainerElem
             });
         
@@ -1114,7 +1007,7 @@ var Engine = function(){
                 min: '0',
                 max: '1',
                 step: '0.01',
-                value: 0.50,
+                value: this.args.backgroundOpacity,
                 parent: this.bgRangeContainerElem
             });
         
@@ -1154,7 +1047,7 @@ var Engine = function(){
                 class: 'panelInputColor',
                 type: 'color',
                 title: 'Change the stroke color around the text',
-                value: '#000000',
+                value: this.args.stroke,
                 parent: this.fontStrokeInputColorContainerElem
             });
         
@@ -1166,7 +1059,7 @@ var Engine = function(){
                 min: '0',
                 max: '40',
                 step: '1',
-                value: 1,
+                value: this.args.strokeWidth,
                 parent: this.fontStrokeRangeContainerElem
             });
         
@@ -1209,7 +1102,7 @@ var Engine = function(){
                 min: '100',
                 max: '900',
                 step: '100',
-                value: 900,
+                value: this.args.fontWeight,
                 parent: this.fontWeightRangeContainerElem
             });
         
@@ -1246,7 +1139,7 @@ var Engine = function(){
                 class: 'panelInputColor',
                 type: 'color',
                 title: 'Change the font color',
-                value: '#ffffff',
+                value: this.args.color,
                 parent: this.fontInputColorContainerElem
             });
         
@@ -1258,7 +1151,7 @@ var Engine = function(){
                 min: '8',
                 max: '120',
                 step: '1',
-                value: 50,
+                value: this.args.fontSize,
                 parent: this.fontSizeRangeContainerElem
             });
         
@@ -1301,14 +1194,45 @@ var Engine = function(){
                 parent: this.panelElem
             });
         
-            this.horizontalFontFamilyElem = appendElement({
-                tag: 'DIV',
-                class: 'fontFamilyButton',
-                title: 'Choose a font family for the text',
-                parent: this.panelHorizontalElem
+//            this.horizontalFontFamilyElem = appendElement({
+//                tag: 'DIV',
+//                class: 'fontFamilyButton',
+//                title: 'Choose a font family for the text',
+//                parent: this.panelHorizontalElem
+//            });
+//            
+//            this.horizontalFontFamilyElem.addEvent( 'click', this, false );
+            
+        };
+        
+        this.buildFontFamily = function() {
+            
+            this.fontFamilySelectElem = appendElement({
+                tag: 'SELECT',
+                class: 'fontFamilySelect',
+                title: 'Select a font family for the text',
+                parent: this.panelElem
             });
             
-            this.horizontalFontFamilyElem.addEvent( 'click', this, false );
+            for ( var i=0 ; i<fontsAvail.length ; i++ ) {
+                
+                var fontFamilyOptionElem = appendElement({
+                    tag: 'OPTION',
+                    class: 'fontFamilyOption',
+                    value: fontsAvail[ i ],
+                    text: fontsAvail[ i ],
+                    parent: this.fontFamilySelectElem
+                });
+                
+                if ( fontFamilyOptionElem.value === this.args.fontFamily ) {
+                    
+                    fontFamilyOptionElem.selected = true;
+                    
+                }
+                
+            }
+            
+            this.fontFamilySelectElem.addEvent( 'change', this, false );
             
         };
         
@@ -1342,6 +1266,8 @@ var Engine = function(){
             
             this.buildInputControl();
             
+            this.buildFontFamily();
+            
             this.buildSizeControl();
             
             this.buildStrokeControl();
@@ -1355,61 +1281,23 @@ var Engine = function(){
             this.panelHeaderDelElem.addEvent( 'click', this, false );
             this.panelHeaderDelElem.addEvent( 'touchstart', this, false );
             
-            this.fsSelector.build();
-            this.fsSelector.adjustText( this.panelInputTextElem.value );
-            this.fsSelector.adjustColor( this.panelInputColorElem.value );
-            this.fsSelector.adjustFontSize( this.fontSizeRangeElem.value );
-            this.fsSelector.adjustFontWeight( this.fontWeightRangeElem.value );
-            this.fsSelector.adjustStrokeWidth( this.fontStrokeRangeElem.value );
-            this.fsSelector.adjustStrokeColor( this.fontStrokeColorElem.value );
-            this.fsSelector.adjustBackgroundColor( convertHexOpacity( this.bgColorElem.value, this.bgRangeElem.value ) );
-            
         };
         
         this.remove = function() {
             
             _Engine.canvas.remove( this.textInstance );
             
-            this.bgRangeUndoElem.removeEventListener( 'touchstart', this, false );
-            this.bgRangeUndoElem.removeEventListener( 'click', this, false );
-            this.bgRangeElem.removeEventListener( 'input', this, false );
-            this.bgColorElem.removeEventListener( 'input', this, false );
-            this.fontWeightRangeUndoElem.removeEventListener( 'touchstart', this, false );
-            this.fontWeightRangeUndoElem.removeEventListener( 'click', this, false );
-            this.fontWeightRangeElem.removeEventListener( 'input', this, false );
-            this.fontStrokeRangeUndoElem.removeEventListener( 'touchstart', this, false );
-            this.fontStrokeRangeUndoElem.removeEventListener( 'click', this, false );
-            this.fontStrokeRangeElem.removeEventListener( 'input', this, false );
-            this.fontStrokeColorElem.removeEventListener( 'input', this, false );
-            this.fontSizeRangeUndoElem.removeEventListener( 'touchstart', this, false );
-            this.fontSizeRangeUndoElem.removeEventListener( 'click', this, false );
-            this.fontSizeRangeElem.removeEventListener( 'input', this, false );
-            this.panelInputColorElem.removeEventListener( 'input', this, false );
-            this.panelInputTextElem.removeEventListener( 'input', this, false );
-            this.panelElem.removeEventListener( 'mouseout', this, false );
-            this.panelElem.removeEventListener( 'mouseover', this, false );
+            this.panelElemNew = this.panelElem.cloneNode(true);
             
-            this.bgRangeUndoElem.remove();
-            this.bgRangeElem.remove();
-            this.bgColorElem.remove();
-            this.bgRangeContainerElem.remove();
-            this.fontWeightRangeUndoElem.remove();
-            this.fontWeightRangeElem.remove();
-            this.fontWeightRangeIcon.remove();
-            this.fontWeightRangeContainerElem.remove();
-            this.fontStrokeRangeUndoElem.remove();
-            this.fontStrokeRangeElem.remove();
-            this.fontStrokeColorElem.remove();
-            this.fontStrokeRangeContainerElem.remove();
-            this.fontSizeRangeUndoElem.remove();
-            this.fontSizeRangeElem.remove();
-            this.panelInputColorElem.remove();
-            this.fontSizeRangeContainerElem.remove();
-            this.panelInputTextElem.remove();            
-            this.panelHeaderDelElem.remove();
-            this.panelHeaderIconElem.remove();
-            this.panelHeaderElem.remove();
-            this.panelElem.remove();
+            this.panelElem.parentNode.replaceChild( this.panelElemNew, this.panelElem );
+            
+            while (this.panelElemNew.firstChild) {
+        
+                this.panelElemNew.removeChild( this.panelElemNew.firstChild );
+
+            }
+            
+            this.panelElemNew.remove();
             
         };
         
@@ -1418,37 +1306,6 @@ var Engine = function(){
         this.args = args;
         this.text;
         this.textInstance;
-        
-        this.panelElem;
-        this.panelHeaderElem;
-        this.panelHeaderIconElem;
-        this.panelHeaderDelElem;
-        this.panelInputTextElem;
-        this.panelInputColorElem;
-        this.fontSizeRangeContainerElem;
-        this.fontSizeRangeIcon;
-        this.fontSizeRangeElem;
-        this.fontSizeRangeUndoElem;
-        this.fontWeightRangeContainerElem;
-        this.fontWeightRangeIcon;
-        this.fontWeightRangeElem;
-        this.fontWeightRangeUndoElem;
-        this.bgRangeContainerElem;
-        this.bgColorElem;
-        this.bgRangeElem;
-        this.bgRangeUndoElem;
-        this.bgInputColorContainerElem;
-        this.fontStrokeInputColorContainerElem;
-        this.fontInputColorContainerElem;
-        this.panelHorizontalElem;
-        this.horizontalFontFamilyElem;
-        
-        this.fontStrokeRangeContainerElem;
-        this.fontStrokeColorElem;
-        this.fontStrokeRangeElem;
-        this.fontStrokeRangeUndoElem;
-        
-        this.fsSelector = new FontSelector();
         
         this.buildControlModule();
         this.buildCanvasModule();
@@ -1814,12 +1671,28 @@ var Engine = function(){
         var copyPart = new CopyrightPart();
         
         var textPart1 = new PartText({
-            text: 'Top Text'
+            text: 'Top Text',
+            fontSize: 50,
+            color: '#ffffff',
+            fontFamily: 'Montserrat',
+            stroke: '#000000',
+            strokeWidth: 1,
+            backgroundColor: '#ff0000',
+            backgroundOpacity: 0.50,
+            fontWeight: 900
         });
         
         var textPart2 = new PartText({
             text: 'Bottom Text',
-            alignBottom: true
+            alignBottom: true,
+            fontSize: 50,
+            color: '#ffffff',
+            fontFamily: 'Montserrat',
+            stroke: '#000000',
+            strokeWidth: 1,
+            backgroundColor: '#ff0000',
+            backgroundOpacity: 0.50,
+            fontWeight: 900
         });
         
     };

@@ -907,40 +907,27 @@ input[type=range]:focus::-ms-fill-upper {
 
 
 
-.fsWrapper {
-    position: absolute;
-    background-color: rgba( 0, 0, 0, 0.98 );
-    z-index: -1;
-    top: 7vh;
-    left: 4vw;
-    overflow: auto;
-    transition: opacity 0.3s ease 0s;
-    opacity: 0;
-}
-
-.ftWrapper {
+.fontFamilySelect {
+    display: block;
     width: 95%;
-    margin: 5vh auto;
+    margin: 1vh auto;
+    border: medium none;
+    font-size: 1em;
+    line-height: 1.5em;
+    padding: 0 1vh;
     box-sizing: border-box;
-    background-color: rgb(20, 20, 20);
-}
-
-.ftName {
-    color: rgb(127, 235, 127);
-    font-size: 3vh;
-    font-family: Montserrat;
-    line-height: 5vh;
-    box-sizing: border-box;
-    padding: 0 0 0 2vw;
-}
-
-.ftDisplay {
-    width: 100%;
-    font-size: 50px;
-    font-weight: 900;
-    box-sizing: border-box;
+    border-radius: 0.5vh;
+    background-color: rgb(127, 235, 127);
+    color: rgb(10, 10, 10);
+    font-family: Montserrat, "sans serif";
     text-align: center;
-    background-color: rgba(255, 0, 0, 0.5);
-    color: white;
-    text-shadow: 0 0 1px black;
+    outline: medium none;
+}
+
+.fontFamilySelect option{
+    text-align: center;
+}
+
+.fontFamilySelect:focus {
+    outline: none;
 }
