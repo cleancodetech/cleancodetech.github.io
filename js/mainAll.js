@@ -468,6 +468,18 @@ var Engine = function(){
             
             this.textInstance.set( 'top', this.topMargin );
             
+            this.textInstance.on( 'mouseover', function() {
+                
+                _CopyrightPart.panelHeaderElem.style.backgroundColor = 'rgb(210, 55, 55)';
+                
+            });
+            
+            this.textInstance.on( 'mouseout', function() {
+                
+                _CopyrightPart.panelHeaderElem.style.backgroundColor = '';
+                
+            });
+            
             _Engine.canvas.add( this.textInstance );
             
         };
@@ -722,6 +734,18 @@ var Engine = function(){
             this.imgCanvasInstance.lockMovementX = true;
             this.imgCanvasInstance.lockMovementY = true;
             
+            this.imgCanvasInstance.on( 'mouseover', function() {
+                
+                _PartWallpaper.panelHeaderElem.style.backgroundColor = 'rgb(210, 55, 55)';
+                
+            });
+            
+            this.imgCanvasInstance.on( 'mouseout', function() {
+                
+                _PartWallpaper.panelHeaderElem.style.backgroundColor = '';
+                
+            });
+            
             _Engine.canvas.add( this.imgCanvasInstance );
             
             if ( this.imgRatio > _Engine.canvasRatio ) {
@@ -879,8 +903,8 @@ var Engine = function(){
         this.createFromSource = function( img ) {
             
             this.imgSrc = img;
-            this.buildCanvasModule();
             this.buildControlModule();
+            this.buildCanvasModule();
             
         };
         
@@ -1146,6 +1170,18 @@ var Engine = function(){
                 this.textInstance.set( 'top', topMargin );
                 
             }
+            
+            this.textInstance.on( 'mouseover', function() {
+                
+                _PartText.panelHeaderElem.style.backgroundColor = 'rgb(210, 55, 55)';
+                
+            });
+            
+            this.textInstance.on( 'mouseout', function() {
+                
+                _PartText.panelHeaderElem.style.backgroundColor = '';
+                
+            });
             
             _Engine.canvas.add( this.textInstance );
             

@@ -245,6 +245,7 @@
     background-color: rgb(20, 20, 20);
     display: flex;
     justify-content: space-between;
+    transition: background-color 0.3s ease 0s;
 }
 
 .panelHeaderWallpIcon{
@@ -771,4 +772,32 @@ input[type=range]::-ms-fill-upper {
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #ffffff;
+}
+
+
+
+
+.fontFamilySelect {
+    display: block;
+    width: 95%;
+    margin: 1vh auto;
+    border: medium none;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    padding: 0 1vh;
+    box-sizing: border-box;
+    border-radius: 0.5vh;
+    background-color: rgb(127, 235, 127);
+    color: rgb(10, 10, 10);
+    font-family: Montserrat, "sans serif";
+    text-align: center;
+    outline: medium none;
+}
+
+.fontFamilySelect option{
+    text-align: center;
+}
+
+.fontFamilySelect:focus {
+    outline: none;
 }
