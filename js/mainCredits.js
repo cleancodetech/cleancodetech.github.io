@@ -6,6 +6,11 @@ function initFunc() {
     
     align();
     
+    document.getElementById('menu').addEvent("mouseup", expandMobileMenu, true);    
+    document.getElementById('backMobile').addEvent("mouseup", minimizeMobileMenu, true);
+    document.getElementById('menu').addEvent("touchstart", expandMobileMenu, true);    
+    document.getElementById('backMobile').addEvent("touchstart", minimizeMobileMenu, true);
+    
 }
 
 function align() {
