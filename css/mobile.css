@@ -640,6 +640,17 @@
     background-image: url('/imgs/image.svg');
 }
 
+#newPartImageInput {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
 #newPartExit {
     background-image: url('/imgs/delete.svg');
     box-shadow: 0 0 0.5vh rgb(235, 127, 127);
@@ -724,7 +735,7 @@ input[type=range]::-ms-track {
   cursor: pointer;
 
   /* Hides the slider so custom styles can be added */
-  background: transparent; 
+  background: transparent;
   border-color: transparent;
   color: transparent;
 }
@@ -800,4 +811,38 @@ input[type=range]:focus::-ms-fill-upper {
 
 .fontFamilySelect:focus {
     outline: none;
+}
+
+
+
+
+.opacityContainer{
+    width: 95%;
+    margin: 1vh auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.opacityIcon{
+    width: 3rem;
+    height: 3rem;
+    background-image: url('/imgs/eye.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.opacityRange{
+    width: 70%;
+    height: 3rem;
+}
+
+.panelHeaderImageIcon{
+    background-image: url('/imgs/image.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 4rem;
+    height: 4rem;
+    margin: 1vh;
 }
