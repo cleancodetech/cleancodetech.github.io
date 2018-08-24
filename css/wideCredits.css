@@ -6,6 +6,7 @@
     bottom: 0;
     overflow-y: scroll;
     box-sizing: border-box;
+    z-index: 4;
 }
 
 #explain {
@@ -37,6 +38,7 @@
     text-align: center;
     box-sizing: border-box;
     float: left;
+    display: block;
 }
 
 .text {
