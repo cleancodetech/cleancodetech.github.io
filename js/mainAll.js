@@ -2117,7 +2117,7 @@ var Engine = function(){
     
     this.createDesktopPlayground = function() {
         
-        var allowedPerc = Math.floor( ( ( clientWidth - rightVoid ) / clientWidth ) * 100 ) - 4;
+        var allowedPerc = Math.floor( ( ( clientWidth - rightVoid ) / clientWidth ) * 100 ) - 5;
         
         this.playgroundElem.style.width = allowedPerc + "vw";
         
